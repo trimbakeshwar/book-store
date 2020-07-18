@@ -5,6 +5,7 @@ import "../stylepage/login.scss"
 import "../stylepage/registrations.scss"
 import Alert from '@material-ui/lab/Alert';
 import Snackbar from '@material-ui/core/Snackbar';
+import patterns from "../configration/regex";
 import userservice from "../services/userservices";
 const service = new userservice();
 export class Login extends Component {
@@ -13,6 +14,8 @@ export class Login extends Component {
         this.state = {
             email: "",
             password: "",
+            EmailError: "",
+            passwordError: "",
             snackbarOpen: false,
             snackbarMessage: '',
             snackServicity: 'success'
@@ -20,15 +23,22 @@ export class Login extends Component {
         }
     }
     EmailHandler = (e) => {
-        this.setState({ email: e.target.value});
+        this.setState({ email: e.target.value, EmailError: "" });
     };
     passwordHandler = (e) => {
         console.log("data", e.target.value);
-        this.setState({ password: e.target.value });
+        this.setState({ password: e.target.value, passwordError: ""  });
         console.log("data later", this.state);
     };
     Login = () => {
-    
+        if (!patterns.EmailPattern.test(this.state.email)) {
+            this.setState({ EmailError: "invalid mail" })
+        }
+        if (!patterns.passwordPattern.test(this.state.password)) {
+            this.setState({ passwordError: "invalid password" })
+        }
+        if ((patterns.EmailPattern.test(this.state.email)) || (patterns.passwordPattern.test(this.state.password))) {
+         
           let requestData = {
                 email: this.state.email,
                 password: this.state.password
@@ -49,20 +59,31 @@ export class Login extends Component {
                 }
             })
                 .catch((err) => {
-                    console.log(err.response.data.error);
-                    if (err.response.data.error.statusCode === 401) {
+                    console.log(err);
+                    if (err === 401) {
                         this.setState({
                             snackbarOpen: true,
                             snackbarMessage: "invalid email or password",
                             snackServicity: "error"
                         })
                     }
-                    if (err.response.data.error.statusCode === 400) {
+                    if (err === 400) {
                         this.setState({
-                         
+                            snackbarOpen: true,
+                            snackbarMessage: "Email and password requir",
+                            snackServicity: "error"
+                        })
+                    }
+                    if (err === 404) {
+                        this.setState({
+                            snackbarOpen: true,
+                            snackbarMessage: "not found",
+                            snackServicity: "error"
                         })
                     }
                 });
+            }
+        
         
     }
    
@@ -90,10 +111,10 @@ export class Login extends Component {
                     <span className="signtext">Sign In</span>
                 </div>
                 <div className="TextField">  <TextField id="outlined-email" label="email" type="text" variant="outlined"
-                    onChange={this.EmailHandler}  size="small" fullWidth>email</TextField><br />
+                    onChange={this.EmailHandler} error={this.state.EmailError} helperText={this.state.EmailError}  size="small" fullWidth>email</TextField><br />
                 </div>
                 <div className="TextField"> <TextField id="outlined-password" label="password" type="password" variant="outlined"
-                    onChange={this.passwordHandler}  size="small" fullWidth>password</TextField>
+                    onChange={this.passwordHandler} error={this.state.passwordError} helperText={this.state.passwordError} size="small" fullWidth>password</TextField>
                 </div>
                 <div>
                     

@@ -3,7 +3,8 @@ import { TextField, Button } from '@material-ui/core';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
 import "../stylepage/registrations.scss"
-
+import userservice from "../services/userservices";
+const service = new userservice();
 export class Registration extends Component {
     constructor(props) {
         super(props);
@@ -46,6 +47,30 @@ export class Registration extends Component {
         this.state.visability ?
             this.setState({ visability: false })
             : this.setState({ visability: true })
+    }
+    Register = (e) => {
+            console.log("in email", this.state);
+            let requestData = {
+                firstName: this.state.firstName,
+                lastName: this.state.lastName,
+                email: this.state.email,
+                password: this.state.password,
+                confirmPassword: this.state.confirmPassword,
+                service: this.state.service
+            }
+            console.log("request data", requestData);
+            service.RegisterData( requestData).then((response) => {
+               
+                console.log("data", response)
+                if (response.status === 200) {
+                    this.props.history.push("/")
+                }
+            })
+                .catch((error) => {
+                    console.log(error);
+                  
+                });
+        
     }
     render() {
         return (

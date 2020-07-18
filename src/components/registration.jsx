@@ -3,6 +3,7 @@ import { TextField, Button } from '@material-ui/core';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
 import "../stylepage/registrations.scss"
+import "../stylepage/login.scss"
 import userservice from "../services/userservices";
 import patterns from "../configration/regex";
 const service = new userservice();

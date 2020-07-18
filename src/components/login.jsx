@@ -3,6 +3,8 @@ import { TextField, Button } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import "../stylepage/login.scss"
 import "../stylepage/registrations.scss"
+import Alert from '@material-ui/lab/Alert';
+import Snackbar from '@material-ui/core/Snackbar';
 import userservice from "../services/userservices";
 const service = new userservice();
 export class Login extends Component {
@@ -11,7 +13,9 @@ export class Login extends Component {
         this.state = {
             email: "",
             password: "",
-          
+            snackbarOpen: false,
+            snackbarMessage: '',
+            snackServicity: 'success'
            
         }
     }
@@ -23,13 +27,55 @@ export class Login extends Component {
         this.setState({ password: e.target.value });
         console.log("data later", this.state);
     };
+    Login = () => {
+    
+          let requestData = {
+                email: this.state.email,
+                password: this.state.password
+            }
+            console.log("request data", requestData);
+            service.LoginData(requestData).then((response) => {
+                console.log("data", response)
+                if (response.status === 200) {
+                  
+                    this.setState({
+                        snackbarOpen: true,
+                        snackbarMessage: "login sucessful",
+                        snackServicity: 'sucess'
+                    })
+               
+                        this.props.history.push('./dashbord');
+                    
+                }
+            })
+                .catch((err) => {
+                    console.log(err.response.data.error);
+                    if (err.response.data.error.statusCode === 401) {
+                        this.setState({
+                            snackbarOpen: true,
+                            snackbarMessage: "invalid email or password",
+                            snackServicity: "error"
+                        })
+                    }
+                    if (err.response.data.error.statusCode === 400) {
+                        this.setState({
+                         
+                        })
+                    }
+                });
+        
+    }
    
     render() {
         return (
             <div className="logincontainer">
-                
+                  <Snackbar open={this.state.snackbarOpen} autoHideDuration={6000} onClose={this.handleClose}>
+                    <Alert onClose={this.handleClose} severity={this.state.snackServicity}>
+                        {this.state.snackbarMessage}
+                    </Alert>
+                </Snackbar>
                 <div className="fundoonamecontainer">
-                <span className="blue">B</span>
+                   <span className="blue">B</span>
                         <span className="red">o</span>
                         <span className="yellow">o</span>
                         <span className="blue">k</span>

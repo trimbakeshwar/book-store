@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { TextField, Button } from '@material-ui/core';
 import { Link } from 'react-router-dom';
-
+import "../stylepage/login.scss"
 import "../stylepage/registrations.scss"
 import userservice from "../services/userservices";
 const service = new userservice();
@@ -29,12 +29,16 @@ export class Login extends Component {
             <div className="logincontainer">
                 
                 <div className="fundoonamecontainer">
-                    <span className="blue">F</span>
-                    <span className="red">u</span>
-                    <span className="yellow">n</span>
-                    <span className="blue">d</span>
-                    <span className="green">o</span>
-                    <span className="red">o</span>
+                <span className="blue">B</span>
+                        <span className="red">o</span>
+                        <span className="yellow">o</span>
+                        <span className="blue">k</span>
+                        <span className="green">-</span>
+                        <span className="red">s</span>
+                        <span className="green">t</span>
+                        <span className="yellow">o</span>
+                        <span className="blue">r</span>
+                        <span className="red">e</span>
                 </div>
                 <div>
                     <span className="signtext">Sign In</span>

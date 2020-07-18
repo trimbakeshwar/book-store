@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { TextField, Button } from '@material-ui/core';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
+import "../stylepage/registrations.scss"
 export class Registration extends Component {
     constructor(props) {
         super(props);

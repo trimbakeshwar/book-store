@@ -37,7 +37,7 @@
     justify-content: space-between;
     display: flex;
     width: 95%;
-    padding-top: 1%;
+    padding-top: 10px;
     float: left;
     position: relative;
     right: 0%;
@@ -50,6 +50,7 @@
 }
 .Field{
     width: 95%;
+    padding-top: 15px;
 }
 .buttonField{
     justify-content: space-between;
@@ -79,13 +80,13 @@
 }
 
 .containersss{
-    width: 50%;  
+    width: 51%;  
   
     position: relative;   
     border-width: 0.1px;
 
     border-color:  rgb(247, 244, 244);
-    top:5em;        
+    top:2em;        
     background-color: #FFFFFF;    
     display: flex;    
     border-style: groove; 

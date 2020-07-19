@@ -89,6 +89,11 @@ export class Login extends Component {
    
     render() {
         return (
+            <div>
+            <div  className='container'>
+              <div className="iconimage" />  
+            <div className="name"> Book-store</div>
+            </div>
             <div className="logincontainer">
                   <Snackbar open={this.state.snackbarOpen} autoHideDuration={6000} onClose={this.handleClose}>
                     <Alert onClose={this.handleClose} severity={this.state.snackServicity}>
@@ -96,21 +101,21 @@ export class Login extends Component {
                     </Alert>
                 </Snackbar>
                 <div className="fundoonamecontainer">
-                   <span className="blue">B</span>
-                        <span className="red">o</span>
+                   <span className="green">B</span>
                         <span className="yellow">o</span>
-                        <span className="blue">k</span>
+                        <span className="green">o</span>
+                        <span className="yellow">k</span>
                         <span className="green">-</span>
-                        <span className="red">s</span>
+                        <span className="yellow">s</span>
                         <span className="green">t</span>
                         <span className="yellow">o</span>
-                        <span className="blue">r</span>
-                        <span className="red">e</span>
+                        <span className="green">r</span>
+                        <span className="yellow">e</span>
                 </div>
                 <div>
                     <span className="signtext">Sign In</span>
                 </div>
-                <div className="TextField">  <TextField id="outlined-email" label="email" type="text" variant="outlined"
+                <div className="TextField">  <TextField id="outlined-email" label="email" type="text" variant="outlined" 
                     onChange={this.EmailHandler} error={this.state.EmailError} helperText={this.state.EmailError}  size="small" fullWidth>email</TextField><br />
                 </div>
                 <div className="TextField"> <TextField id="outlined-password" label="password" type="password" variant="outlined"
@@ -120,9 +125,10 @@ export class Login extends Component {
                     
                     <div className="distancnButtons">
                         <Link to="./registration" style={{ textDecoration: 'none' }} fullWidth>Create account</Link>
-                        <Button variant="contained" color="primary" float='right' onClick={this.Login} >Login</Button>
+                        <Button variant="contained" style ={{backgroundColor:"rgb(64, 192, 85)"}} color="primary" float='right' onClick={this.Login} >Login</Button>
                     </div>
                 </div>
+            </div>
             </div>
         );
     }

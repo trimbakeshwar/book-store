@@ -1,0 +1,25 @@
+.searchBar{
+    position: relative;
+    right: 20em;
+    flex-direction: row;
+    display: flex;
+    width:30em;
+    height: 40px;
+    padding-bottom: 10px;
+    background-color:white;
+ 
+}
+.inputText
+{
+    width:100%;
+   height: 20px;
+   border-style: none;
+   position: relative;
+   top:8px;
+}
+.bookIcon{
+   
+    position: relative;
+    top:3px;
+    left:2px;
+}

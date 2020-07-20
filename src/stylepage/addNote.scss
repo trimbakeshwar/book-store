@@ -1,5 +1,5 @@
 .dilogContainer{
-    width:300px;
+    width:400px;
    
 }
 
@@ -16,10 +16,15 @@
     padding-bottom: 8px; 
 
 }
+.buttons{
+position: relative;
+right: 3px;
+}
 .buttonContainer{
     padding-top: 10px;
 padding-left: 30px;
 padding-right: 30px;
+padding-bottom: 20px;
 } 
 .imageContainer{
     padding-top: 30px;

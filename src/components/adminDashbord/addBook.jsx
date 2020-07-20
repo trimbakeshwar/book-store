@@ -146,10 +146,10 @@ export default class AddBooks extends Component {
                             size="small" fullWidth>Quantity</TextField><br /></div>
                         <div className="buttonContainer">
                            
-                            <Button variant="contained" color="primary" onClick={this.AddBook}>
+                           <Button  variant="contained" color="primary" onClick={this.AddBook}>
                                 Add
                                </Button>
-                            <Button variant="contained" color="secondary" onClick={this.cancle}>
+                            <Button className="buttons" variant="contained" color="secondary" onClick={this.cancle}>
                                 cancle
                               </Button>
                         </div>

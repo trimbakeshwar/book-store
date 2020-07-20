@@ -5,6 +5,7 @@ import "../../stylepage/addNote.scss"
 import { TextField, Button } from '@material-ui/core';
 import ImageIcon from '@material-ui/icons/Image';
 import adminService from "../../services/adminServices";
+import ImageOutlinedIcon from '@material-ui/icons/ImageOutlined';
 const service = new adminService();
 export default class AddBooks extends Component {
     constructor(props) {
@@ -95,23 +96,26 @@ export default class AddBooks extends Component {
                                 onClick={() =>
                                     this.fileUpload.click()
                                 }
+                               
                             />
-                            : <div onClick={() =>
+                            : 
+                            <div onClick={() =>
                                 this.fileUpload.click()
                             }>
-                                <Button style={{ textTransform: 'none' }}><ImageIcon />BookImage</Button>
+                               
                             </div>
                         }
-                          </div>
+                         
                         <input
                             type="file"
                             style={{ display: "none" }}
                             onChange={this.ImageHandler}
                             ref={(fileUpload) =>
                                 (this.fileUpload = fileUpload)
+                              
                             }
                         ></input>
-
+ </div>
                         <div className="textFields"><TextField
                             id="outlined-Title" label="Title"
                             type="text" variant="outlined"

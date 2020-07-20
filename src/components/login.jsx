@@ -91,8 +91,8 @@ export class Login extends Component {
         return (
             <div>
             <div  className='container'>
-              <div className="iconimage" />  
-            <div className="name"> Book-store</div>
+              <div className="iconimages" />  
+            <div className="names"> Book-store</div>
             </div>
             <div className="logincontainer">
                   <Snackbar open={this.state.snackbarOpen} autoHideDuration={6000} onClose={this.handleClose}>

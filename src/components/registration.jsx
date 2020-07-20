@@ -140,8 +140,8 @@ export class Registration extends Component {
         return (
             <div>
                 <div className='container'>
-                    <div className="iconimage" />
-                    <div className="name"> Book-store</div>
+                    <div className="iconimages" />
+                    <div className="names"> Book-store</div>
                 </div>
                 <div className="containersss">
                     <div className="Registrationcontainer">

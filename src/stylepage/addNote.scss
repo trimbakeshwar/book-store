@@ -1,6 +1,8 @@
 .dilogContainer{
-    width:500px;
+    width:300px;
+   
 }
+
 .dilogHederContainer
 {
     top: 85px;
@@ -14,7 +16,17 @@
     padding-bottom: 8px; 
 
 }
-
+.buttonContainer{
+    padding-top: 10px;
+padding-left: 30px;
+padding-right: 30px;
+} 
+.imageContainer{
+    padding-top: 30px;
+  
+    display: flex;
+    justify-content: center;
+}
 .dilogicon{
     padding-left: 1em;
     content: url('../images/bookicon.png');

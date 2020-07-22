@@ -12,6 +12,9 @@ import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
 import DeleteOutlineOutlinedIcon from '@material-ui/icons/DeleteOutlineOutlined';
 import UpdateBooks from './updateBook';
 
+import adminService from "../../services/adminServices";
+import ImageOutlinedIcon from '@material-ui/icons/ImageOutlined';
+const service = new adminService();
 
 
  class GetAllBook extends Component {
@@ -45,8 +48,12 @@ EditData=(book)=>{
   
   this.props.history.push('./updateBook');
 }
-  DeleteData=(book)=>{
-    console.log("id",book);
+  DeleteData=(id)=>{
+  service.deletebook(id).then((Response)=>{
+    console.log("delete",Response)
+  }).catch((err)=>{
+    console.log("err",err)
+  })
   }
   openBook=()=>{
 this.setState({open:!this.state.open})

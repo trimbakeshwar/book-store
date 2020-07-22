@@ -68,7 +68,7 @@ export default class UpdateBooks extends Component {
                       // imageUrl: this.state.imageUrl
         }
         console.log("req Data", requestData)
-        service.AddBooksDetail(requestData).then((Response) => {
+        service.updateBooksDetail(requestData).then((Response) => {
             console.log("Response", Response);
         }).catch((err) => {
             console.log(err);

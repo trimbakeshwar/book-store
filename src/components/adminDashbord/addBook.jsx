@@ -74,9 +74,7 @@ export default class AddBooks extends Component {
             console.log(err);
         })
     }
-    CloseBook=()=>{
-        this.props.openBook();
-    }
+   
 
     render() {
         return (
@@ -158,7 +156,7 @@ export default class AddBooks extends Component {
                         <Button variant="contained" color="primary" onClick={this.AddBook}>
                             Add
                                </Button>
-                        <Button className="buttons" variant="contained" color="secondary" onClick={this.CloseBook}>
+                        <Button className="buttons" variant="contained" color="secondary" >
                             cancle
                               </Button>
                     </div>

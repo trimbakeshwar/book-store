@@ -13,6 +13,7 @@ import "../../stylepage/adminDashbord.scss"
 import "../../stylepage/logo.scss"
 import AddCircleIcon from '@material-ui/icons/AddCircle';
  import MenuBookSharpIcon from '@material-ui/icons/MenuBookSharp';
+ import GetAllBook from "./getAllBookList"
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
@@ -76,7 +77,7 @@ export default function AdminDashboard() {
           </Toolbar>
         </AppBar>
       </div>
-      
+     <GetAllBook />
     
     </div>
   );

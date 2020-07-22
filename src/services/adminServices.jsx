@@ -5,7 +5,7 @@ import AxiosServices from "../services/axiosServices";
  class adminService {  
     
     AddBooksDetail(data) {
-		return Axios.Post(config.url+"", data);  
+		return Axios.Post(config.url+"Book", data);  
     }
 }
 export default adminService;

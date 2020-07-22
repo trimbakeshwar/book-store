@@ -40,21 +40,21 @@ export class Login extends Component {
         if ((patterns.EmailPattern.test(this.state.email)) || (patterns.passwordPattern.test(this.state.password))) {
          
           let requestData = {
-                email: this.state.email,
-                password: this.state.password
+                Email: this.state.email,
+                Password: this.state.password
             }
             console.log("request data", requestData);
             service.LoginData(requestData).then((response) => {
                 console.log("data", response)
                 if (response.status === 200) {
-                  
+                    localStorage.setItem("Token", response.data.jsonToken);
                     this.setState({
                         snackbarOpen: true,
                         snackbarMessage: "login sucessful",
                         snackServicity: 'sucess'
                     })
                
-                        this.props.history.push('./dashbord');
+                        this.props.history.push('./adminDashbord');
                     
                 }
             })

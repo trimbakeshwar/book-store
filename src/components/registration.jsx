@@ -126,12 +126,12 @@ export class Registration extends Component {
 
                 console.log("data", response)
                 if (response.status === 200) {
-                    this.props.history.push("/")
+                 //   this.props.history.push("/")
                 }
             })
                 .catch((error) => {
                     console.log(error);
-
+                    this.props.history.push("/")
                 });
         }
 

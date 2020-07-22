@@ -2,7 +2,7 @@ import axios from 'axios'
 export default class AxiosServices{
    
     Post(url, data){
-        return axios.post(url,data,{headers: { Authorization: localStorage.getItem("token") }})
+        return axios.post(url,data,{headers: {Authorization: "Bearer "+localStorage.getItem("Token") }})
     
 }
     Get( url){

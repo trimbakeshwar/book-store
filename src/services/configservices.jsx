@@ -1,4 +1,4 @@
 
 export default class Config {
-    static url = ""
+    static url = "https://localhost:44387/api/"
 }

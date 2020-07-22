@@ -7,8 +7,10 @@ import IconButton from '@material-ui/core/IconButton';
  import TableHead from '@material-ui/core/TableHead';
  import TableRow from '@material-ui/core/TableRow';
  import Paper from '@material-ui/core/Paper';
+import { Link } from 'react-router-dom';
 import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
 import DeleteOutlineOutlinedIcon from '@material-ui/icons/DeleteOutlineOutlined';
+import UpdateBooks from './updateBook';
 
 
 
@@ -18,8 +20,8 @@ import DeleteOutlineOutlinedIcon from '@material-ui/icons/DeleteOutlineOutlined'
      super(props);
      this.state={
        bookDetail:[],
-       tempBooksArry:[]
-     }
+       tempBooksArry:[],
+       open:false     }
    }
 
    componentDidMount(){
@@ -38,11 +40,16 @@ import DeleteOutlineOutlinedIcon from '@material-ui/icons/DeleteOutlineOutlined'
    this.setState({tempBooksArry:tempBooksArry})
  }
  
-  EditData=()=>{
-
+EditData=(book)=>{
+  console.log("book",book);
+  
+  this.props.history.push('./updateBook');
+}
+  DeleteData=(book)=>{
+    console.log("id",book);
   }
-  DeleteData=()=>{
-
+  openBook=()=>{
+this.setState({open:!this.state.open})
   }
 
 
@@ -81,8 +88,8 @@ import DeleteOutlineOutlinedIcon from '@material-ui/icons/DeleteOutlineOutlined'
                <TableCell align="left">{book.author}</TableCell>
                <TableCell align="left">{book.price}</TableCell>
                <TableCell align="left">{book.quantity}</TableCell>
-               <TableCell align="left"> <IconButton><EditOutlinedIcon onClick={this.editData(book)}  />  </IconButton> </TableCell>
-                <TableCell align="left"> <IconButton><DeleteOutlineOutlinedIcon onClick={this.DeleteData()} /></IconButton> </TableCell>
+            <TableCell align="left"> <IconButton><EditOutlinedIcon onClick={()=>this.EditData(book)}  />  </IconButton> </TableCell>
+                <TableCell align="left"> <IconButton><DeleteOutlineOutlinedIcon onClick={()=>this.DeleteData(index + 1)} /></IconButton> </TableCell>
              </TableRow>
            })
           }

@@ -11,6 +11,7 @@ import { Link } from 'react-router-dom';
 import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
 import DeleteOutlineOutlinedIcon from '@material-ui/icons/DeleteOutlineOutlined';
 import UpdateBooks from './updateBook';
+import { withRouter } from 'react-router';
 
 import adminService from "../../services/adminServices";
 import ImageOutlinedIcon from '@material-ui/icons/ImageOutlined';
@@ -110,8 +111,8 @@ this.setState({open:!this.state.open})
 
   }
  }
-
- export default GetAllBook;
+ export default withRouter(GetAllBook);
+ 
 
   
    

@@ -91,7 +91,7 @@ export default class UpdateBooks extends Component {
     }
 
     render() {
-        console.log("book",this.props.openBook)
+        console.log(" update book",this.props.openBook)
         return (
             <Dialog
                 open={this.props.openBook}

@@ -1,10 +1,10 @@
 
 .searchBar{
     position: relative;
-    right: 20em;
+    right: 28em;
     flex-direction: row;
     display: flex;
-    width:30em;
+    width:40em;
     height: 30px;
     padding-bottom: 10px;
     background-color:white;
@@ -23,4 +23,13 @@
     position: relative;
     top:3px;
     left:2px;
+}
+.shopingcart
+{
+    position: relative;
+    right: 15em;
+} 
+.cart{
+    position: relative;
+    bottom: 9px;
 }

@@ -156,7 +156,8 @@ export class Registration extends Component {
                                 error={this.state.firstNameError}
                                 helperText={this.state.firstNameError}
                             >first Name</TextField><br />
-                            <TextField id="outlined-lastName"
+                            <TextField className="rightTextField"
+                             id="outlined-lastName"
                                 label="last Name" type="text"
                                 variant="outlined" size="small"
                                 onChange={this.lastNameHandler}
@@ -202,7 +203,8 @@ export class Registration extends Component {
                                 error={this.state.phoneNumberError}
                                 helperText={this.state.phoneNumberError}
                             >phone number</TextField><br />
-                            <TextField id="outlined-city"
+                            <TextField className="rightTextField"
+                                id="outlined-city"
                                 label="city" type="text"
                                 variant="outlined" size="small"
                                 onChange={this.cityHandler}

@@ -13,7 +13,7 @@ import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
 import DeleteOutlineOutlinedIcon from '@material-ui/icons/DeleteOutlineOutlined';
 import UpdateBooks from './updateBook';
 import { withRouter } from 'react-router';
-
+import "../../stylepage/getAll.scss"
 import adminService from "../../services/adminServices";
 import ImageOutlinedIcon from '@material-ui/icons/ImageOutlined';
 import { TextareaAutosize } from '@material-ui/core';

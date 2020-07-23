@@ -27,9 +27,19 @@ const service = new adminService();
      this.state={
        bookDetail:[],
        tempBooksArry:[],
-       open:false     }
+       open:false  
+         }
+         this.getBooksList()
    }
+   getBooksList=()=>{
+    service.getbook().then((Response)=>{
+      console.log("get",Response.data.data)
+      this.setState({ bookDetail: Response.data.data })
+   }).then((err)=>{
 
+
+   })
+  }
    componentDidMount(){
     let tempBooksArry=[];
     for(var i=0;i<20;i++){
@@ -55,9 +65,11 @@ EditData=(obj)=>{
   DeleteData=(id)=>{
   service.deletebook(id).then((Response)=>{
     console.log("delete",Response)
+
   }).catch((err)=>{
     console.log("err",err)
   })
+  this.getBooksList()
   }
   openDilog=()=>{
 this.setState({open:true})
@@ -89,7 +101,7 @@ this.setState({open:true})
          <TableBody>
          {
 
-            this.state.tempBooksArry.map((book, index) => {
+            this.state.bookDetail.map((book, index) => {
               return <TableRow key={index}>
 
 
@@ -101,7 +113,7 @@ this.setState({open:true})
                <TableCell align="left">{book.quantity}</TableCell>
             <TableCell align="left"><Link to={{ pathname: '/updateBook', aboutProps: { myObj: book ,openBook:true } }}>
                <IconButton><EditOutlinedIcon onClick={()=>this.EditData(book)}  />  </IconButton></Link > </TableCell>
-                <TableCell align="left"> <IconButton><DeleteOutlineOutlinedIcon onClick={()=>this.DeleteData(index + 1)} /></IconButton> </TableCell>
+                <TableCell align="left"> <IconButton><DeleteOutlineOutlinedIcon onClick={()=>this.DeleteData(book.bookId)} /></IconButton> </TableCell>
              </TableRow>
            })
           }

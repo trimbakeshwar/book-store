@@ -8,7 +8,11 @@ import AxiosServices from "../services/axiosServices";
 		return Axios.Post(config.url+"Book", data,{headers: {Authorization: "Bearer "+localStorage.getItem("Token") }});  
     }
     deletebook(id){
-      return Axios.Post(config.url+"Book"+id, {headers: {Authorization: "Bearer "+localStorage.getItem("Token") }}); 
+      return Axios.Delete(config.url+"Book/"+id, {headers: {Authorization: "Bearer "+localStorage.getItem("Token") }}); 
+    }
+    getbook(){
+      return Axios.Get(config.url+"Book", {headers: {Authorization: "Bearer "+localStorage.getItem("Token") }}); 
+ 
     }
 }
 export default adminService;

@@ -124,6 +124,7 @@ export default class AddBooks extends Component {
                         type="text" variant="outlined"
                         // value={this.state.Title}
                         onChange={this.handleTitleChange}
+                       
                         size="small" fullWidth>Title</TextField><br /></div>
                     <div className="textFields">
                         <TextField id="outlined-Auther"
@@ -153,10 +154,10 @@ export default class AddBooks extends Component {
                         size="small" fullWidth>Quantity</TextField><br /></div>
                     <div className="buttonContainer">
 
-                        <Button variant="contained" color="primary" onClick={this.AddBook}>
+                        <Button variant="contained" style={{backgroundColor:"rgba(160, 48, 55, 0.925)"}} color="primary" onClick={this.AddBook}>
                             Add
                                </Button>
-                        <Button className="buttons" variant="contained" color="secondary" >
+                        <Button className="buttons"style={{backgroundColor:"rgba(160, 48, 55, 0.925)"}} variant="contained" color="secondary" >
                             cancle
                               </Button>
                     </div>

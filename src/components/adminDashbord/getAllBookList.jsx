@@ -1,3 +1,4 @@
+
 import IconButton from '@material-ui/core/IconButton';
  import React, { Component } from 'react';
  import Table from '@material-ui/core/Table';
@@ -15,11 +16,12 @@ import { withRouter } from 'react-router';
 
 import adminService from "../../services/adminServices";
 import ImageOutlinedIcon from '@material-ui/icons/ImageOutlined';
+import { TextareaAutosize } from '@material-ui/core';
 const service = new adminService();
 
 
  class GetAllBook extends Component {
-  
+
    constructor(props){
      super(props);
      this.state={
@@ -39,15 +41,16 @@ const service = new adminService();
             price : '250',
             quantity : '25',
             })
-         
+
     }
    this.setState({tempBooksArry:tempBooksArry})
  }
- 
-EditData=(book)=>{
-  console.log("book",book);
-  
-  this.props.history.push('./updateBook');
+
+EditData=(obj)=>{
+  console.log("book",obj);
+  this.setState=({openBook:true})
+
+  this.props.history.push('./updateBook'+obj);
 }
   DeleteData=(id)=>{
   service.deletebook(id).then((Response)=>{
@@ -56,23 +59,23 @@ EditData=(book)=>{
     console.log("err",err)
   })
   }
-  openBook=()=>{
-this.setState({open:!this.state.open})
+  openDilog=()=>{
+this.setState({open:true})
   }
 
 
- 
+
    render() { 
      return ( 
        <div>
-    
+
        <div className="table">        
        <TableContainer  className="table" component={Paper} >    
        <Table id="tabledata" >
        <TableHead >
         <TableRow >
-       
-            
+
+
              <TableCell align="right">sr no</TableCell>
              <TableCell align="left">Title</TableCell>
             <TableCell align="left">Auther</TableCell>
@@ -80,28 +83,29 @@ this.setState({open:!this.state.open})
             <TableCell align="left">Quantity</TableCell>
              <TableCell align="left">Edit</TableCell>
             <TableCell align="left">Remove</TableCell>
-    
+
            </TableRow>
          </TableHead>
          <TableBody>
          {
-           
+
             this.state.tempBooksArry.map((book, index) => {
               return <TableRow key={index}>
-                 
-                    
-              
+
+
+
                <TableCell  align="left">  {index + 1}</TableCell>
                <TableCell align="left">{book.Title}</TableCell>
                <TableCell align="left">{book.author}</TableCell>
                <TableCell align="left">{book.price}</TableCell>
                <TableCell align="left">{book.quantity}</TableCell>
-            <TableCell align="left"> <IconButton><EditOutlinedIcon onClick={()=>this.EditData(book)}  />  </IconButton> </TableCell>
+            <TableCell align="left"><Link to={{ pathname: '/updateBook', aboutProps: { myObj: book ,openBook:true } }}>
+               <IconButton><EditOutlinedIcon onClick={()=>this.EditData(book)}  />  </IconButton></Link > </TableCell>
                 <TableCell align="left"> <IconButton><DeleteOutlineOutlinedIcon onClick={()=>this.DeleteData(index + 1)} /></IconButton> </TableCell>
              </TableRow>
            })
           }
-          
+
          </TableBody>
        </Table>
      </TableContainer>
@@ -112,8 +116,81 @@ this.setState({open:!this.state.open})
   }
  }
  export default withRouter(GetAllBook);
- 
 
-  
-   
-    
+
+
+
+
+// import React, { Component } from "react";
+// import logo from "./logo.svg";
+// import "./App.css";
+// import "react-table/react-table.css";
+// class App extends Component {
+//   constructor() {
+//     super();
+//     this.state = {
+//       data: [],
+//       firstName: "",
+//       lastName: ""
+//     };
+//   }
+//   handleChange = event => {
+//     if (event.target.name === "firstName")
+//       this.setState({ firstName: event.target.value });
+//     if (event.target.name === "lastName")
+//       this.setState({ lastName: event.target.value });
+//   };
+
+//   handleSubmit = event => {
+//     event.preventDefault();
+//   };
+
+
+//   renderEditable = cellInfo => {
+//     return (
+//       <div style={{ backgroundColor: "#fafafa" }}
+//         contentEditable
+//         suppressContentEditableWarning
+//         onBlur={e => {
+//           const data = [...this.state.data];
+//           data[cellInfo.index][cellInfo.column.id] = e.target.innerHTML;
+//           this.setState({ data });
+//         }}
+//         dangerouslySetInnerHTML={{ __html: this.state.data[cellInfo.index][cellInfo.column.id] }} />
+//     );
+//   };
+
+//   render() {
+//     const { data } = this.state;
+//     return (
+//       <div className="App">
+//         <header className="App-header">
+//           <img src={logo} className="App-logo" alt="logo" />
+//           <h1 className="App-title">Welcome to React</h1>
+//         </header>
+//         <p className="App-intro">
+//           <form onSubmit={this.handleSubmit}>
+//             <h3>Add new record</h3>
+//             <label>              FirstName:
+//     <input type="text" name="firstName"
+//                 value={this.state.firstName} onChange={this.handleChange} />
+//             </label>{" "}
+//             <label>              LastName:
+//       <input type="text" name="lastName"
+//                 value={this.state.lastName} onChange={this.handleChange} />
+//             </label>
+//             <input type="submit" value="Add" />
+//           </form>
+//         </p>
+//         <div>
+//           <ReactTable
+//             data={data}
+//             columns={[
+//               {
+//                 Header: "First Name",
+//                 accessor: "firstName", Cell: this.renderEditable
+//               },
+//               { Header: "Last Name", accessor: "lastName", Cell: this.renderEditable }, { Header: "Full Name", id: "full", accessor: d => (<div dangerouslySetInnerHTML={{ __html: d.firstName + " " + d.lastName }} />) }]} defaultPageSize={10} className="-striped -highlight" />        </div>      </div>);
+//   }
+// }
+// export default App;

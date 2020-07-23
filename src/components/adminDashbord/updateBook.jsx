@@ -75,26 +75,28 @@ export default class UpdateBooks extends Component {
         })
     }
     componentDidMount(){
-        if(Boolean (this.props.bookData) ){
-            this.setState({ Title : this.props.bookData.title ,     
-                            Decription : this.props.bookData.description,
-                            Author : this.props.bookData.author,
-                            imageUrl : this.props.bookData.imageUrl,
-                            price : this.props.bookData.price,
-                            Quantity :this.props.bookData.booksAvailable,
-                            BookId : this.props.bookData.bookId,
+      
+            this.setState({ Title :this.props.location.aboutProps.title ,     
+                            // Decription :this.props.location.aboutProps.description,
+                            // Author :this.props.location.aboutProps.author,
+                            // imageUrl :this.props.location.aboutProps.imageUrl,
+                            // price : this.props.location.aboutProps.price,
+                            // Quantity :this.props.location.aboutProps.booksAvailable,
+                            // BookId :this.props.location.aboutProps.bookId,
             })
-        }         
+           
+        console.log("comp did mount",this.state)
     }
     CloseBook=()=>{
         this.props.openBook();
     }
 
     render() {
-        console.log(" update book",this.props.openBook)
+        console.log(" dilog open ",this.props.openBook)
+        console.log(" update book",this.props.location.aboutProps)
         return (
             <Dialog
-                open={this.props.openBook}
+                open={this.props.location.aboutProps.openBook}
                // onClose={this.CloseBook}
                 aria-labelledby="alert-dialog-title"
                 aria-describedby="alert-dialog-description"
@@ -169,7 +171,7 @@ export default class UpdateBooks extends Component {
                         size="small" fullWidth>Quantity</TextField><br /></div>
                     <div className="buttonContainer">
 
-                        <Button variant="contained" color="primary" onClick={this.editook}>
+                        <Button variant="contained" color="primary" onClick={this.editbook}>
                             edit
                                </Button>
                         <Button className="buttons" variant="contained" color="secondary" onClick={this.CloseBook}>

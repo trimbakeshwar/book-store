@@ -90,10 +90,7 @@ export class Login extends Component {
     render() {
         return (
             <div>
-            <div  className='container'>
-              <div className="iconimages" />  
-            <div className="names"> Book-store</div>
-            </div>
+            
             <div className="logincontainer">
                   <Snackbar open={this.state.snackbarOpen} autoHideDuration={6000} onClose={this.handleClose}>
                     <Alert onClose={this.handleClose} severity={this.state.snackServicity}>
@@ -101,16 +98,9 @@ export class Login extends Component {
                     </Alert>
                 </Snackbar>
                 <div className="fundoonamecontainer">
-                   <span className="green">B</span>
-                        <span className="yellow">o</span>
-                        <span className="green">o</span>
-                        <span className="yellow">k</span>
-                        <span className="green">-</span>
-                        <span className="yellow">s</span>
-                        <span className="green">t</span>
-                        <span className="yellow">o</span>
-                        <span className="green">r</span>
-                        <span className="yellow">e</span>
+                  
+                        <span className="bookColor">Bookstore</span>
+                       
                 </div>
                 <div>
                     <span className="signtext">Sign In</span>
@@ -125,7 +115,7 @@ export class Login extends Component {
                     
                     <div className="distancnButtons">
                         <Link to="./registration" style={{ textDecoration: 'none' }} fullWidth>Create account</Link>
-                        <Button variant="contained" style ={{backgroundColor:"rgb(64, 192, 85)"}} color="primary" float='right' onClick={this.Login} >Login</Button>
+                        <Button variant="contained" style ={{backgroundColor:"rgba(160, 48, 55, 0.925)"}} color="primary" float='right' onClick={this.Login} >Login</Button>
                     </div>
                 </div>
             </div>

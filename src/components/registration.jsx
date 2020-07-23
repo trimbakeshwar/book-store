@@ -139,23 +139,11 @@ export class Registration extends Component {
     render() {
         return (
             <div>
-                <div className='container'>
-                    <div className="iconimages" />
-                    <div className="names"> Book-store</div>
-                </div>
+                
                 <div className="containersss">
                     <div className="Registrationcontainer">
                         <div className="fundoonamecontainer">
-                            <span className="green">B</span>
-                            <span className="yellow">o</span>
-                            <span className="green">o</span>
-                            <span className="yellow">k</span>
-                            <span className="green">-</span>
-                            <span className="yellow">s</span>
-                            <span className="green">t</span>
-                            <span className="yellow">o</span>
-                            <span className="green">r</span>
-                            <span className="yellow">e</span>
+                        <span className="bookColor">Bookstore</span>
                         </div>
                         <div>
                             <span className="labletext">Create your book store account</span>
@@ -231,7 +219,7 @@ export class Registration extends Component {
                         </div>
                         <div className="distancnButtons">
                             <Link to="./" style={{ textDecoration: 'none' }} >  <label className="linkages">sign in insted</label></Link>
-                            <Button id="contained-button" style={{ backgroundColor: "rgb(64, 192, 85)" }} variant="contained" color="primary" float='right' onClick={this.Register}>submit</Button>
+                            <Button id="contained-button" style={{ backgroundColor: "rgba(160, 48, 55, 0.925)" }} variant="contained" color="primary" float='right' onClick={this.Register}>submit</Button>
                         </div>
                     </div>
                     <div className='imageContainer'>

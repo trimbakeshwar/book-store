@@ -5,6 +5,7 @@ import Login from "./components/login"
 import AdminDashboard from "./components/adminDashbord/adminDashbord";
 import UpdateBooks from "./components/adminDashbord/updateBook"
 import Store from "./components/userstore/store"
+import DisplayBook from "./components/userstore/displayCard"
 function App() {
   return (
     <div >
@@ -14,6 +15,8 @@ function App() {
     <Route exact path="/adminDashbord" component={AdminDashboard}/> 
     <Route  path="/updateBook" component={UpdateBooks}/>
     <Route exact path="/store" component={Store}/> 
+    <Route exact path="/displayCard" component={DisplayBook}/> 
+
     </Router>
     </div>
   );

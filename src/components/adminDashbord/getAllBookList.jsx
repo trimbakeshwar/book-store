@@ -26,7 +26,7 @@ const service = new adminService();
      super(props);
      this.state={
        bookDetail:[],
-       tempBooksArry:[],
+    
        open:false  
          }
          this.getBooksList()
@@ -35,26 +35,12 @@ const service = new adminService();
     service.getbook().then((Response)=>{
       console.log("get",Response.data.data)
       this.setState({ bookDetail: Response.data.data })
-   }).then((err)=>{
+   }).catch((err)=>{
 
-
+    console.log("err",err)
    })
   }
-   componentDidMount(){
-    let tempBooksArry=[];
-    for(var i=0;i<20;i++){
-        tempBooksArry.push({
-            title : 'StructureAnalysis',
-            decription : 'Structural analysis is the determination of the effects of loads on physical structures and their components. Structures subject to this type of analysis include all that must withstand loads, such as buildings, bridges, aircraft and ships.',
-            author : 'mrutunjay',
-           // imageUrl : 'https://panchayatrajengineers.files.wordpress.com/2019/02/11820192337156313445039947930760.jpg?w=640',
-            price : '250',
-            quantity : '25',
-            })
-
-    }
-   this.setState({tempBooksArry:tempBooksArry})
- }
+  
 
 EditData=(obj)=>{
   console.log("book",obj);
@@ -78,6 +64,9 @@ this.setState({open:true})
 
 
    render() { 
+   let data=this.state.bookDetail
+   .filter((item) => item.isDeleted === false)
+   console.log("data",data)
      return ( 
        <div>
 
@@ -107,10 +96,10 @@ this.setState({open:true})
 
 
                <TableCell  align="left">  {index + 1}</TableCell>
-               <TableCell align="left">{book.Title}</TableCell>
+               <TableCell align="left">{book.title}</TableCell>
                <TableCell align="left">{book.author}</TableCell>
                <TableCell align="left">{book.price}</TableCell>
-               <TableCell align="left">{book.quantity}</TableCell>
+               <TableCell align="left">{book.booksAvailable}</TableCell>
             <TableCell align="left"><Link to={{ pathname: '/updateBook', aboutProps: { myObj: book ,openBook:true } }}>
                <IconButton><EditOutlinedIcon onClick={()=>this.EditData(book)}  />  </IconButton></Link > </TableCell>
                 <TableCell align="left"> <IconButton><DeleteOutlineOutlinedIcon onClick={()=>this.DeleteData(book.bookId)} /></IconButton> </TableCell>

@@ -11,7 +11,7 @@ import Toolbar from "@material-ui/core/Toolbar";
 import SearchIcon from "@material-ui/icons/Search";
 import "../../stylepage/adminDashbord.scss"
 import "../../stylepage/logo.scss"
-
+import DisplayBook from "./displayCard"
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -69,7 +69,7 @@ export default function Store() {
         </AppBar>
       </div>
    
-    
+    <DisplayBook />
     </div>
   );
 }

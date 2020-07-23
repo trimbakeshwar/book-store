@@ -26,10 +26,13 @@
 }
 .shopingcart
 {
+    flex-direction: row;
+    display: flex;
     position: relative;
-    right: 15em;
+    right:12em;
 } 
 .cart{
     position: relative;
-    bottom: 9px;
+    bottom: 2px;
+    padding-right: 5px;
 }

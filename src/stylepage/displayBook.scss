@@ -1,4 +1,6 @@
-
+$bookContainerColor:rgb(243, 243, 243);
+$textweight: 600;
+$buttonColor:rgba(160, 48, 55, 0.925);
 .masonry-grid {
     width: 100%;
       display: -webkit-box; /* Not needed if autoprefixing */
@@ -8,27 +10,82 @@
       flex-grow: initial;
       overflow-wrap: initial;
       padding-left:100px;; /* gutter size offset */
+      margin-top: 50px;
       
   }
   .masonry-grid_column {
-    padding-left: 15px; /* gutter size */
+    padding-left: 25px; /* gutter size */
     background-clip: padding-box;
-    width: 296px !important;
+    width: 250px !important;
   }
   
   /* Style your items */
   .masonry-grid_column > div {
-    margin: 15px 0 !important;
+    margin: 25px 0 !important;
   }
-  .imagecontainer{
-    height: 250px ;
-     width: 240px ;
+  .bookimagecontainer{
+    height: 180px ;
+     width: 250px ;
       margin-Right : 10px;
+      background-color: $bookContainerColor;
   }
+  
   .display{
     width:100%;
     display:flex;
     margin-top:50px;
+    margin-left: 100px;
     align-items:flex-start;
     flex-direction:row 
   }
+  .author {
+padding-left: 20px;
+font-size: 12px;
+padding-top: 3px;
+padding-bottom: 10px;
+  }
+  .price{
+    padding-left: 20px;
+    padding-bottom: 10px;
+    font-weight: $textweight;
+  }
+   .titles{
+       padding-top: 10px;
+    padding-left: 20px;
+    font-weight: $textweight;
+   }
+   .cardbuttonContainers{
+    padding-left: 20px;
+    padding-bottom: 20px;
+    width: 100%;
+   }
+   .Buttons{
+    font-size: 10px !important;
+    border-radius: 0 !important;
+    background-color:$buttonColor !important ;
+    color: white !important;
+   }
+   .buttonsetting{
+flex-direction: row;
+display: flex;
+
+   }
+   .wishlist{
+    padding-left: 25px;
+}
+   .Buttonss{
+    font-size: 10px;
+   padding:7.7px;
+   padding-left: 20px;
+   padding-right: 20px;
+    background-color:white;
+    border-style: groove  ;
+    border-radius: 0 ;
+    border-width: 1px;
+    border-color: rgb(253, 253, 253) ;
+   }
+   .imag{
+       padding-top: 15px;
+       padding-bottom: 10px;
+       padding-left: 70px;
+   }

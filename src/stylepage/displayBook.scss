@@ -16,7 +16,7 @@ $buttonColor:rgba(160, 48, 55, 0.925);
   .masonry-grid_column {
     padding-left: 25px; /* gutter size */
     background-clip: padding-box;
-    width: 250px !important;
+    width: 230px !important;
   }
   
   /* Style your items */
@@ -39,25 +39,27 @@ $buttonColor:rgba(160, 48, 55, 0.925);
     flex-direction:row 
   }
   .author {
-padding-left: 20px;
-font-size: 12px;
+padding-left: 15px;
+font-size: 10px;
 padding-top: 3px;
 padding-bottom: 10px;
 color: grey;
   }
   .price{
-    padding-left: 20px;
-    padding-bottom: 10px;
+    padding-left: 15px;
+    padding-bottom: 15px;
     font-weight: $textweight;
   }
    .titles{
        padding-top: 10px;
-    padding-left: 20px;
+    padding-left: 15px;
     font-weight: $textweight;
    }
    .cardbuttonContainers{
-    padding-left: 20px;
-    padding-bottom: 20px;
+   // padding-left: 15px;
+    padding-bottom: 15px;
+    position: relative;
+    left:15px;
     width: 100%;
    }
    .Buttons{
@@ -72,7 +74,7 @@ display: flex;
 
    }
    .wishlist{
-    padding-left: 25px;
+    padding-left: 15px;
 }
    .Buttonss{
     font-size: 10px;
@@ -82,11 +84,35 @@ display: flex;
     background-color:white;
     border-style: groove  ;
     border-radius: 0 ;
-    border-width: 1px;
+    
     border-color: rgb(253, 253, 253) ;
+    border-width:1px 2px 2px 2px;
    }
    .imag{
        padding-top: 15px;
        padding-bottom: 10px;
        padding-left: 70px;
    }
+   .ActiveButtons{
+    
+    width: 200px !important;
+     height: 30px !important;
+    font-size: 10px !important;
+    border-radius: 0 !important;
+    background-color:blue !important ;
+    color: white !important;
+    display: inline-block !important;
+   }
+ .wishlistButton{
+  font-size: 10px;
+  padding:7.7px;
+  padding-left: 20px;
+  padding-right: 20px;
+  width: 100%;
+   background-color:white;
+   border-style: groove  ;
+   border-radius: 0 ;
+   width: 200px;
+   border-color: rgb(253, 253, 253) ;
+   border-width:1px 2px 2px 2px;
+ }

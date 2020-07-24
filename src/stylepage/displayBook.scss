@@ -31,7 +31,7 @@ $buttonColor:rgba(160, 48, 55, 0.925);
   }
   
   .display{
-    width:100%;
+    // width:100%;
     display:flex;
     margin-top:50px;
     margin-left: 100px;
@@ -43,6 +43,7 @@ padding-left: 20px;
 font-size: 12px;
 padding-top: 3px;
 padding-bottom: 10px;
+color: grey;
   }
   .price{
     padding-left: 20px;

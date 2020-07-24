@@ -59,7 +59,7 @@ export default class DisplayBook extends Component {
                         {values.author}
                     </div>
                     <div className="price">
-                        {values.price}
+                      Rs.  {values.price} 
                     </div>
                     <div className="cardbuttonContainers">
                         <div className="buttonsetting">

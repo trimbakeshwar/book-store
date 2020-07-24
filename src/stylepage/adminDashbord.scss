@@ -5,10 +5,11 @@
     flex-direction: row;
     display: flex;
     width:40em;
+
     height: 30px;
     padding-bottom: 10px;
     background-color:white;
- 
+    border-radius: 5px;
 }
 .inputText
 {
@@ -22,7 +23,10 @@
    
     position: relative;
     top:3px;
-    left:2px;
+    //left:2px;
+    right: 200px;
+    flex-direction: row;
+    display: flex;
 }
 .shopingcart
 {

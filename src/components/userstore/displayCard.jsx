@@ -10,10 +10,11 @@ import adminService from "../../services/adminServices";
 import ImageOutlinedIcon from '@material-ui/icons/ImageOutlined';
 import { TextareaAutosize } from '@material-ui/core';
 import BookCover from "../../images/bookcover.jpg"
+import {connect} from 'react-redux'
 const service = new adminService();
 
 
-export default class DisplayBook extends Component {
+ class DisplayBook extends Component {
 
     constructor(props) {
         super(props);
@@ -42,12 +43,14 @@ export default class DisplayBook extends Component {
         })
     }
     AddToBag = (values) => {
-        this.setState({ AddBagButtonSetting: true, id: values, AddwishlistSetting: false })
+        this.setState({ AddBagButtonSetting: true, id: values.bookId, AddwishlistSetting: false })
         console.log("AddBagButtonSetting", this.state.AddBagButtonSetting)
+        this.props.changemyBookDetail(values)
     }
     AddToWishlist = (values) => {
-        this.setState({ AddwishlistSetting: true, id: values, AddBagButtonSetting: false })
+        this.setState({ AddwishlistSetting: true, id: values.bookId, AddBagButtonSetting: false })
         console.log("AddwishlistSetting", this.state.AddwishlistSetting)
+        this.props.changemyBookDetail(values)
     }
 
     render() {
@@ -73,7 +76,7 @@ export default class DisplayBook extends Component {
                     {(this.state.AddwishlistSetting === true && this.state.id === values.bookId) ?
                         (<div className="wishlist">
                             <button variant="contained" className={(this.state.AddwishlistSetting === true && this.state.id === values.bookId) ? "wishlistButton" : "Buttonss"}
-                                disableElevation onClick={() => this.AddToWish(values.bookId)}>
+                                disableElevation onClick={() => this.AddToWish(values)}>
                                 WISHLIST
                                    </button>
                         </div>) :
@@ -83,14 +86,14 @@ export default class DisplayBook extends Component {
 
                                     <div style={{ position: "relative" }}>
                                         <Button variant="contained" className={(this.state.AddBagButtonSetting === true && this.state.id === values.bookId) ? "ActiveButtons" : "Buttons"}
-                                            disableElevation onClick={() => this.AddToBag(values.bookId)}>
+                                            disableElevation onClick={() => this.AddToBag(values)}>
                                             {(this.state.AddBagButtonSetting === true && this.state.id === values.bookId) ? "ADDED TO BAG" : " ADD TO BAG"}
 
                                         </Button>
                                     </div>
                                     <div className="wishlist">
                                         <button variant="contained" className={(this.state.AddwishlistSetting === true && this.state.id === values.bookId) ? "wishlistButton" : "Buttonss"}
-                                            disableElevation onClick={() => this.AddToWishlist(values.bookId)}>
+                                            disableElevation onClick={() => this.AddToWishlist(values)}>
                                             WISHLIST
                                    </button>
                                     </div>
@@ -115,3 +118,17 @@ export default class DisplayBook extends Component {
     }
 }
 //className="Buttons"
+const mapStateToProps=(state)=>{
+    return{
+        myBookDetail:state.BookDetail,
+    
+    }
+    } 
+    const mapDispatrchToProps =(dispatch)=>{
+      return{
+        changemyBookDetail:(BookDetail)=>{(dispatch({type:'BOOK_DETAIL',payload:BookDetail}))},
+   
+    }
+    }
+    export default connect(mapStateToProps,mapDispatrchToProps)(DisplayBook);
+    

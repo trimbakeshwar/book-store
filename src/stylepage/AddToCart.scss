@@ -1,0 +1,35 @@
+$textweight: 500;
+.boxForCart{
+margin: 150px;
+width: 60%;
+padding: 20px;
+border: groove;
+border-color: rgb(252, 251, 251);
+border-width: 0.1px;
+display: flex;
+}
+.carttag{
+    padding-bottom: 20px;
+    font-weight: $textweight;
+}
+.informationOfBook{
+    flex-direction: row;
+    display: flex;
+}
+.authors {
+    padding-left: 25px;
+    font-size: 10px;
+    padding-top: 3px;
+    padding-bottom: 10px;
+    color: grey;
+ }
+.prices{
+        padding-left: 25px;
+        padding-bottom: 10px;
+        font-weight: bold;
+}
+.title {
+         
+        padding-left: 25px;
+        font-weight: $textweight;
+ }

@@ -69,9 +69,9 @@ export default function Store() {
           </Toolbar>
         </AppBar>
       </div>
-   {/* <DisplayBook /> */}
+   <DisplayBook />
       
- <AddInCart/>
+  <AddInCart/>
     </div>
   );
 }

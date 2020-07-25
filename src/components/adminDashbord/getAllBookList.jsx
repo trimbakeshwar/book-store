@@ -17,6 +17,7 @@ import "../../stylepage/getAll.scss"
 import adminService from "../../services/adminServices";
 import ImageOutlinedIcon from '@material-ui/icons/ImageOutlined';
 import { TextareaAutosize } from '@material-ui/core';
+import {connect} from 'react-redux'
 const service = new adminService();
 
 
@@ -42,11 +43,12 @@ const service = new adminService();
   }
   
 
-EditData=(obj)=>{
-  console.log("book",obj);
+EditData=(updateBookData)=>{
+  console.log("book",updateBookData);
   this.setState=({openBook:true})
-
-  this.props.history.push('./updateBook'+obj);
+  this.props.changeopenupdateBook(true)
+  this.props.sendDataForUpdateBook(updateBookData)
+  this.props.history.push('./adminDashbord');
 }
   DeleteData=(id)=>{
   service.deletebook(id).then((Response)=>{
@@ -100,7 +102,7 @@ this.setState({open:true})
                <TableCell align="left">{book.author}</TableCell>
                <TableCell align="left">{book.price}</TableCell>
                <TableCell align="left">{book.booksAvailable}</TableCell>
-            <TableCell align="left"><Link to={{ pathname: '/updateBook', aboutProps: { myObj: book ,openBook:true } }}>
+            <TableCell align="left"><Link to={{ pathname: '/adminDashbord',  }}>
                <IconButton><EditOutlinedIcon onClick={()=>this.EditData(book)}  />  </IconButton></Link > </TableCell>
                 <TableCell align="left"> <IconButton><DeleteOutlineOutlinedIcon onClick={()=>this.DeleteData(book.bookId)} /></IconButton> </TableCell>
              </TableRow>
@@ -116,7 +118,21 @@ this.setState({open:true})
 
   }
  }
- export default withRouter(GetAllBook);
+ const mapStateToProps=(state)=>{
+  return{
+    myopenupdateBook:state.openupdateBook,
+   
+  }
+  } 
+  const mapDispatrchToProps =(dispatch)=>{
+    return{
+  changeopenupdateBook:(openupdateBook)=>{(dispatch({type:'OPEN_UPDATE_BOOK_DILOGBOX',payload:openupdateBook}))},
+  sendDataForUpdateBook:(updateBookData)=>{(dispatch({type:'OPEN_UPDATE_BOOK_DATA',payload:updateBookData}))}
+    }
+  }
+  export default connect(mapStateToProps,mapDispatrchToProps)(withRouter(GetAllBook));
+  
+
 
 
 

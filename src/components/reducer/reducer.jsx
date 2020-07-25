@@ -2,7 +2,8 @@ const iState = {
     
     openBook:false,
     openupdateBook:false,
-    updateBookData:""
+    updateBookData:"",
+    BookDetail:"",
 }
 
 const reducer = (state=iState,action)=>{
@@ -30,6 +31,15 @@ const reducer = (state=iState,action)=>{
             
         }
     }
+    if(action.type === 'BOOK_DETAIL')
+    {
+        return {
+            ...state,
+            BookDetail:action.payload,
+            
+        }
+    }
+
     
    
     return state;

@@ -14,6 +14,7 @@ import "../../stylepage/logo.scss"
 import AddCircleIcon from '@material-ui/icons/AddCircle';
  import MenuBookSharpIcon from '@material-ui/icons/MenuBookSharp';
  import GetAllBook from "./getAllBookList"
+ import {connect} from 'react-redux'
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
@@ -35,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
  
  
 }));
-export default function AdminDashboard() {
+function AdminDashboard(props) {
   const classes = useStyles();
   const theme = useTheme();
   const [searchtextField, setsearchtextField] = React.useState(false)
@@ -44,8 +45,8 @@ export default function AdminDashboard() {
     setsearchtextField(true)
   }
   const addBook =()=>{
-    setopenaddBook(!openaddBook);
-   
+  
+    props.changeopenBook(!openaddBook)
   }
   
   return (
@@ -71,7 +72,7 @@ export default function AdminDashboard() {
             <div className="bookIcon">
              <AddCircleIcon onClick={addBook}/>
              < MenuBookSharpIcon />
-             <AddBooks openBook={openaddBook}  />
+             <AddBooks  />
              </div>
            
           </Toolbar>
@@ -82,3 +83,18 @@ export default function AdminDashboard() {
     </div>
   );
 }
+
+const mapStateToProps=(state)=>{
+  return{
+    openBook:state.openBook,
+   
+  }
+  } 
+  const mapDispatrchToProps =(dispatch)=>{
+    return{
+  changeopenBook:(openBook)=>{(dispatch({type:'OPEN_ADD_BOOK_DILOGBOX',payload:openBook}))},
+ 
+    }
+  }
+  export default connect(mapStateToProps,mapDispatrchToProps)(AdminDashboard);
+  

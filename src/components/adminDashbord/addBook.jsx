@@ -6,8 +6,9 @@ import { TextField, Button } from '@material-ui/core';
 import ImageIcon from '@material-ui/icons/Image';
 import adminService from "../../services/adminServices";
 import ImageOutlinedIcon from '@material-ui/icons/ImageOutlined';
+import {connect} from 'react-redux'
 const service = new adminService();
-export default class AddBooks extends Component {
+class AddBooks extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -70,16 +71,19 @@ export default class AddBooks extends Component {
         console.log("req Data", requestData)
         service.AddBooksDetail(requestData).then((Response) => {
             console.log("Response", Response);
+            this.props.changeopenBook(!this.props.myopenBook)
         }).catch((err) => {
             console.log(err);
         })
     }
    
-
+    CloseBook=()=>{
+        this.props.changeopenBook(!this.props.myopenBook)
+    }
     render() {
         return (
             <Dialog
-                open={this.props.openBook}
+                open={this.props.myopenBook}
                 onClose={this.CloseBook}
                 aria-labelledby="alert-dialog-title"
                 aria-describedby="alert-dialog-description"
@@ -157,7 +161,7 @@ export default class AddBooks extends Component {
                         <Button variant="contained" style={{backgroundColor:"rgba(160, 48, 55, 0.925)"}} color="primary" onClick={this.AddBook}>
                             Add
                                </Button>
-                        <Button className="buttons"style={{backgroundColor:"rgba(160, 48, 55, 0.925)"}} variant="contained" color="secondary" >
+                        <Button className="buttons"style={{backgroundColor:"rgba(160, 48, 55, 0.925)"}} variant="contained" onClick={this.CloseBook}color="secondary" >
                             cancle
                               </Button>
                     </div>
@@ -167,3 +171,17 @@ export default class AddBooks extends Component {
         );
     }
 } 
+const mapStateToProps=(state)=>{
+    return{
+      myopenBook:state.openBook,
+     
+    }
+    } 
+    const mapDispatrchToProps =(dispatch)=>{
+      return{
+    changeopenBook:(openBook)=>{(dispatch({type:'OPEN_ADD_BOOK_DILOGBOX',payload:openBook}))},
+   
+      }
+    }
+    export default connect(mapStateToProps,mapDispatrchToProps)(AddBooks);
+    

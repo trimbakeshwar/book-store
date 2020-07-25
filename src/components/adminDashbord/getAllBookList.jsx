@@ -48,7 +48,7 @@ EditData=(updateBookData)=>{
   this.setState=({openBook:true})
   this.props.changeopenupdateBook(true)
   this.props.sendDataForUpdateBook(updateBookData)
-  this.props.history.push('./adminDashbord');
+  this.props.history.push('/adminDashbord/updateBook');
 }
   DeleteData=(id)=>{
   service.deletebook(id).then((Response)=>{
@@ -102,8 +102,8 @@ this.setState({open:true})
                <TableCell align="left">{book.author}</TableCell>
                <TableCell align="left">{book.price}</TableCell>
                <TableCell align="left">{book.booksAvailable}</TableCell>
-            <TableCell align="left"><Link to={{ pathname: '/adminDashbord',  }}>
-               <IconButton><EditOutlinedIcon onClick={()=>this.EditData(book)}  />  </IconButton></Link > </TableCell>
+            <TableCell align="left">
+               <IconButton><EditOutlinedIcon onClick={()=>this.EditData(book)}  />  </IconButton> </TableCell>
                 <TableCell align="left"> <IconButton><DeleteOutlineOutlinedIcon onClick={()=>this.DeleteData(book.bookId)} /></IconButton> </TableCell>
              </TableRow>
            })

@@ -6,17 +6,18 @@ import { TextField, Button } from '@material-ui/core';
 import ImageIcon from '@material-ui/icons/Image';
 import adminService from "../../services/adminServices";
 import ImageOutlinedIcon from '@material-ui/icons/ImageOutlined';
+import {connect} from 'react-redux'
 const service = new adminService();
-export default class UpdateBooks extends Component {
+class UpdateBooks extends Component {
     constructor(props) {
         super(props);
         this.state = {
             imageUrl: "",
             Title: "",
-            Auther: "",
+            Author: "",
             Description: "",
-            prize: "",
-            Quantity: "",
+            price: null,
+            booksAvailable: null,
             closeDilog: false,
 
         }
@@ -29,14 +30,14 @@ export default class UpdateBooks extends Component {
         this.setState({ Description: e.target.value })
     }
     handleAutherChange = (e) => {
-        this.setState({ Auther: e.target.value })
+        this.setState({ Author: e.target.value })
     }
    
     handleQuantityChange = (e) => {
-        this.setState({ Quantity: e.target.value })
+        this.setState({ booksAvailable: e.target.value })
     }
     handleprizeChange = (e) => {
-        this.setState({ prize: e.target.value })
+        this.setState({ price: e.target.value })
     }
     
 
@@ -58,45 +59,47 @@ export default class UpdateBooks extends Component {
         this.setState({ closeDilog: true })
         console.log("closeDilog", this.state.closeDilog)
     }
-    AddBook = () => {
+    editbook = () => {
         let requestData = {
             Title: this.state.Title,
             Description: this.state.Description,
-            Author: this.state.Auther,
-            BooksAvailable: this.state.Quantity,
-            Price: this.state.prize,
+            Author: this.state.Author,
+            BooksAvailable: this.state.booksAvailable,
+            Price: this.state.price,
                       // imageUrl: this.state.imageUrl
         }
         console.log("req Data", requestData)
-        service.updateBooksDetail(requestData).then((Response) => {
+        service.updateBooksDetail(requestData,this.props.myupdateBookData.bookId).then((Response) => {
             console.log("Response", Response);
         }).catch((err) => {
             console.log(err);
         })
     }
-    componentDidMount(){
+   async componentDidMount(){
       
-            this.setState({ Title :this.props.location.aboutProps.title ,     
-                            // Decription :this.props.location.aboutProps.description,
-                            // Author :this.props.location.aboutProps.author,
-                            // imageUrl :this.props.location.aboutProps.imageUrl,
-                            // price : this.props.location.aboutProps.price,
-                            // Quantity :this.props.location.aboutProps.booksAvailable,
-                            // BookId :this.props.location.aboutProps.bookId,
-            })
+           this.setState({ Title :this.props.myupdateBookData.title,     
+            Description :this.props.myupdateBookData.description,
+                            Author :this.props.myupdateBookData.author,
+                            imageUrl :this.props.myupdateBookData.imageUrl,
+                            price : this.props.myupdateBookData.price,
+                            booksAvailable :this.props.myupdateBookData.booksAvailable,
+                            BookId :this.props.myupdateBookData.bookId,
+           
+                        })
            
         console.log("comp did mount",this.state)
     }
     CloseBook=()=>{
-        this.props.openBook();
+        this.props.changeopenupdateBook(false)
+        this.props.history.push('./')
     }
 
     render() {
         console.log(" dilog open ",this.props.openBook)
-        console.log(" update book",this.props.location.aboutProps)
+        console.log(" update book",this.props.myopenupdateBook)
         return (
             <Dialog
-                open={this.props.location.aboutProps.openBook}
+                open={this.props.myopenupdateBook}
                // onClose={this.CloseBook}
                 aria-labelledby="alert-dialog-title"
                 aria-describedby="alert-dialog-description"
@@ -139,7 +142,7 @@ export default class UpdateBooks extends Component {
                     <div className="textFields"><TextField
                         id="outlined-Title" label="Title"
                         type="text" variant="outlined"
-                        // value={this.state.Title}
+                        value={this.state.Title}
                        // defaultValue={this.props.book.Title}
                         onChange={this.handleTitleChange}
                         size="small" fullWidth>Title</TextField><br /></div>
@@ -147,7 +150,7 @@ export default class UpdateBooks extends Component {
                         <TextField id="outlined-Auther"
                             label="Auther" type="text"
                             variant="outlined"
-                            //  value={this.state.Auther}
+                              value={this.state.Author}
                             onChange={this.handleAutherChange}
                             size="small" fullWidth>Auther</TextField><br /></div>
 
@@ -160,23 +163,23 @@ export default class UpdateBooks extends Component {
                     <div className="textFields"><TextField
                         id="outlined-prize" label="prize"
                         type="number" variant="outlined"
-                        value={this.state.prize}
+                        value={this.state.price}
                         onChange={this.handleprizeChange}
                         size="small" fullWidth>prize</TextField><br /></div>
                     <div className="textFields"><TextField
                         id="outlined-prize" label="Quantity"
                         type="number" variant="outlined"
-                        value={this.state.Quantity}
+                        value={this.state.booksAvailable}
                         onChange={this.handleQuantityChange}
                         size="small" fullWidth>Quantity</TextField><br /></div>
                     <div className="buttonContainer">
 
                         <Button variant="contained" color="primary" onClick={this.editbook}>
                             edit
-                               </Button>
+                        </Button>
                         <Button className="buttons" variant="contained" color="secondary" onClick={this.CloseBook}>
                             cancle
-                              </Button>
+                        </Button>
                     </div>
                 </div>
 
@@ -184,3 +187,17 @@ export default class UpdateBooks extends Component {
         );
     }
 } 
+const mapStateToProps=(state)=>{
+    return{
+      myopenupdateBook:state.openupdateBook,
+     myupdateBookData:state.updateBookData
+    }
+    } 
+    const mapDispatrchToProps =(dispatch)=>{
+      return{
+    changeopenupdateBook:(openupdateBook)=>{(dispatch({type:'OPEN_UPDATE_BOOK_DILOGBOX',payload:openupdateBook}))},
+    sendDataForUpdateBook:(updateBookData)=>{(dispatch({type:'OPEN_UPDATE_BOOK_DATA',payload:updateBookData}))}
+      }
+    }
+    export default connect(mapStateToProps,mapDispatrchToProps)(UpdateBooks);
+    

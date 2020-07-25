@@ -87,7 +87,7 @@ class UpdateBooks extends Component {
            
                         })
            
-      await  console.log("comp did mount",this.state)
+        console.log("comp did mount",this.state)
     }
     CloseBook=()=>{
         this.props.changeopenupdateBook(false)

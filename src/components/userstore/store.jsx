@@ -12,7 +12,8 @@ import SearchIcon from "@material-ui/icons/Search";
 import "../../stylepage/adminDashbord.scss"
 import "../../stylepage/logo.scss"
 import DisplayBook from "./displayCard"
-
+import getAllBookList from "../adminDashbord/getAllBookList";
+import AddInCart from "./addCart"
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
@@ -68,8 +69,10 @@ export default function Store() {
           </Toolbar>
         </AppBar>
       </div>
-   
-    <DisplayBook />
+   {/* <DisplayBook /> */}
+      
+ <AddInCart/>
     </div>
   );
 }
+

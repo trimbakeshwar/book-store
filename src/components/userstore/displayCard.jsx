@@ -42,16 +42,16 @@ export default class DisplayBook extends Component {
         })
     }
     AddToBag = (values) => {
-        this.setState({ AddBagButtonSetting: true, id: values,AddwishlistSetting:false })
+        this.setState({ AddBagButtonSetting: true, id: values, AddwishlistSetting: false })
         console.log("AddBagButtonSetting", this.state.AddBagButtonSetting)
     }
     AddToWishlist = (values) => {
         this.setState({ AddwishlistSetting: true, id: values, AddBagButtonSetting: false })
         console.log("AddwishlistSetting", this.state.AddwishlistSetting)
     }
-     
+
     render() {
-        const bookCard = this.state.bookDetail.reverse().map((values, index) => {
+        const bookCard = this.state.bookDetail.map((values, index) => {
             return (
                 <Card>
                     <div className="bookimagecontainer">
@@ -70,34 +70,34 @@ export default class DisplayBook extends Component {
                     <div className="price">
                         Rs.  {values.price}
                     </div>
-{(this.state.AddwishlistSetting === true && this.state.id === values.bookId )?
-                        ( <div className="wishlist">
-                                    <button variant="contained" className={(this.state.AddwishlistSetting === true && this.state.id === values.bookId) ? "wishlistButton" : "Buttonss"}
-                                        disableElevation onClick={() => this.AddToWish(values.bookId)}>
-                                        WISHLIST
+                    {(this.state.AddwishlistSetting === true && this.state.id === values.bookId) ?
+                        (<div className="wishlist">
+                            <button variant="contained" className={(this.state.AddwishlistSetting === true && this.state.id === values.bookId) ? "wishlistButton" : "Buttonss"}
+                                disableElevation onClick={() => this.AddToWish(values.bookId)}>
+                                WISHLIST
                                    </button>
-                                </div>):
-                   ( <div>
-                        <div className="cardbuttonContainers">
-                            <div className="buttonsetting">
+                        </div>) :
+                        (<div>
+                            <div className="cardbuttonContainers">
+                                <div className="buttonsetting">
 
-                                <div style={{ position: "relative" }}>
-                                    <Button variant="contained" className={(this.state.AddBagButtonSetting === true && this.state.id === values.bookId) ? "ActiveButtons" : "Buttons"}
-                                        disableElevation onClick={() => this.AddToBag(values.bookId)}>
-                                        {(this.state.AddBagButtonSetting === true && this.state.id === values.bookId) ? "ADDED TO BAG" : " ADD TO BAG"}
+                                    <div style={{ position: "relative" }}>
+                                        <Button variant="contained" className={(this.state.AddBagButtonSetting === true && this.state.id === values.bookId) ? "ActiveButtons" : "Buttons"}
+                                            disableElevation onClick={() => this.AddToBag(values.bookId)}>
+                                            {(this.state.AddBagButtonSetting === true && this.state.id === values.bookId) ? "ADDED TO BAG" : " ADD TO BAG"}
 
-                                    </Button>
-                                </div>
-                                <div className="wishlist">
-                                    <button variant="contained" className={(this.state.AddwishlistSetting === true && this.state.id === values.bookId) ? "wishlistButton" : "Buttonss"}
-                                        disableElevation onClick={() => this.AddToWishlist(values.bookId)}>
-                                        WISHLIST
+                                        </Button>
+                                    </div>
+                                    <div className="wishlist">
+                                        <button variant="contained" className={(this.state.AddwishlistSetting === true && this.state.id === values.bookId) ? "wishlistButton" : "Buttonss"}
+                                            disableElevation onClick={() => this.AddToWishlist(values.bookId)}>
+                                            WISHLIST
                                    </button>
+                                    </div>
                                 </div>
+
                             </div>
-
-                        </div>
-                    </div>)}
+                        </div>)}
                 </Card>
             );
         })

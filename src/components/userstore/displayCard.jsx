@@ -19,10 +19,9 @@ export default class DisplayBook extends Component {
         super(props);
         this.state = {
             bookDetail: [],
-            id:"",
-            open: false,
-            AddBagButtonSetting : false, 
-            AddwishlistSetting:false,
+            id: "",
+            AddBagButtonSetting: false,
+            AddwishlistSetting: false,
             breakpointColumnsObj: {
                 default: 4,
                 1717: 4,
@@ -42,24 +41,25 @@ export default class DisplayBook extends Component {
             console.log("err", err)
         })
     }
-    AddToBag=(values)=>{
-this.setState({AddBagButtonSetting:true,id:values})
-console.log("AddBagButtonSetting", this.state.AddBagButtonSetting)
+    AddToBag = (values) => {
+        this.setState({ AddBagButtonSetting: true, id: values,AddwishlistSetting:false })
+        console.log("AddBagButtonSetting", this.state.AddBagButtonSetting)
     }
-    AddToWishlist=(values)=>{
-        this.setState({AddwishlistSetting:true,id:values,AddBagButtonSetting:false})
-console.log("AddwishlistSetting", this.state.AddwishlistSetting)
+    AddToWishlist = (values) => {
+        this.setState({ AddwishlistSetting: true, id: values, AddBagButtonSetting: false })
+        console.log("AddwishlistSetting", this.state.AddwishlistSetting)
     }
+     
     render() {
         const bookCard = this.state.bookDetail.reverse().map((values, index) => {
             return (
                 <Card>
                     <div className="bookimagecontainer">
-                        <div  className="imag">
-                        <img src={BookCover} 
-                          width="100px"
-                         height="150px" />
-                         </div>
+                        <div className="imag">
+                            <img src={BookCover}
+                                width="100px"
+                                height="150px" />
+                        </div>
                     </div>
                     <div className="titles">
                         {values.title}
@@ -68,27 +68,36 @@ console.log("AddwishlistSetting", this.state.AddwishlistSetting)
                         {values.author}
                     </div>
                     <div className="price">
-                      Rs.  {values.price} 
+                        Rs.  {values.price}
                     </div>
-                    <div className="cardbuttonContainers">
-                        <div className="buttonsetting">
-                          
-                           <div style={{position:"relative"}}>
-                        <Button variant="contained" className={(this.state.AddBagButtonSetting === true && this.state.id === values.bookId )?"ActiveButtons":"Buttons"}  
-                        disableElevation onClick={()=>this.AddToBag(values.bookId)}>
-                            {(this.state.AddBagButtonSetting === true && this.state.id === values.bookId )? "ADDED TO BAG":" ADD TO BAG"}
-                           
-                        </Button>
+{(this.state.AddwishlistSetting === true && this.state.id === values.bookId )?
+                        ( <div className="wishlist">
+                                    <button variant="contained" className={(this.state.AddwishlistSetting === true && this.state.id === values.bookId) ? "wishlistButton" : "Buttonss"}
+                                        disableElevation onClick={() => this.AddToWish(values.bookId)}>
+                                        WISHLIST
+                                   </button>
+                                </div>):
+                   ( <div>
+                        <div className="cardbuttonContainers">
+                            <div className="buttonsetting">
+
+                                <div style={{ position: "relative" }}>
+                                    <Button variant="contained" className={(this.state.AddBagButtonSetting === true && this.state.id === values.bookId) ? "ActiveButtons" : "Buttons"}
+                                        disableElevation onClick={() => this.AddToBag(values.bookId)}>
+                                        {(this.state.AddBagButtonSetting === true && this.state.id === values.bookId) ? "ADDED TO BAG" : " ADD TO BAG"}
+
+                                    </Button>
+                                </div>
+                                <div className="wishlist">
+                                    <button variant="contained" className={(this.state.AddwishlistSetting === true && this.state.id === values.bookId) ? "wishlistButton" : "Buttonss"}
+                                        disableElevation onClick={() => this.AddToWishlist(values.bookId)}>
+                                        WISHLIST
+                                   </button>
+                                </div>
+                            </div>
+
                         </div>
-                        <div className="wishlist">
-                        <button   variant="contained"   className={(this.state.AddwishlistSetting === true && this.state.id === values.bookId )?"wishlistButton":"Buttonss"}  
-                        disableElevation onClick={()=>this.AddToWishlist(values.bookId)}>
-                            WISHLIST
-                        </button>
-                        </div>
-                         
-                          </div>
-                    </div>
+                    </div>)}
                 </Card>
             );
         })

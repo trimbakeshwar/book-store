@@ -14,13 +14,15 @@ import { connect } from 'react-redux'
 import AddCircleOutlineOutlinedIcon from '@material-ui/icons/AddCircleOutlineOutlined';
 import RemoveCircleOutlineIcon from '@material-ui/icons/RemoveCircleOutline';
 import OrderDetails from "./orderDetails"
+import OrderSummary from "./orderSummary"
 const service = new adminService();
 
 class AddInCart extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            count: 0
+            count: 0,
+            customerDetailHide:false
         }
     }
     increaseQuantity = () => {
@@ -34,6 +36,10 @@ class AddInCart extends Component {
             this.setState({ count: this.state.count - 1 })
             console.log("count", this.state.count)
         }
+    }
+    openCustomerDetails =() =>{
+        console.log("run")
+        this.setState({ customerDetailHide:true})
     }
     render() {
 
@@ -68,13 +74,17 @@ class AddInCart extends Component {
                        
                     </div>
                     <div className="placeOrder">
-                                    <Button variant="contained" color="primary">
+                                    <Button variant="contained" color="primary" onClick={this.openCustomerDetails}>
                                         PLACE ORDER
                                     </Button>
                                 </div>
                 </div>
             </div>
-            <OrderDetails/>
+            {/* {(this.state.customerDetailHide)?
+            <OrderDetails/>:( <div className="hedlineContainers">
+            Customer Details
+        </div>)} */}
+        <OrderSummary />
             </div>
         )
     }

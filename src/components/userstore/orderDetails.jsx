@@ -56,7 +56,7 @@ console.log(e.target.value)
                     <div className="FieldForContactDetails">
                         <TextField className="TextStyle" id="outlined-Address" label="Address" type="text" variant="outlined"
                             onChange={this.NameHandler} error={this.state.EmailError}
-                            helperText={this.state.EmailError} size="small" fullWidth multiline />
+                            helperText={this.state.EmailError} style={{marginBottom:"5px"}} size="small" fullWidth multiline />
 
 
                     </div>

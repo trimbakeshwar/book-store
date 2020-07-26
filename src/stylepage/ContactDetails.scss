@@ -1,4 +1,4 @@
-$textweight: 500;
+$textweight: 400;
 .contactContainer{
 margin-left: 150px;
 width: 55%;
@@ -13,8 +13,9 @@ flex-direction: column;
 .hedlineContainer{
     width: 100%;
     height: 50px;
-    padding-bottom: 20px;
+    
     flex-direction: row;
+    font-weight:$textweight;
     justify-content: space-between;
     display: flex;
 

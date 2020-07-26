@@ -52,7 +52,7 @@ const service = new adminService();
         
         this.setState({ AddwishlistSetting: true, id: values.bookId, AddBagButtonSetting: false })
         console.log("AddwishlistSetting", this.state.AddwishlistSetting)
-        this.props.changemyBookDetail(values)
+        
     }
 
     render() {

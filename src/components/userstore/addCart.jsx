@@ -13,6 +13,7 @@ import "../../stylepage/AddToCart.scss"
 import { connect } from 'react-redux'
 import AddCircleOutlineOutlinedIcon from '@material-ui/icons/AddCircleOutlineOutlined';
 import RemoveCircleOutlineIcon from '@material-ui/icons/RemoveCircleOutline';
+import OrderDetails from "./orderDetails"
 const service = new adminService();
 
 class AddInCart extends Component {
@@ -38,6 +39,7 @@ class AddInCart extends Component {
 
         console.log("op", this.props.myBookDetail)
         return (
+            <div>
             <div className="boxForCart">
                 <div className="container">
                     <div className="carttag"> My cart(2)</div>
@@ -71,6 +73,8 @@ class AddInCart extends Component {
                                     </Button>
                                 </div>
                 </div>
+            </div>
+            <OrderDetails/>
             </div>
         )
     }

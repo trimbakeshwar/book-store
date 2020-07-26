@@ -1,7 +1,7 @@
 $textweight: 500;
 .boxForCart{
 margin: 150px;
-width: 60%;
+width: 55%;
 padding: 20px;
 border: groove;
 border-color: rgb(252, 251, 251);
@@ -17,19 +17,47 @@ display: flex;
     display: flex;
 }
 .authors {
-    padding-left: 25px;
+    padding-left: 35px;
     font-size: 10px;
     padding-top: 3px;
     padding-bottom: 10px;
     color: grey;
  }
 .prices{
-        padding-left: 25px;
+        padding-left: 35px;
         padding-bottom: 10px;
         font-weight: bold;
 }
+.container{
+    width: 100%;
+}
 .title {
          
-        padding-left: 25px;
+        padding-left: 35px;
         font-weight: $textweight;
  }
+ .quantityContainer{
+    flex-direction: row;
+    display: flex;
+}
+ 
+ .countButton{
+    margin-left:35px;
+ } 
+ .inputQuantity{
+    height: 20px;
+    position: relative;
+    bottom: 5px;
+    width: 25px;
+    margin: 10px;
+    padding-left: 25px;
+ } 
+ .remove{
+    padding-top: 4px;
+    padding-left: 20px;
+    font-size: 15px;
+ } 
+ .placeOrder{
+    padding-left: 685px;
+
+}

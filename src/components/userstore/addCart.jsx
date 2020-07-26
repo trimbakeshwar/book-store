@@ -39,35 +39,37 @@ class AddInCart extends Component {
         console.log("op", this.props.myBookDetail)
         return (
             <div className="boxForCart">
-                <div>
+                <div className="container">
                     <div className="carttag"> My cart(2)</div>
                     <div>
                         <div className="informationOfBook">
                             <div>
                                 <img src={BookCover}
                                     width="60px"
-                                    height="80px" />
+                                    height="90px" />
                             </div>
                             <div>
                                 <div className="title">{this.props.myBookDetail.title}</div>
                                 <div className="authors">{this.props.myBookDetail.author}</div>
                                 <div className="prices">{this.props.myBookDetail.price}</div>
-                                <div>
-                                    <div> <AddCircleOutlineOutlinedIcon fontSize="small" onClick={this.increaseQuantity} />
-                                        <input  Value={this.state.count} disabled type="number" />
+                                <div className="quantityContainer">
+                                    <div className="countButton"> <AddCircleOutlineOutlinedIcon fontSize="small" onClick={this.increaseQuantity} />
+                                        <input className="inputQuantity"  Value={this.state.count} disabled type="number" />
                                         <RemoveCircleOutlineIcon onClick={this.decreaseQuantity} />
                                     </div>
-                                    <div>Remove</div>
+                                    <div className="remove">Remove</div>
                                 </div>
-                                <div>
+                               
+                            </div>
+                            
+                        </div>
+                       
+                    </div>
+                    <div className="placeOrder">
                                     <Button variant="contained" color="primary">
                                         PLACE ORDER
                                     </Button>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
             </div>
         )

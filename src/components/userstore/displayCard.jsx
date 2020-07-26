@@ -7,13 +7,14 @@ import Button from '@material-ui/core/Button';
 import { withRouter } from 'react-router';
 import "../../stylepage/displayBook.scss"
 import adminService from "../../services/adminServices";
+import storeServices from "../../services/storeServices";
 import ImageOutlinedIcon from '@material-ui/icons/ImageOutlined';
 import { TextareaAutosize } from '@material-ui/core';
 import BookCover from "../../images/bookcover.jpg"
 import {connect} from 'react-redux'
 const service = new adminService();
 
-
+const storeservice = new storeServices();
  class DisplayBook extends Component {
 
     constructor(props) {
@@ -45,6 +46,17 @@ const service = new adminService();
     AddToBag = (values) => {
         this.setState({ AddBagButtonSetting: true, id: values.bookId, AddwishlistSetting: false })
         console.log("AddBagButtonSetting", this.state.AddBagButtonSetting)
+
+        let requestData={
+            BookId:values.bookId
+
+        } 
+     console.log("add cart id",requestData)
+        storeservice.addToCart(requestData).then((Response)=>{
+            console.log("add to cart succefull",Response)
+        }).then((err)=>{
+            console.log("add to cart succefull",err)
+        })
         this.props.changemyBookDetail(values)
     }
     AddToWishlist = (values) => {

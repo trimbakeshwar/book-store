@@ -11,11 +11,32 @@ import { TextareaAutosize } from '@material-ui/core';
 import BookCover from "../../images/bookcover.jpg"
 import "../../stylepage/AddToCart.scss"
 import {connect} from 'react-redux'
-
+import AddCircleOutlineOutlinedIcon from '@material-ui/icons/AddCircleOutlineOutlined';
+import RemoveCircleOutlineIcon from '@material-ui/icons/RemoveCircleOutline';
 const service = new adminService();
 
 class AddInCart extends Component {
+    constructor(props){
+        super(props);
+        this.state={
+          count:0  
+        }
+    }
+    increaseQuantity=()=>{
+        if(this.state.count < this.props.myBookDetail.booksAvailable){
+        this.setState({count:this.state.count+1})
+        console.log("count",this.state.count)
+        }
+    }
+    decreaseQuantity=()=>{
+        if(this.state.count > 0)
+        {
+        this.setState({count:this.state.count-1})
+        console.log("count",this.state.count)
+        }
+    }
     render() {
+
         console.log("op",this.props.myBookDetail)
         return (
             <div className="boxForCart">
@@ -32,6 +53,10 @@ class AddInCart extends Component {
         <div className="title">{this.props.myBookDetail.title}</div>
         <div className="authors">{this.props.myBookDetail.author}</div>
         <div className="prices">{this.props.myBookDetail.price}</div>
+        <div> <AddCircleOutlineOutlinedIcon fontSize="small"  onClick={this.increaseQuantity}/>
+        <input  Value={this.state.count} disabled type="number"/> 
+        <RemoveCircleOutlineIcon onClick={this.decreaseQuantity}/>
+        </div>
                         </div>
                         </div>
                     </div>

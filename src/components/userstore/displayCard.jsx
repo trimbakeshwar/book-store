@@ -48,6 +48,8 @@ const service = new adminService();
         this.props.changemyBookDetail(values)
     }
     AddToWishlist = (values) => {
+
+        
         this.setState({ AddwishlistSetting: true, id: values.bookId, AddBagButtonSetting: false })
         console.log("AddwishlistSetting", this.state.AddwishlistSetting)
         this.props.changemyBookDetail(values)

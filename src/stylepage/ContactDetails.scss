@@ -1,0 +1,51 @@
+$textweight: 400;
+.contactContainer{
+margin-left: 150px;
+width: 55%;
+padding: 20px;
+border: groove;
+border-color: rgb(252, 251, 251);
+border-width: 0.1px;
+display: flex;
+flex-direction: column;
+
+}
+.hedlineContainer{
+    width: 100%;
+    height: 50px;
+    
+    flex-direction: row;
+    font-weight:$textweight;
+    justify-content: space-between;
+    display: flex;
+
+} 
+.hedline{
+
+} 
+.editlable{
+
+}
+.contactinformationContainer{
+    flex-direction: column;
+    display: flex;
+}
+.FieldForContactDetails{
+    flex-direction: row;
+    display: flex;
+    justify-content: space-between;
+    width: 55%;
+    margin-bottom: 2%;
+    
+}
+.TextStyle{
+    border-radius: 0 !important;
+    height: 50px !important;
+}
+.radioSetting{
+   justify-content: space-between; 
+}
+.continue{
+    justify-content: flex-end;
+    display: flex;
+}

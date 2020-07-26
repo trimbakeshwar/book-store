@@ -7,13 +7,14 @@ import Button from '@material-ui/core/Button';
 import { withRouter } from 'react-router';
 import "../../stylepage/displayBook.scss"
 import adminService from "../../services/adminServices";
+import storeServices from "../../services/storeServices";
 import ImageOutlinedIcon from '@material-ui/icons/ImageOutlined';
 import { TextareaAutosize } from '@material-ui/core';
 import BookCover from "../../images/bookcover.jpg"
 import {connect} from 'react-redux'
 const service = new adminService();
 
-
+const storeservice = new storeServices();
  class DisplayBook extends Component {
 
     constructor(props) {
@@ -43,15 +44,40 @@ const service = new adminService();
         })
     }
     AddToBag = (values) => {
-        this.setState({ AddBagButtonSetting: true, id: values.bookId, AddwishlistSetting: false })
-        console.log("AddBagButtonSetting", this.state.AddBagButtonSetting)
+         this.setState({ AddBagButtonSetting: true, id: values.bookId, AddwishlistSetting: false })
+      
+
+        let requestData={
+            BookId:this.state.id
+
+        } 
+     console.log("add cart id",requestData)
+        storeservice.addToCart(requestData).then((Response)=>{
+            console.log("add to cart succefull",Response)
+        }).then((err)=>{
+            console.log("add to cart succefull",err)
+        })
         this.props.changemyBookDetail(values)
     }
-    AddToWishlist = (values) => {
-        this.setState({ AddwishlistSetting: true, id: values.bookId, AddBagButtonSetting: false })
+    AddToWishlist = async(values) => {
+
+        
+        await this.setState({ AddwishlistSetting: true, id: values.bookId, AddBagButtonSetting: false })
         console.log("AddwishlistSetting", this.state.AddwishlistSetting)
-        this.props.changemyBookDetail(values)
+        let requestData={
+            BookId:this.state.id
+
+        } 
+     console.log("add wishlist id",requestData)
+        storeservice.addToWishLists(requestData).then((json)=>{
+            console.log("add to wishlist succefull",json)
+        }).then((err)=>{
+            console.log("add to wishlist reject",err)
+        })
+      //  this.props.changemyBookDetail(values)
     }
+        
+    
 
     render() {
         const bookCard = this.state.bookDetail.map((values, index) => {
@@ -76,7 +102,7 @@ const service = new adminService();
                     {(this.state.AddwishlistSetting === true && this.state.id === values.bookId) ?
                         (<div className="wishlist">
                             <button variant="contained" className={(this.state.AddwishlistSetting === true && this.state.id === values.bookId) ? "wishlistButton" : "Buttonss"}
-                                disableElevation onClick={() => this.AddToWish(values)}>
+                                disableElevation >
                                 WISHLIST
                                    </button>
                         </div>) :

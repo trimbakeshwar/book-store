@@ -8,6 +8,9 @@ import AxiosServices from "../services/axiosServices";
     addToCart(id) {
 		return Axios.Post(config.url+"Cart", id,{headers: {Authorization: "Bearer "+localStorage.getItem("Token") }});  
     }
+    addToWishLists(id){
+        return Axios.Post(config.url+"WishList", id,{headers: {Authorization: "Bearer "+localStorage.getItem("Token") }});   
+    }
   
 }
 export default storeServices;

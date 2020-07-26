@@ -44,11 +44,11 @@ const storeservice = new storeServices();
         })
     }
     AddToBag = (values) => {
-        this.setState({ AddBagButtonSetting: true, id: values.bookId, AddwishlistSetting: false })
-        console.log("AddBagButtonSetting", this.state.AddBagButtonSetting)
+         this.setState({ AddBagButtonSetting: true, id: values.bookId, AddwishlistSetting: false })
+      
 
         let requestData={
-            BookId:values.bookId
+            BookId:this.state.id
 
         } 
      console.log("add cart id",requestData)
@@ -59,13 +59,25 @@ const storeservice = new storeServices();
         })
         this.props.changemyBookDetail(values)
     }
-    AddToWishlist = (values) => {
+    AddToWishlist = async(values) => {
 
         
-        this.setState({ AddwishlistSetting: true, id: values.bookId, AddBagButtonSetting: false })
+        await this.setState({ AddwishlistSetting: true, id: values.bookId, AddBagButtonSetting: false })
         console.log("AddwishlistSetting", this.state.AddwishlistSetting)
-        
+        let requestData={
+            BookId:this.state.id
+
+        } 
+     console.log("add wishlist id",requestData)
+        storeservice.addToWishLists(requestData).then((json)=>{
+            console.log("add to wishlist succefull",json)
+        }).then((err)=>{
+            console.log("add to wishlist reject",err)
+        })
+      //  this.props.changemyBookDetail(values)
     }
+        
+    
 
     render() {
         const bookCard = this.state.bookDetail.map((values, index) => {
@@ -90,7 +102,7 @@ const storeservice = new storeServices();
                     {(this.state.AddwishlistSetting === true && this.state.id === values.bookId) ?
                         (<div className="wishlist">
                             <button variant="contained" className={(this.state.AddwishlistSetting === true && this.state.id === values.bookId) ? "wishlistButton" : "Buttonss"}
-                                disableElevation onClick={() => this.AddToWish(values)}>
+                                disableElevation >
                                 WISHLIST
                                    </button>
                         </div>) :

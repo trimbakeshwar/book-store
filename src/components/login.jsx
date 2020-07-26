@@ -132,6 +132,7 @@ export class Login extends Component {
                         <Button variant="contained" style ={{backgroundColor:"rgba(160, 48, 55, 0.925)"}} color="primary" float='right' onClick={this.Login} >Login</Button>
                     </div>
                 </div>
+                
             </div>
             </div>
         );

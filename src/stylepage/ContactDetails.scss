@@ -41,3 +41,10 @@ flex-direction: column;
     border-radius: 0 !important;
     height: 50px !important;
 }
+.radioSetting{
+   justify-content: space-between; 
+}
+.continue{
+    justify-content: flex-end;
+    display: flex;
+}

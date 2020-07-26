@@ -7,7 +7,11 @@ import adminService from "../../services/adminServices";
 import { connect } from 'react-redux'
 import "../../stylepage/ContactDetails.scss"
 import { TextField } from '@material-ui/core';
-
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormControl from '@material-ui/core/FormControl';
+import FormLabel from '@material-ui/core/FormLabel';
 const service = new adminService();
 
 class OrderDetails extends Component {
@@ -17,9 +21,12 @@ class OrderDetails extends Component {
 
         }
     }
+    handleRedioChange=(e)=>{
+console.log(e.target.value)
+    }
     render() {
         return (
-            
+
             <div className="contactContainer">
                 <div className="hedlineContainer">
                     <div className="hedline">
@@ -49,17 +56,33 @@ class OrderDetails extends Component {
                     <div className="FieldForContactDetails">
                         <TextField className="TextStyle" id="outlined-Address" label="Address" type="text" variant="outlined"
                             onChange={this.NameHandler} error={this.state.EmailError}
-                            helperText={this.state.EmailError} size="small" fullWidth multiline /> 
+                            helperText={this.state.EmailError} size="small" fullWidth multiline />
 
 
                     </div>
                     <div className="FieldForContactDetails">
-                        <TextField  id="outlined-city" label="city/town" type="text" variant="outlined"
+                        <TextField id="outlined-city" label="city/town" type="text" variant="outlined"
                             onChange={this.NameHandler} error={this.state.EmailError}
                             helperText={this.state.EmailError} size="small" />
-                        <TextField  id="outlined-Landmark" label="Landmark" type="text" variant="outlined"
+                        <TextField id="outlined-Landmark" label="Landmark" type="text" variant="outlined"
                             onChange={this.phoneHandler} error={this.state.EmailError}
                             helperText={this.state.EmailError} size="small" />
+                    </div>
+                    <div> </div>
+                    <div className="radioSetting">
+                        <FormControl component="fieldset">
+                            <FormLabel component="legend">Type</FormLabel>
+                            <RadioGroup aria-label="gender" name="gender1" value={this.value} onChange={this.handleRedioChange}>
+                               <div >
+                                <FormControlLabel style={{paddingRight:"30px"}} value="Home" control={<Radio />} label="Home" />
+                               <FormControlLabel style={{paddingRight:"30px"}} value="Work" control={<Radio />} label="Work" />
+                               <FormControlLabel  value="other" control={<Radio />} label="Other" />
+                                </div>
+                            </RadioGroup>
+                        </FormControl>
+                    </div>
+                    <div className="continue">
+                    <Button variant="contained" color="primary">CONTINUE</Button>
                     </div>
 
                 </div>

@@ -19,7 +19,6 @@ function App() {
     <Route exact path="/store" component={Store}/> 
     <Route exact path="/addCart" component={AddInCart}/>
     <Route exact path="/displayCard" component={DisplayBook}/> 
-    
     </Router>
     </div>
   );

@@ -6,7 +6,7 @@ import AdminDashboard from "./components/adminDashbord/adminDashbord";
 import UpdateBooks from "./components/adminDashbord/updateBook"
 import Store from "./components/userstore/store"
 import DisplayBook from "./components/userstore/displayCard"
-import AddInCart from "./components/userstore/AddCart"
+import AddInCart from "./components/userstore/addCart"
 
 function App() {
   return (

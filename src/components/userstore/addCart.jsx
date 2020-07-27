@@ -24,18 +24,18 @@ class AddInCart extends Component {
         super(props);
         this.state = {
             count: 0,
-            customerDetailHide:false,
-            cartData:[],
-            countBooks:0,
+            customerDetailHide: false,
+            cartData: [],
+            countBooks: 0,
         }
         this.getAllBookFromCart()
     }
-    getAllBookFromCart(){
-        storeservice.getCartList().then((Response)=>{
-            console.log("cart books",Response.data.data)
-            this.setState({cartData:Response.data.data})
-        }).catch((err)=>{
-            console.log("err catch ",err)
+    getAllBookFromCart() {
+        storeservice.getCartList().then((Response) => {
+            console.log("cart books", Response.data.data)
+            this.setState({ cartData: Response.data.data })
+        }).catch((err) => {
+            console.log("err catch ", err)
         })
     }
     increaseQuantity = () => {
@@ -50,9 +50,9 @@ class AddInCart extends Component {
             console.log("count", this.state.count)
         }
     }
-    openCustomerDetails =() =>{
+    openCustomerDetails = () => {
         console.log("run")
-        this.setState({ customerDetailHide:true})
+        this.setState({ customerDetailHide: true })
     }
     render() {
 
@@ -60,52 +60,51 @@ class AddInCart extends Component {
         return (
             <div>
                 <Headers />
-            <div className="boxForCart">
-                <div className="container">
-                    <div className="carttag"> My cart()</div>
-                    <div>
-                        {
-                        this.state.cartData.map((values, index) => {
-                          
-                            return(
-                               
-                        <div className="informationOfBook">
-                            <div>
-                                <img src={BookCover}
-                                    width="60px"
-                                    height="90px" />
-                            </div>
-                            <div>
-                                <div className="title">{values.title}</div>
-                                <div className="authors">{values.author}</div>
-                                <div className="prices">{values.price}</div>
-                                <div className="quantityContainer">
-                                    <div className="countButton"> <AddCircleOutlineOutlinedIcon fontSize="small" onClick={this.increaseQuantity} />
-                                        <input className="inputQuantity"  Value={this.state.count} disabled type="number" />
-                                        <RemoveCircleOutlineIcon onClick={this.decreaseQuantity} />
-                                    </div>
-                                    <div className="remove" >Remove</div>
-                                </div>
-                               
-                            </div>
-                          
+                <div className="boxForCart">
+                    <div className="container">
+                        <div className="carttag"> My cart()</div>
+                        <div>
+                            {
+                                this.state.cartData.map((values, index) => {
+
+                                    return (
+
+                                        <div className="informationOfBook">
+                                            <div>
+                                                <img src={BookCover}
+                                                    width="60px"
+                                                    height="90px" />
+                                            </div>
+                                            <div>
+                                                <div className="title">{values.title}</div>
+                                                <div className="authors">{values.author}</div>
+                                                <div className="prices">{values.price}</div>
+                                                <div className="quantityContainer">
+                                                    <div className="countButton"> <AddCircleOutlineOutlinedIcon fontSize="small" onClick={this.increaseQuantity} />
+                                                        <input className="inputQuantity" Value={this.state.count} disabled type="number" />
+                                                        <RemoveCircleOutlineIcon onClick={this.decreaseQuantity} />
+                                                    </div>
+                                                    <div className="remove" >Remove</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    )
+                                }
+                                )}
+
                         </div>
-                        )}
-                        )}
-                       
-                    </div>
-                    <div className="placeOrder">
-                                    <Button variant="contained" color="primary" onClick={this.openCustomerDetails}>
-                                        PLACE ORDER
+                        <div className="placeOrder">
+                            <Button variant="contained" color="primary" onClick={this.openCustomerDetails}>
+                                PLACE ORDER
                                     </Button>
-                                </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-             {(this.state.customerDetailHide)?
-            <OrderDetails/>:( <div className="hedlineContainers">
-            Customer Details
-        </div>)} 
-        <OrderSummary />
+                {(this.state.customerDetailHide) ?
+                    <OrderDetails /> : (<div className="hedlineContainers">
+                        Customer Details
+                    </div>)}
+                <OrderSummary />
             </div>
         )
     }

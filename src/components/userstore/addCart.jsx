@@ -89,7 +89,9 @@ class AddInCart extends Component {
                                
                             </div>
                           
-                        </div>)})}
+                        </div>
+                        )}
+                        )}
                        
                     </div>
                     <div className="placeOrder">

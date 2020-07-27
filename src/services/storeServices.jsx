@@ -5,7 +5,7 @@ import AxiosServices from "../services/axiosServices";
  const Axios = new AxiosServices();
  class storeServices {  
     
-    addToCart(id ,) {
+    addToCart(id ) {
 		return Axios.Post(config.url+"Cart?BookId="+id,id,{headers: {Authorization: "Bearer "+localStorage.getItem("Token") }});  
     }
     addToWishLists(id){
@@ -18,11 +18,16 @@ import AxiosServices from "../services/axiosServices";
       return Axios.Get(config.url+"Cart/", {headers: {Authorization: "Bearer "+localStorage.getItem("Token") }}); 
  
     }
-    removeFromWishlist(id){
-      return Axios.Delete(config.url+"WishList/"+id, {headers: {Authorization: "Bearer "+localStorage.getItem("Token") }}); 
+    removeFromWishlist(WishListId ){
+      
+      return Axios.Delete(config.url+"WishList/"+WishListId , {headers: {Authorization: "Bearer "+localStorage.getItem("Token") }}); 
     } 
     getWishListList(){
       return Axios.Get(config.url+"WishList/", {headers: {Authorization: "Bearer "+localStorage.getItem("Token") }}); 
+    }
+    AddWishListToCart(id){
+      return Axios.Post(config.url+"Cart/WishListToCart/"+id,id,{headers: {Authorization: "Bearer "+localStorage.getItem("Token") }});  
+
     }
 
 }

@@ -43,11 +43,11 @@ class AddInCart extends Component {
         let CartId = value
         storeservice.remove(CartId).then((Response)=>{
             console.log("remove cart books",Response)
-          
+            this.getAllBookFromCart()
         }).catch((err)=>{
             console.log("err catch ",err)
         })
-        this.getAllBookFromCart()
+       
     }
     increaseQuantity = () => {
         if (this.state.count < this.props.myBookDetail.booksAvailable) {

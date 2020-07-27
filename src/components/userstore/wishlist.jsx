@@ -46,23 +46,34 @@ class AddInWishLIst extends Component {
        
     }
     RemoveFromWishlist=(value)=>{
-        let WishListId  = value.bookId
+        let WishListId  = value
         console.log("WishListId ",WishListId)
         storeservice.removeFromWishlist(WishListId).then((Response)=>{
             console.log("remove cart books",Response)
+            this.getAllBookFromWishList()
+        }).catch((err)=>{
+            console.log("err catch ",err)
+        })
+      
+    }
+    wishListToCart=(value)=>{
+        let WishListId   = value
+        console.log("WishList to cart ",WishListId)
+        storeservice.AddWishListToCart(WishListId).then((Response)=>{
+            console.log("add wish to cart books",Response)
+            this.getAllBookFromWishList()
           
         }).catch((err)=>{
             console.log("err catch ",err)
         })
-        this.getAllBookFromWishList()
-    }
-   
+     
+   }
    
    
     render() {
       
        
-        const bookCard = this.state.wishListData.map((values, index) => {
+        const bookCard = this.state.wishListData.filter((item) => item.isDeleted === false ).filter((item) => item.isMoved === false ).map((values, index) => {
             return (
                 <Card>
                     <div className="bookimagecontainer">
@@ -88,14 +99,14 @@ class AddInWishLIst extends Component {
 
                                     <div style={{ position: "relative" }}>
                                         <Button variant="contained" className= "Buttons"
-                                            disableElevation onClick={() => this.wishListToCart(values)}>
+                                            disableElevation onClick={() => this.wishListToCart(values.wishListId)}>
                                           ADD TO BAG
 
                                         </Button>
                                     </div>
                                     <div className="wishlist">
                                         <button variant="contained" className= "Buttonss"
-                                            disableElevation onClick={() => this.RemoveFromWishlist(values)}>
+                                            disableElevation onClick={() => this.RemoveFromWishlist(values.wishListId)}>
                                             REMOVE
                                    </button>
                                     </div>

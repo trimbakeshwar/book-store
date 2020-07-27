@@ -1,7 +1,7 @@
 import axios from 'axios'
 export default class AxiosServices{
    
-    Post(url, data ,ishederRequire, token){
+    Post(url, data , token){
         return axios.post(url,data,token)
     
 }

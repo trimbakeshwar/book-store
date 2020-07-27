@@ -7,7 +7,7 @@ import UpdateBooks from "./components/adminDashbord/updateBook"
 import Store from "./components/userstore/store"
 import DisplayBook from "./components/userstore/displayCard"
 import AddInCart from "./components/userstore/addCart"
-
+import AddInWishLIst from "./components/userstore/wishlist"
 function App() {
   return (
     <div >
@@ -19,6 +19,9 @@ function App() {
     <Route exact path="/store" component={Store}/> 
     <Route exact path="/AddCart" component={AddInCart}/>
     <Route exact path="/displayCard" component={DisplayBook}/> 
+    <Route exact path="/wishlist" component={AddInWishLIst}/> 
+    
+
     </Router>
     </div>
   );

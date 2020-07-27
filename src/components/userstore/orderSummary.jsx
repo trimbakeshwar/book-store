@@ -18,7 +18,7 @@ const goToStore = () => {
               src={CheckoutMessage}
               className="summaryimage"
               alt="summary img"
-            />
+            />z
           </div>
           <br />
           <div className="Comfirmation">
@@ -28,9 +28,9 @@ const goToStore = () => {
           </div>
           <br />
           <br />
-          <br />
+         
           <div>
-            <Card className="table">
+            <Card className="tables">
               <div className="flexSetting">
                 <div className="Column">
                   <div className="header"> Email Id</div><br/>
@@ -52,7 +52,7 @@ const goToStore = () => {
             </Card>
           </div>
           <br />
-          <br />
+         
           <div>
             <Button
               className="button-Login"
@@ -65,8 +65,8 @@ const goToStore = () => {
           </div>
         </div>
         <br />
-        <br />
-        <br />
+       
+        
         <div>
         
         </div>

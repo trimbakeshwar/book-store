@@ -20,32 +20,33 @@ import storeServices from "../../services/storeServices";
 
 const service = new adminService();
 const storeservice = new storeServices();
+
 class AddInCart extends Component {
     constructor(props) {
         super(props);
         this.state = {
             count: 0,
-            customerDetailHide:false,
-            cartData:[]
+            customerDetailHide: false,
+            cartData: []
         }
         this.getAllBookFromCart()
     }
-    getAllBookFromCart(){
-        storeservice.getCartList().then((Response)=>{
-            console.log("cart books",Response.data.data)
-            this.setState({cartData:Response.data.data})
-        }).catch((err)=>{
-            console.log("err catch ",err)
+    getAllBookFromCart() {
+        storeservice.getCartList().then((Response) => {
+            console.log("cart books", Response.data.data)
+            this.setState({ cartData: Response.data.data })
+        }).catch((err) => {
+            console.log("err catch ", err)
         })
-       
+
     }
-    removeFromCart=(value)=>{
+    removeFromCart = (value) => {
         let CartId = value
-        storeservice.remove(CartId).then((Response)=>{
-            console.log("remove cart books",Response)
-          
-        }).catch((err)=>{
-            console.log("err catch ",err)
+        storeservice.remove(CartId).then((Response) => {
+            console.log("remove cart books", Response)
+
+        }).catch((err) => {
+            console.log("err catch ", err)
         })
         this.getAllBookFromCart()
     }
@@ -61,9 +62,9 @@ class AddInCart extends Component {
             console.log("count", this.state.count)
         }
     }
-    openCustomerDetails =() =>{
+    openCustomerDetails = () => {
         console.log("run")
-        this.setState({ customerDetailHide:true})
+        this.setState({ customerDetailHide: true })
     }
     render() {
 
@@ -71,11 +72,11 @@ class AddInCart extends Component {
         return (
             <div>
                 <Headers />
-            <div className="boxForCart">
-                <div className="container">
-                    <div className="carttag"> My cart(2)</div>
-                    <div>
-                    {
+                <div className="boxForCart">
+                    <div className="container">
+                        <div className="carttag"> My cart(2)</div>
+                        <div>
+                            {
                                 this.state.cartData.filter((item) => item.isDeleted === false).map((values, index) => {
                                     return (
 
@@ -107,18 +108,18 @@ class AddInCart extends Component {
 
 
                             }
-                       
-                    </div>
-                    <div className="placeOrder">
-                                    <Button variant="contained" color="primary" onClick={this.openCustomerDetails}>
-                                      PLACE ORDER
+
+                        </div>
+                        <div className="placeOrder">
+                            <Button variant="contained" color="primary" onClick={this.openCustomerDetails}>
+                                PLACE ORDER
                                     </Button>
-                                </div>
+                        </div>
+                    </div>
                 </div>
+                {(this.state.customerDetailHide) ? <OrderDetails /> : (<div className="hedlineContainers"> Customer Details </div>)}
+                <OrderSummary />
             </div>
-             {(this.state.customerDetailHide)?<OrderDetails/>:( <div className="hedlineContainers"> Customer Details </div>)} 
-             <OrderSummary />
-         </div>
         )
     }
 }

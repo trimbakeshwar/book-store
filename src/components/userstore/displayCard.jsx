@@ -13,7 +13,6 @@ import { TextareaAutosize } from '@material-ui/core';
 import BookCover from "../../images/bookcover.jpg"
 import {connect} from 'react-redux'
 const service = new adminService();
-
 const storeservice = new storeServices();
  class DisplayBook extends Component {
 

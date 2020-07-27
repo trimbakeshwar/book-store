@@ -18,11 +18,13 @@ import AxiosServices from "../services/axiosServices";
       return Axios.Get(config.url+"Cart/", {headers: {Authorization: "Bearer "+localStorage.getItem("Token") }}); 
  
     }
+
     removeFromWishlist(id){
       return Axios.Delete(config.url+"WishList/"+id, {headers: {Authorization: "Bearer "+localStorage.getItem("Token") }}); 
     } 
     getWishListList(){
       return Axios.Get(config.url+"WishList/", {headers: {Authorization: "Bearer "+localStorage.getItem("Token") }}); 
+
     }
 
 }

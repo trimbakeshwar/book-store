@@ -47,25 +47,25 @@ console.log(e.target.value)
                     </div>
                     <div className="FieldForContactDetails">
                         <TextField className="TextStyle" id="outlined-Pincode" label="Pincode" type="number" variant="outlined"
-                            onChange={this.NameHandler} error={this.state.EmailError}
+                            onChange={this.pinHandler} error={this.state.EmailError}
                             helperText={this.state.EmailError} size="small" />
                         <TextField className="TextStyle" id="outlined-Location" label="Location" type="text" variant="outlined"
-                            onChange={this.phoneHandler} error={this.state.EmailError}
+                            onChange={this.LocationHandler} error={this.state.EmailError}
                             helperText={this.state.EmailError} size="small" />
                     </div>
                     <div className="FieldForContactDetails">
                         <TextField className="TextStyle" id="outlined-Address" label="Address" type="text" variant="outlined"
-                            onChange={this.NameHandler} error={this.state.EmailError}
+                            onChange={this.AddressHandler} error={this.state.EmailError}
                             helperText={this.state.EmailError} style={{marginBottom:"5px"}} size="small" fullWidth multiline />
 
 
                     </div>
                     <div className="FieldForContactDetails">
                         <TextField id="outlined-city" label="city/town" type="text" variant="outlined"
-                            onChange={this.NameHandler} error={this.state.EmailError}
+                            onChange={this.cityHandler} error={this.state.EmailError}
                             helperText={this.state.EmailError} size="small" />
                         <TextField id="outlined-Landmark" label="Landmark" type="text" variant="outlined"
-                            onChange={this.phoneHandler} error={this.state.EmailError}
+                            onChange={this.LandmarkHandler} error={this.state.EmailError}
                             helperText={this.state.EmailError} size="small" />
                     </div>
                     <div> </div>

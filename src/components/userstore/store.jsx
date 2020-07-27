@@ -46,10 +46,7 @@ export default function Store() {
  
         <div  >
       <Headers />
-    
-   <DisplayBook />
-      
-  
+   <DisplayBook />  
     </div>
    
 

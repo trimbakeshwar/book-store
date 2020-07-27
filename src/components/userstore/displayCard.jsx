@@ -63,9 +63,9 @@ const storeservice = new storeServices();
          this.setState({ AddwishlistSetting: true, id: values.bookId, AddBagButtonSetting: false })
         console.log("AddwishlistSetting", this.state.AddwishlistSetting)
          let   BookId=values.bookId
-        let  isHeaderReqire=true
-     console.log("add wishlist id",BookId,isHeaderReqire)
-        storeservice.addToWishLists(BookId,isHeaderReqire).then((Response)=>{
+      
+     console.log("add wishlist id",BookId)
+        storeservice.addToWishLists(BookId).then((Response)=>{
             console.log("add to wishlist succefull",Response)
         }).then((err)=>{
             console.log("add to wishlist reject",err)

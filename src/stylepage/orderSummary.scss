@@ -1,0 +1,117 @@
+
+
+
+.summary {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 100px;
+}
+.ordersummaryimage {
+
+  display: flex;
+  justify-content: center;
+}
+.summaryimage{
+  width:350px;
+}
+.Comfirmation {
+  max-width:300px;
+  text-align:center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  font-weight: bold;
+  font-size: 18px;
+}
+.tables {
+  max-width:700px;
+  height: 200px;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+.flexSetting {
+  display: flex;
+  flex-direction:row;
+}
+.Column{
+  width:40%;
+  display: flex;
+  flex-direction:column;
+  
+  border: groove;
+  border-color: red($color: #ffffff);
+  border-width: 0.01px;
+}
+.header{
+ padding: 12px;
+  word-wrap: break-word !important;
+  border-top: groove;
+  border-color: red($color: #ffffff);
+  border-width: 0.1px;
+}
+
+@media only screen and (max-width: 1024px) {
+ 
+  .orderPage{
+    padding-bottom:150px;
+  }
+  .summary{
+    padding-bottom:330px;
+  }
+}
+@media only screen and (max-width: 768px) {
+  .ordersummaryimage {
+  
+    margin-bottom:0px;
+  }
+  .summary{
+    padding-bottom:0px;
+  }
+}
+@media only screen and (max-width: 450px) {
+  .ordersummaryimage {
+    margin-top:30px;
+  }
+  .orderPage{
+    padding-bottom:0px;
+  }
+  .tables {
+     width:400px;
+  }
+  .flexSetting {
+    flex-direction:column;
+  }
+  .Column{
+    width:100%;
+    flex-direction:row;
+  }
+  
+  .button-Login{
+    margin-bottom:30px !important;
+  }
+}
+@media only screen and (max-width: 414px) {
+  .tables {
+     width:350px;
+  }
+ 
+}
+@media only screen and (max-width: 320px) {
+  .tables {
+     width:300px;
+  }
+  .summaryimage{
+    width:300px;
+  }
+}
+@media only screen and (max-width: 280px) {
+  .tables {
+     width:260px;
+  }
+  .summaryimage{
+    width:260px;
+  }
+}

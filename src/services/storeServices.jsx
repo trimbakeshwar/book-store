@@ -11,6 +11,8 @@ import AxiosServices from "../services/axiosServices";
     addToWishLists(id){
         return Axios.Post(config.url+"WishList", id,{headers: {Authorization: "Bearer "+localStorage.getItem("Token") }});   
     }
-  
+    remove(id){
+      return Axios.Delete(config.url+"Cart/"+id, {headers: {Authorization: "Bearer "+localStorage.getItem("Token") }}); 
+    }
 }
 export default storeServices;

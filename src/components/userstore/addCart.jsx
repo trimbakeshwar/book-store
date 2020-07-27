@@ -14,6 +14,9 @@ import { connect } from 'react-redux'
 import AddCircleOutlineOutlinedIcon from '@material-ui/icons/AddCircleOutlineOutlined';
 import RemoveCircleOutlineIcon from '@material-ui/icons/RemoveCircleOutline';
 import OrderDetails from "./orderDetails"
+import OrderSummary from "./orderSummary"
+import storeServices from "../../services/storeServices";
+const storeservice = new storeServices();
 const service = new adminService();
 
 class AddInCart extends Component {
@@ -40,6 +43,15 @@ class AddInCart extends Component {
         console.log("run")
         this.setState({ customerDetailHide:true})
     }
+    removeFromCart=(value)=>{
+        let CartId = value
+        console.log("remove from cart",CartId)
+        storeservice.remove(CartId).then((Response)=>{
+            console.log("remove",Response)
+        }).catch((err)=>{
+            console.log("remove",err)
+        })
+    }
     render() {
 
         console.log("op", this.props.myBookDetail)
@@ -64,7 +76,7 @@ class AddInCart extends Component {
                                         <input className="inputQuantity"  Value={this.state.count} disabled type="number" />
                                         <RemoveCircleOutlineIcon onClick={this.decreaseQuantity} />
                                     </div>
-                                    <div className="remove">Remove</div>
+                                    <div onClick={()=>this.removeFromCart(this.props.myBookDetail.bookId)} className="remove">Remove</div>
                                 </div>
                                
                             </div>
@@ -79,10 +91,13 @@ class AddInCart extends Component {
                                 </div>
                 </div>
             </div>
-            {(this.state.customerDetailHide)?
+
+             {(this.state.customerDetailHide)?
             <OrderDetails/>:( <div className="hedlineContainers">
             Customer Details
-        </div>)}
+        </div>)} 
+        <OrderSummary />
+
             </div>
         )
     }

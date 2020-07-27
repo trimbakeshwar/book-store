@@ -7,6 +7,7 @@ import UpdateBooks from "./components/adminDashbord/updateBook"
 import Store from "./components/userstore/store"
 import DisplayBook from "./components/userstore/displayCard"
 import AddInCart from "./components/userstore/addCart"
+
 function App() {
   return (
     <div >
@@ -16,8 +17,9 @@ function App() {
     <Route exact path="/adminDashbord" component={AdminDashboard}/> 
     <Route  path="/updateBook" component={UpdateBooks}/>
     <Route exact path="/store" component={Store}/> 
+    <Route exact path="/addCart" component={AddInCart}/>
     <Route exact path="/displayCard" component={DisplayBook}/> 
-    <Router exact path="/addCart" component={AddInCart}/>
+    
     </Router>
     </div>
   );

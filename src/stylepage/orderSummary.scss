@@ -25,8 +25,9 @@
   font-weight: bold;
   font-size: 18px;
 }
-.table {
+.tables {
   max-width:700px;
+  height: 200px;
   width: 100%;
   display: flex;
   flex-wrap: wrap;
@@ -77,7 +78,7 @@
   .orderPage{
     padding-bottom:0px;
   }
-  .table {
+  .tables {
      width:400px;
   }
   .flexSetting {
@@ -93,12 +94,13 @@
   }
 }
 @media only screen and (max-width: 414px) {
-  .table {
+  .tables {
      width:350px;
   }
+ 
 }
 @media only screen and (max-width: 320px) {
-  .table {
+  .tables {
      width:300px;
   }
   .summaryimage{
@@ -106,7 +108,7 @@
   }
 }
 @media only screen and (max-width: 280px) {
-  .table {
+  .tables {
      width:260px;
   }
   .summaryimage{

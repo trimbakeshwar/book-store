@@ -14,7 +14,6 @@ import "../../stylepage/logo.scss"
 import DisplayBook from "./displayCard"
 import getAllBookList from "../adminDashbord/getAllBookList";
 import AddInCart from "./addCart"
-import Headers from "./Header"
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
@@ -36,23 +35,43 @@ const useStyles = makeStyles((theme) => ({
  
  
 }));
-export default function Store() {
+export default function Headers() {
   const classes = useStyles();
   const theme = useTheme();
   
 
   
   return (
- 
-        <div  >
-      <Headers />
-    
-   <DisplayBook />
-      
   
+    <div  >
+      
+      <div className="{classes.root}">
+       
+        <AppBar position="fixed" style={{backgroundColor: "rgba(160, 48, 55, 0.925)"}} className={clsx(classes.appBar)} >
+          <Toolbar color="rgb(192, 14, 14)">
+             
+              <div className="iconimage" />  
+              <div className="name" >Bookstore</div>
+            <div className="searchBar" >
+              <div>
+                <IconButton><SearchIcon /></IconButton>
+              </div>
+              <div  >
+                <TextField className="inputText" placeholder="Search"
+                  InputProps={{ disableUnderline: true, }}  fullWidth>search</TextField>
+              </div>
+            </div>
+            <div className="shopingcart">
+             <span className="cart">cart </span>
+            <ShoppingCartOutlinedIcon />
+             </div>
+           
+          </Toolbar>
+        </AppBar>
+      </div>
+  
+      
     </div>
-   
-
   );
 }
 

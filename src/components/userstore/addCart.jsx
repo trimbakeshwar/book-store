@@ -25,7 +25,8 @@ class AddInCart extends Component {
         this.state = {
             count: 0,
             customerDetailHide:false,
-            cartData:[]
+            cartData:[],
+            countBooks:0,
         }
         this.getAllBookFromCart()
     }
@@ -61,11 +62,13 @@ class AddInCart extends Component {
                 <Headers />
             <div className="boxForCart">
                 <div className="container">
-                    <div className="carttag"> My cart(2)</div>
+                    <div className="carttag"> My cart()</div>
                     <div>
                         {
                         this.state.cartData.map((values, index) => {
+                          
                             return(
+                               
                         <div className="informationOfBook">
                             <div>
                                 <img src={BookCover}
@@ -81,11 +84,11 @@ class AddInCart extends Component {
                                         <input className="inputQuantity"  Value={this.state.count} disabled type="number" />
                                         <RemoveCircleOutlineIcon onClick={this.decreaseQuantity} />
                                     </div>
-                                    <div className="remove">Remove</div>
+                                    <div className="remove" >Remove</div>
                                 </div>
                                
                             </div>
-                            
+                          
                         </div>)})}
                        
                     </div>

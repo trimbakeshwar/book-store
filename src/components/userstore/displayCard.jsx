@@ -46,30 +46,26 @@ const storeservice = new storeServices();
          this.setState({ AddBagButtonSetting: true, id: values.bookId, AddwishlistSetting: false })
       
 
-        let requestData={
-            BookId:this.state.id
+       
+           let BookId=values.bookId
 
-        } 
-     console.log("add cart id",requestData)
-        storeservice.addToCart(requestData).then((Response)=>{
+        
+     console.log("add cart id",BookId)
+        storeservice.addToCart(BookId).then((Response)=>{
             console.log("add to cart succefull",Response)
         }).then((err)=>{
             console.log("add to cart succefull",err)
         })
         this.props.changemyBookDetail(values)
     }
-    AddToWishlist = async(values) => {
-
-        
-        await this.setState({ AddwishlistSetting: true, id: values.bookId, AddBagButtonSetting: false })
+    AddToWishlist = (values) => {
+         this.setState({ AddwishlistSetting: true, id: values.bookId, AddBagButtonSetting: false })
         console.log("AddwishlistSetting", this.state.AddwishlistSetting)
-        let requestData={
-            BookId:this.state.id
-
-        } 
-     console.log("add wishlist id",requestData)
-        storeservice.addToWishLists(requestData).then((json)=>{
-            console.log("add to wishlist succefull",json)
+         let   BookId=values.bookId
+        let  isHeaderReqire=true
+     console.log("add wishlist id",BookId,isHeaderReqire)
+        storeservice.addToWishLists(BookId,isHeaderReqire).then((Response)=>{
+            console.log("add to wishlist succefull",Response)
         }).then((err)=>{
             console.log("add to wishlist reject",err)
         })

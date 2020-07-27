@@ -67,7 +67,7 @@ this.setState({open:true})
 
    render() { 
    let data=this.state.bookDetail
-   .filter((item) => item.isDeleted === false)
+   .filter((item) => item.isDeleted === true)
    console.log("data",data)
      return ( 
        <div>

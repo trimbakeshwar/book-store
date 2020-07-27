@@ -14,7 +14,6 @@ import "../../stylepage/logo.scss"
 import DisplayBook from "./displayCard"
 import getAllBookList from "../adminDashbord/getAllBookList";
 import AddInCart from "./addCart"
-import Headers from "./Header"
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
@@ -36,14 +35,13 @@ const useStyles = makeStyles((theme) => ({
  
  
 }));
-export default function Store() {
+export default function Headers() {
   const classes = useStyles();
   const theme = useTheme();
   
 
   
   return (
-
   
     <div  >
       
@@ -71,12 +69,9 @@ export default function Store() {
           </Toolbar>
         </AppBar>
       </div>
-   <DisplayBook />
-      
   
+      
     </div>
-   
-
   );
 }
 

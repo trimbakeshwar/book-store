@@ -12,5 +12,8 @@ export default class AxiosServices{
     Delete(url, isHeaderRequire){
         return axios.delete(url,isHeaderRequire?{headers: {Authorization: "Bearer "+localStorage.getItem("Token") }}:undefined)
     }
+    Put(url,data,tokan){
+        return axios.put(url,data,tokan)
+    }
 
 }

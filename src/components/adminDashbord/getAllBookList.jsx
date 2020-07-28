@@ -45,10 +45,9 @@ const service = new adminService();
 
 EditData=(updateBookData)=>{
   console.log("book",updateBookData);
-  this.setState=({openBook:true})
   this.props.changeopenupdateBook(true)
   this.props.sendDataForUpdateBook(updateBookData)
-  this.props.history.push('./adminDashbord');
+  this.props.history.push('/adminDashbord/updateBook');
 }
   DeleteData=(id)=>{
   service.deletebook(id).then((Response)=>{

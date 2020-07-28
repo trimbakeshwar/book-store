@@ -16,7 +16,7 @@ function App() {
       <Route exact path="/" component={Login}/>
     <Route exact path="/registration" component={Registration}/> 
     <Route exact path="/adminDashbord" component={AdminDashboard}/> 
-    <Route  path="/updateBook" component={UpdateBooks}/>
+    <Route  path="/adminDashbord/updateBook" component={UpdateBooks}/>
     <Route exact path="/store" component={Store}/> 
     <Route exact path="/addCart" component={AddInCart}/>
     <Route exact path="/displayCard" component={DisplayBook}/> 

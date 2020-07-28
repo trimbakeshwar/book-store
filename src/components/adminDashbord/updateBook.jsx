@@ -95,7 +95,7 @@ class UpdateBooks extends Component {
     }
 
     render() {
-        console.log(" dilog open ",this.props.openBook)
+       // console.log(" dilog open ",this.props.openBook)
         console.log(" update book",this.props.myopenupdateBook)
         return (
             <Dialog

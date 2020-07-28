@@ -4,7 +4,9 @@ const iState = {
     openupdateBook:false,
     updateBookData:"",
     BookDetail:"",
-    cartData:[]
+    cartData:[],
+    SearchData:[],
+    searchEnable:false,
 }
 
 const reducer = (state=iState,action)=>{
@@ -49,8 +51,24 @@ const reducer = (state=iState,action)=>{
         }
     }
     
+    if(action.type === 'SEARCH_BOOKS')
+    {
+        return {
+            ...state,
+            SearchData:action.payload,
+           
+        }
+    }
+    if(action.type === 'SEARCH_ENABLE')
+    {
+        return {
+            ...state,
+            searchEnable:action.payload,
+           
+        }
+    }
     
-   
+ 
     return state;
 }
 

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import clsx from "clsx";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import IconButton from '@material-ui/core/IconButton';
@@ -14,6 +14,9 @@ import "../../stylepage/logo.scss"
 import DisplayBook from "./displayCard"
 import getAllBookList from "../adminDashbord/getAllBookList";
 import AddInCart from "./addCart"
+import adminService from "../../services/adminServices";
+import { connect } from 'react-redux'
+const service = new adminService();
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
@@ -35,11 +38,21 @@ const useStyles = makeStyles((theme) => ({
  
  
 }));
-export default function Headers() {
+ function Headers(props) {
   const classes = useStyles();
   const theme = useTheme();
-  
-
+  const [Search, setSearch] = useState('');
+const search=(e)=>{
+  console.log("search")
+   setSearch(e.target.value)
+  service.SearchBook(Search).then((Response)=>{
+    console.log("search",Response.data.data)
+    props.searchedData(Response.data.data)
+    props.searchedEnable(true)
+  }).catch((err)=>{
+    console.log("err",err)
+  })
+}
   
   return (
   
@@ -57,7 +70,7 @@ export default function Headers() {
                 <IconButton><SearchIcon /></IconButton>
               </div>
               <div  >
-                <TextField className="inputText" placeholder="Search"
+                <TextField className="inputText" placeholder="Search" onChange={search}
                   InputProps={{ disableUnderline: true, }}  fullWidth>search</TextField>
               </div>
             </div>
@@ -74,4 +87,21 @@ export default function Headers() {
     </div>
   );
 }
+const mapStateToProps=(state)=>{
+  return{
+      mySearchData:state.SearchData,
+      mysearchEnable:state.searchEnable
+  }
+  } 
+ 
+  const mapDispatrchToProps =(dispatch)=>{
+    return{
+      searchedData:(SearchData,)=>{(dispatch({type:'SEARCH_BOOKS',payload:SearchData, }))},
+      searchedEnable:(searchEnable,)=>{(dispatch({type:'SEARCH_ENABLE',payload:searchEnable, }))}
+ 
+  }
+  }
+  export default connect(mapStateToProps,mapDispatrchToProps)(Headers);
+  
+
 

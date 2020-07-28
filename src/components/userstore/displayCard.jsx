@@ -1,6 +1,6 @@
 
 import IconButton from '@material-ui/core/IconButton';
-import React, { Component } from 'react';
+import React,  {Component}  from 'react';
 import Card from '@material-ui/core/Card';
 import Masonry from 'react-masonry-css';
 import Button from '@material-ui/core/Button';
@@ -43,7 +43,8 @@ const storeservice = new storeServices();
                 1084: 2,
                 750: 1
             },
-            AnchorEl:null
+            AnchorEl:null,
+            searchEnable:false,
         }
         this.getBooksList()
     }
@@ -117,8 +118,11 @@ const storeservice = new storeServices();
         const { anchorEl } = this.state;
         const open = Boolean(anchorEl);
         const id = open ? 'no-transition-popper' : null;
-        const bookCard = this.state.bookDetail.map((values, index) => {
+        
+        
+        const bookCard = this.props.mysearchEnable?(this.props.mySearchData):(this.state.bookDetail).map((values, index) => {
             return (
+                
                 <Card>
                     <div className="bookimagecontainer">
                         <div className="imag">
@@ -201,7 +205,8 @@ DisplayBook.propTypes = {
 const mapStateToProps=(state)=>{
     return{
         myBookDetail:state.BookDetail,
-    
+        mySearchData:state.SearchData,
+        mysearchEnable:state.searchEnable
     }
     } 
     const mapDispatrchToProps =(dispatch)=>{
@@ -210,5 +215,6 @@ const mapStateToProps=(state)=>{
    
     }
     }
+   
     export default connect(mapStateToProps,mapDispatrchToProps)(withStyles(styles)(DisplayBook));
     

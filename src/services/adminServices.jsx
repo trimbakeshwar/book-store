@@ -22,5 +22,9 @@ import AxiosServices from "../services/axiosServices";
       return Axios.Put(config.url+"Book/InsertImage/"+bookId,imageUrl, {headers: {Authorization: "Bearer "+localStorage.getItem("Token") }}); 
  
     }
+    SearchBook(Search){
+      return Axios.Get(config.url+"Book/"+Search, {headers: {Authorization: "Bearer "+localStorage.getItem("Token") }}); 
+      
+    }
 }
 export default adminService;

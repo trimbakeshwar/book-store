@@ -91,7 +91,7 @@ this.setState({open:true})
          <TableBody>
          {
 
-            this.state.bookDetail.map((book, index) => {
+            this.state.bookDetail.filter((item) => item.isDeleted === false).map((book, index) => {
               return <TableRow key={index}>
 
 
@@ -101,7 +101,7 @@ this.setState({open:true})
                <TableCell align="left">{book.author}</TableCell>
                <TableCell align="left">{book.price}</TableCell>
                <TableCell align="left">{book.booksAvailable}</TableCell>
-            <TableCell align="left"><Link to={{ pathname: '/adminDashbord',  }}>
+            <TableCell align="left"><Link to={{ pathname: '/adminDashbord/updateBook',  }}>
                <IconButton><EditOutlinedIcon onClick={()=>this.EditData(book)}  />  </IconButton></Link > </TableCell>
                 <TableCell align="left"> <IconButton><DeleteOutlineOutlinedIcon onClick={()=>this.DeleteData(book.bookId)} /></IconButton> </TableCell>
              </TableRow>

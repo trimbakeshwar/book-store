@@ -13,6 +13,7 @@ class UpdateBooks extends Component {
         super(props);
         this.state = {
             imageUrl: "",
+            image:null,
             Title: "",
             Author: "",
             Description: "",
@@ -53,6 +54,7 @@ class UpdateBooks extends Component {
             image: e.target.files[0],
             imageUrl: URL.createObjectURL(e.target.files[0])
         });
+    
         console.log("imageUrl", this.state.imageUrl)
     }
     cancle = () => {
@@ -66,13 +68,22 @@ class UpdateBooks extends Component {
             Author: this.state.Author,
             BooksAvailable: this.state.booksAvailable,
             Price: this.state.price,
-                      // imageUrl: this.state.imageUrl
+           
         }
         console.log("req Data", requestData)
         service.updateBooksDetail(requestData,this.props.myupdateBookData.bookId).then((Response) => {
             console.log("Response", Response);
+            this.props.changeopenupdateBook(false)
+            this.props.history.push('./')
         }).catch((err) => {
             console.log(err);
+        })
+        const BookImage=this.state.imageUrl
+        
+        service.uploadImage(BookImage,this.state.BookId).then((Response)=>{
+            console.log("image upload ",Response)
+        }).catch((err)=>{
+             console.log("image upload ",Response)
         })
     }
    async componentDidMount(){
@@ -109,23 +120,19 @@ class UpdateBooks extends Component {
                         <div className="dilogicon" />
                         <div className="dilogname" >AddBooks</div>
                     </div>
-                    {/* <div className="imageContainer">
+                    <div className="imageContainer">
                         {(this.state.imageUrl !== null && this.state.imageUrl !== undefined) ?
                             <img src={this.state.imageUrl}
                                 className='BookImageAdmin'
                                 alt="BookImage"
                                 width="100px"
                                 height="100px"
-                                onClick={() =>
-                                    this.fileUpload.click()
-                                }
+                                onClick={() =>this.fileUpload.click()}
 
                             />
                             :
-                            <div onClick={() =>
-                                this.fileUpload.click()
-                            }>
-
+                            <div onClick={() =>this.fileUpload.click() }>
+                        <ImageOutlinedIcon/>
                             </div>
                         }
 
@@ -138,7 +145,7 @@ class UpdateBooks extends Component {
 
                             }
                         ></input>
-                    </div> */}
+                    </div>
                     <div className="textFields"><TextField
                         id="outlined-Title" label="Title"
                         type="text" variant="outlined"

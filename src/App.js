@@ -8,6 +8,7 @@ import Store from "./components/userstore/store"
 import DisplayBook from "./components/userstore/displayCard"
 import AddInCart from "./components/userstore/addCart"
 import AddInWishLIst from "./components/userstore/wishlist"
+import OrderSummary from "./components/userstore/orderSummary"
 function App() {
   return (
     <div >
@@ -20,7 +21,7 @@ function App() {
     <Route exact path="/addCart" component={AddInCart}/>
     <Route exact path="/displayCard" component={DisplayBook}/> 
     <Route exact path="/wishlist" component={AddInWishLIst}/> 
-    
+    <Route exact path="/orderSummary" component={OrderSummary}/>
     </Router>
     </div>
   );

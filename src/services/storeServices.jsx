@@ -5,30 +5,38 @@ import AxiosServices from "../services/axiosServices";
  const Axios = new AxiosServices();
  class storeServices {  
     
-    addToCart(id ) {
-		return Axios.Post(config.url+"Cart?BookId="+id,id,{headers: {Authorization: "Bearer "+localStorage.getItem("Token") }});  
+    addToCart(id ,isHeaderRequire) {
+		return Axios.Post(config.url+"Cart?BookId="+id,id,isHeaderRequire);  
     }
-    addToWishLists(id){
-        return Axios.Post(config.url+"WishList?BookId="+id, id,{headers: {Authorization: "Bearer "+localStorage.getItem("Token") }});   
+    addToWishLists(id,isHeaderRequire){
+        return Axios.Post(config.url+"WishList?BookId="+id, id,isHeaderRequire);   
     }
-    remove(id){
-      return Axios.Delete(config.url+"Cart/"+id, {headers: {Authorization: "Bearer "+localStorage.getItem("Token") }}); 
+    remove(id,isHeaderRequire){
+      return Axios.Delete(config.url+"Cart/"+id,isHeaderRequire); 
     }
-    getCartList(){
-      return Axios.Get(config.url+"Cart/", {headers: {Authorization: "Bearer "+localStorage.getItem("Token") }}); 
+    getCartList(isHeaderRequire){
+      return Axios.Get(config.url+"Cart/",isHeaderRequire); 
  
     }
-    removeFromWishlist(WishListId ){
+    removeFromWishlist(WishListId,isHeaderRequire ){
       
-      return Axios.Delete(config.url+"WishList/"+WishListId , {headers: {Authorization: "Bearer "+localStorage.getItem("Token") }}); 
+      return Axios.Delete(config.url+"WishList/"+WishListId ,isHeaderRequire); 
     } 
-    getWishListList(){
-      return Axios.Get(config.url+"WishList/", {headers: {Authorization: "Bearer "+localStorage.getItem("Token") }}); 
+    getWishListList(isHeaderRequire){
+      return Axios.Get(config.url+"WishList/",isHeaderRequire ); 
     }
-    AddWishListToCart(id){
-      return Axios.Post(config.url+"Cart/WishListToCart/"+id,id,{headers: {Authorization: "Bearer "+localStorage.getItem("Token") }});  
+    AddWishListToCart(id,isHeaderRequire){
+      return Axios.Post(config.url+"Cart/WishListToCart/"+id,id,isHeaderRequire);  
 
     }
+    SortByAscending(price,orderby,isHeaderRequire){
+      return Axios.Get(config.url+"book/Sorting?columnName="+price+"&order="+orderby,isHeaderRequire ); 
+
+    }
+     SortByDescending(price,orderby,isHeaderRequire){
+      return Axios.Get(config.url+"book/Sorting?columnName="+price+"&order="+orderby,isHeaderRequire ); 
+
+     }
 
 }
 export default storeServices;

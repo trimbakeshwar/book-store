@@ -4,6 +4,7 @@ const iState = {
     openupdateBook:false,
     updateBookData:"",
     BookDetail:"",
+    cartData:[]
 }
 
 const reducer = (state=iState,action)=>{
@@ -39,7 +40,15 @@ const reducer = (state=iState,action)=>{
             
         }
     }
-
+    if(action.type === 'ALL_CART_DETAILS')
+    {
+        return {
+            ...state,
+            cartData:action.payload,
+            
+        }
+    }
+    
     
    
     return state;

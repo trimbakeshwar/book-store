@@ -37,7 +37,8 @@ class AddInWishLIst extends Component {
         this.getAllBookFromWishList()
     }
     getAllBookFromWishList(){
-        storeservice.getWishListList().then((Response)=>{
+        let isHeaderRequire=true
+        storeservice.getWishListList(isHeaderRequire).then((Response)=>{
             console.log("cart books",Response.data.data)
             this.setState({wishListData:Response.data.data})
         }).catch((err)=>{
@@ -47,8 +48,9 @@ class AddInWishLIst extends Component {
     }
     RemoveFromWishlist=(value)=>{
         let WishListId  = value
+        let isHeaderRequire=true
         console.log("WishListId ",WishListId)
-        storeservice.removeFromWishlist(WishListId).then((Response)=>{
+        storeservice.removeFromWishlist(WishListId,isHeaderRequire).then((Response)=>{
             console.log("remove cart books",Response)
             this.getAllBookFromWishList()
         }).catch((err)=>{
@@ -58,8 +60,9 @@ class AddInWishLIst extends Component {
     }
     wishListToCart=(value)=>{
         let WishListId   = value
+        let isHeaderRequire=true
         console.log("WishList to cart ",WishListId)
-        storeservice.AddWishListToCart(WishListId).then((Response)=>{
+        storeservice.AddWishListToCart(WishListId,isHeaderRequire).then((Response)=>{
             console.log("add wish to cart books",Response)
             this.getAllBookFromWishList()
           

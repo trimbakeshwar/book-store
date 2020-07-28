@@ -18,7 +18,7 @@ import OrderSummary from "./orderSummary"
 import Headers from "./Header"
 import storeServices from "../../services/storeServices";
 
-const service = new adminService();
+
 const storeservice = new storeServices();
 class AddInCart extends Component {
     constructor(props) {
@@ -29,11 +29,16 @@ class AddInCart extends Component {
             cartData:[]
         }
         this.getAllBookFromCart()
+      
     }
-    getAllBookFromCart(){
-        storeservice.getCartList().then((Response)=>{
+     getAllBookFromCart(){
+        let isHeaderRequire=true
+        storeservice.getCartList(isHeaderRequire).then((Response)=>{
             console.log("cart books",Response.data.data)
-            this.setState({cartData:Response.data.data})
+             this.setState({cartData:Response.data.data.filter(data =>  data.isDeleted === false).filter(data => data.isUsed === false)})
+           
+            console.log("cart books details", this.props.AllCartData(this.state.cartData))
+           
         }).catch((err)=>{
             console.log("err catch ",err)
         })
@@ -41,7 +46,8 @@ class AddInCart extends Component {
     }
     removeFromCart=(value)=>{
         let CartId = value
-        storeservice.remove(CartId).then((Response)=>{
+        let isHeaderRequire=true
+        storeservice.remove(CartId,isHeaderRequire).then((Response)=>{
             console.log("remove cart books",Response)
             this.getAllBookFromCart()
         }).catch((err)=>{
@@ -64,7 +70,9 @@ class AddInCart extends Component {
     openCustomerDetails =() =>{
         console.log("run")
         this.setState({ customerDetailHide:true})
-    }
+        
+    } 
+  
     render() {
 
         console.log("op", this.props.myBookDetail)
@@ -116,12 +124,25 @@ class AddInCart extends Component {
                                 </div>
                 </div>
             </div>
-             {(this.state.customerDetailHide)?<OrderDetails/>:( <div className="hedlineContainers"> Customer Details </div>)} 
-             <OrderSummary />
+             {(this.state.customerDetailHide)?<OrderDetails/>:( <div className="hedlineContainers" style={{marginBottom:"25px"}}> Customer Details </div>)} 
+             <div className="hedlineContainers"> Order Summery </div>)
          </div>
         )
     }
 }
+const mapStateToProps=(state)=>{
+    return{
+        mycartData:state.cartData,
+    
+    }
+    } 
+   
+    const mapDispatrchToProps =(dispatch)=>{
+      return{
+        AllCartData:(cartData)=>{(dispatch({type:'ALL_CART_DETAILS',payload:cartData}))},
+   
+    }
+    }
+    export default connect(mapStateToProps,mapDispatrchToProps)(AddInCart);
+    
 
-
-export default AddInCart;

@@ -12,9 +12,9 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
+import OrderServices from "../../services/orderServices"
 
-const service = new adminService();
-
+const orderServices = new OrderServices();
 class OrderDetails extends Component {
     constructor(props) {
         super(props);
@@ -22,8 +22,8 @@ class OrderDetails extends Component {
            
 name:localStorage.getItem("Name"),
 phoneNumber:localStorage.getItem("phoneNumber"),
-pincode:"",
-location:"",
+pincode:null,
+Locality:"",
 Address:localStorage.getItem("Address"),
 city:localStorage.getItem("city"),
 Landmard:""
@@ -40,11 +40,11 @@ console.log(e.target.value)
             phoneHandlerr=(e)=>{
                 this.setState({phoneNumber:e.target.value })
             } 
-             pinHandlerr=(e)=>{
+            pinHandler=(e)=>{
                 this.setState({pincode:e.target.value})
             } 
              LocationHandlerr=(e)=>{
-                this.setState({ location:e.target.value})
+                this.setState({ Locality:e.target.value})
             } 
              AddressHandlerr=(e)=>{
                 this.setState({ Address:e.target.value})
@@ -55,6 +55,25 @@ console.log(e.target.value)
              LandmarkHandlerr=(e)=>{
                 this.setState({ Landmard:e.target.value})
             }  
+            placeOrder=()=>{
+                this.props.mycartData.filter((item)=>item.isUsed === false)
+                .filter((item)=>item.isDeleted === false).map((item)=>{
+                    const CartId = item.cartId;
+                    const Address = `${this.state.name} ${this.state.Address} ${this.state.Locality} ${this.state.Landmard} ${this.state.phoneNumber}`;
+                    const City = this.state.city;
+                    const PinCode = this.state.pincode;
+                    console.log("cartid ",CartId," Address ",Address," City ",City," PinCode ",PinCode)
+                    let isheaderRequired = true
+                    orderServices.orderPlaced(CartId,Address,City,PinCode,isheaderRequired).then((Response)=>{
+                        console.log("order placed",Response)
+                    }).catch((err)=>{
+                        console.log("order err",err)
+                    })
+                   
+                })
+               
+                
+            }
     render() {
         return (
 
@@ -107,7 +126,7 @@ console.log(e.target.value)
                         </FormControl>
                     </div>
                     <div className="continue">
-                    <Button variant="contained" color="primary">CONTINUE</Button>
+                    <Button  onClick={this.placeOrder}variant="contained" color="primary">CONTINUE</Button>
                     </div>
 
                 </div>
@@ -115,4 +134,12 @@ console.log(e.target.value)
         );
     }
 }
-export default OrderDetails;
+const mapStateToProps=(state)=>{
+    return{
+        mycartData:state.cartData,
+    
+    }
+    } 
+
+     export default connect(mapStateToProps)(OrderDetails);
+ 

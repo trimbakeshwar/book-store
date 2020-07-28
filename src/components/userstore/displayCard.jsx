@@ -12,6 +12,18 @@ import ImageOutlinedIcon from '@material-ui/icons/ImageOutlined';
 import { TextareaAutosize } from '@material-ui/core';
 import BookCover from "../../images/bookcover.jpg"
 import {connect} from 'react-redux'
+import Popper from '@material-ui/core/Popper';
+import Fade from '@material-ui/core/Fade';
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
+import Paper from '@material-ui/core/Paper';
+
+const styles = theme => ({
+    typography: {
+      padding: theme.spacing.unit * 1,
+    },
+  });
 const service = new adminService();
 
 const storeservice = new storeServices();
@@ -31,11 +43,13 @@ const storeservice = new storeServices();
                 1084: 2,
                 750: 1
             },
+            AnchorEl:null
         }
         this.getBooksList()
     }
     getBooksList = () => {
-        service.getbook().then((Response) => {
+        let isHeaderRequire=true
+        service.getbook(isHeaderRequire).then((Response) => {
             console.log("geting", Response.data.data)
             this.setState({ bookDetail: Response.data.data })
         }).catch((err) => {
@@ -43,16 +57,20 @@ const storeservice = new storeServices();
             console.log("err", err)
         })
     }
+    handleClick = event => {
+        const { currentTarget } = event;
+        this.setState(state => ({
+          anchorEl: state.anchorEl ? null : currentTarget,
+        }));
+      };
+    
+     
     AddToBag = (values) => {
          this.setState({ AddBagButtonSetting: true, id: values.bookId, AddwishlistSetting: false })
-      
-
-       
-           let BookId=values.bookId
-
-        
+           let BookId=values.bookId  
      console.log("add cart id",BookId)
-        storeservice.addToCart(BookId).then((Response)=>{
+     let isHeaderRequire=true
+        storeservice.addToCart(BookId,isHeaderRequire).then((Response)=>{
             console.log("add to cart succefull",Response)
         }).then((err)=>{
             console.log("add to cart succefull",err)
@@ -60,22 +78,45 @@ const storeservice = new storeServices();
         this.props.changemyBookDetail(values)
     }
     AddToWishlist = (values) => {
+
          this.setState({ AddwishlistSetting: true, id: values.bookId, AddBagButtonSetting: false })
         console.log("AddwishlistSetting", this.state.AddwishlistSetting)
          let   BookId=values.bookId
-      
+       let isHeaderRequire=true
      console.log("add wishlist id",BookId)
-        storeservice.addToWishLists(BookId).then((Response)=>{
+        storeservice.addToWishLists(BookId,isHeaderRequire).then((Response)=>{
             console.log("add to wishlist succefull",Response)
         }).then((err)=>{
             console.log("add to wishlist reject",err)
         })
       //  this.props.changemyBookDetail(values)
     }
-        
+    
+    SortLowToHigh=()=>{
+       let isHeaderRequire = true
+        storeservice.SortByAscending("Price","ascending",isHeaderRequire).then((Response)=>{
+            console.log("ascending",Response.data.data)
+            this.setState({bookDetail:Response.data.data})
+        }).catch((err)=>{
+            console.log("err",err)
+        })
+    } 
+    SortHighToLow=()=>{
+        let isHeaderRequire = true
+        storeservice.SortByDescending("Price","descending",isHeaderRequire).then((Response)=>{
+            console.log("ascending",Response.data.data)
+            this.setState({bookDetail:Response.data.data})
+        }).catch((err)=>{
+            console.log("err",err)
+        })
+    }
     
 
     render() {
+        const { classes } = this.props;
+        const { anchorEl } = this.state;
+        const open = Boolean(anchorEl);
+        const id = open ? 'no-transition-popper' : null;
         const bookCard = this.state.bookDetail.map((values, index) => {
             return (
                 <Card>
@@ -127,8 +168,21 @@ const storeservice = new storeServices();
             );
         })
         return (
-            <div>
-                <div className='display' >
+            <div> 
+                  <div className="poppersetting" >
+                  <button className="popperButtonsetting" aria-describedby={id} onClick={this.handleClick}>
+            sort by relevent
+            </button>
+            <Popper id={id} open={open} anchorEl={anchorEl}>
+              <Paper>
+                <div onClick={this.SortLowToHigh} className="poperitom">price : Low To High</div>
+                <div onClick={this.SortHighToLow} className="poperitom">price : High To Low</div>
+
+              </Paper>
+            </Popper>
+          </div>       
+               <div className='display' >
+                  
                     <Masonry
                         breakpointCols={this.state.breakpointColumnsObj}
                         className="masonry-grid"
@@ -139,6 +193,10 @@ const storeservice = new storeServices();
             </div>);
     }
 }
+DisplayBook.propTypes = {
+    classes: PropTypes.object.isRequired,
+  };
+  
 //className="Buttons"
 const mapStateToProps=(state)=>{
     return{
@@ -152,5 +210,5 @@ const mapStateToProps=(state)=>{
    
     }
     }
-    export default connect(mapStateToProps,mapDispatrchToProps)(DisplayBook);
+    export default connect(mapStateToProps,mapDispatrchToProps)(withStyles(styles)(DisplayBook));
     

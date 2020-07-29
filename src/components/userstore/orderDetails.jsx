@@ -13,7 +13,8 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import OrderServices from "../../services/orderServices"
-
+import storeServices from '../../services/storeServices';
+const storeservice = new storeServices();
 const orderServices = new OrderServices();
 class OrderDetails extends Component {
     constructor(props) {
@@ -56,9 +57,12 @@ console.log(e.target.value)
                 this.setState({ Landmard:e.target.value})
             }  
             placeOrder=()=>{
+               
                 this.props.mycartData.filter((item)=>item.isUsed === false)
-                .filter((item)=>item.isDeleted === false).map((item)=>{
-                    const CartId = item.cartId;
+                .filter((item)=>item.isDeleted === false).map(async(item)=>{
+                
+                  
+                    const CartId  = item.cartId
                     const Address = `${this.state.name} ${this.state.Address} ${this.state.Locality} ${this.state.Landmard} ${this.state.phoneNumber}`;
                     const City = this.state.city;
                     const PinCode = this.state.pincode;

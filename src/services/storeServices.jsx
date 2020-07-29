@@ -5,8 +5,8 @@ import AxiosServices from "../services/axiosServices";
  const Axios = new AxiosServices();
  class storeServices {  
     
-    addToCart(id ,isHeaderRequire) {
-		return Axios.Post(config.url+"Cart?BookId="+id,id,isHeaderRequire);  
+    addToCart(id,Quantity ,isHeaderRequire) {
+		return Axios.Post(config.url+"Cart?BookId="+id,Quantity,isHeaderRequire);  
     }
     addToWishLists(id,isHeaderRequire){
         return Axios.Post(config.url+"WishList?BookId="+id, id,isHeaderRequire);   
@@ -15,7 +15,7 @@ import AxiosServices from "../services/axiosServices";
       return Axios.Delete(config.url+"Cart/"+id,isHeaderRequire); 
     }
     getCartList(isHeaderRequire){
-      return Axios.Get(config.url+"Cart/",isHeaderRequire); 
+      return Axios.Get(config.url+"Cart",isHeaderRequire); 
  
     }
     removeFromWishlist(WishListId,isHeaderRequire ){

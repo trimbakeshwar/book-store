@@ -78,15 +78,16 @@ class UpdateBooks extends Component {
         }).catch((err) => {
             console.log(err);
         })
-        const BookImage=this.state.imageUrl
-        
-        service.uploadImage(BookImage,this.state.BookId).then((Response)=>{
+        let BookId= this.state.BookId
+        let BookImage = new FormData();
+        BookImage.append("BookImage",Boolean(this.state.image) ? this.state.image : "") 
+        service.uploadImage(BookImage,BookId).then((Response)=>{
             console.log("image upload ",Response)
         }).catch((err)=>{
-             console.log("image upload ",Response)
+             console.log("image upload ",err)
         })
     }
-   async componentDidMount(){
+    componentDidMount(){
       
            this.setState({ Title :this.props.myupdateBookData.title,     
             Description :this.props.myupdateBookData.description,
@@ -122,7 +123,7 @@ class UpdateBooks extends Component {
                     </div>
                     <div className="imageContainer">
                         {(this.state.imageUrl !== null && this.state.imageUrl !== undefined) ?
-                            <img src={this.state.imageUrl}
+                            <img  src={this.state.imageUrl}
                                 className='BookImageAdmin'
                                 alt="BookImage"
                                 width="100px"

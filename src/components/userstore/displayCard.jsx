@@ -48,7 +48,10 @@ const storeservice = new storeServices();
         }
         this.getBooksList()
     }
+  
     getBooksList = () => {
+       
+       
         let isHeaderRequire=true
         service.getbook(isHeaderRequire).then((Response) => {
             console.log("geting", Response.data.data)
@@ -57,6 +60,7 @@ const storeservice = new storeServices();
 
             console.log("err", err)
         })
+    
     }
     handleClick = event => {
         const { currentTarget } = event;
@@ -69,9 +73,10 @@ const storeservice = new storeServices();
     AddToBag = (values) => {
          this.setState({ AddBagButtonSetting: true, id: values.bookId, AddwishlistSetting: false })
            let BookId=values.bookId  
+           let Quantity=1
      console.log("add cart id",BookId)
      let isHeaderRequire=true
-        storeservice.addToCart(BookId,isHeaderRequire).then((Response)=>{
+        storeservice.addToCart(BookId,1,isHeaderRequire).then((Response)=>{
             console.log("add to cart succefull",Response)
         }).then((err)=>{
             console.log("add to cart succefull",err)
@@ -82,8 +87,8 @@ const storeservice = new storeServices();
 
          this.setState({ AddwishlistSetting: true, id: values.bookId, AddBagButtonSetting: false })
         console.log("AddwishlistSetting", this.state.AddwishlistSetting)
-         let   BookId=values.bookId
-       let isHeaderRequire=true
+         let   isHeaderRequire=true
+        let BookId = values.bookId
      console.log("add wishlist id",BookId)
         storeservice.addToWishLists(BookId,isHeaderRequire).then((Response)=>{
             console.log("add to wishlist succefull",Response)
@@ -111,16 +116,17 @@ const storeservice = new storeServices();
             console.log("err",err)
         })
     }
-    
-
+    searchbook(){
+    this.setState({ bookDetail: this.props.mySearchData })
+    }
     render() {
         const { classes } = this.props;
         const { anchorEl } = this.state;
         const open = Boolean(anchorEl);
         const id = open ? 'no-transition-popper' : null;
+      
         
-        
-        const bookCard = this.props.mysearchEnable?(this.props.mySearchData):(this.state.bookDetail).map((values, index) => {
+        const bookCard = this.state.bookDetail.map((values, index) => {
             return (
                 
                 <Card>

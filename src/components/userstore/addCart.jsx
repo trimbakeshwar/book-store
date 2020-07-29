@@ -33,9 +33,9 @@ class AddInCart extends Component {
     }
      getAllBookFromCart(){
         let isHeaderRequire=true
-        storeservice.getCartList(isHeaderRequire).then((Response)=>{
+        storeservice.getCartList(isHeaderRequire).then(async(Response)=>{
             console.log("cart books",Response.data.data)
-             this.setState({cartData:Response.data.data.filter(data =>  data.isDeleted === false).filter(data => data.isUsed === false)})
+            await this.setState({cartData:Response.data.data.filter((data) =>data.isDeleted === false).filter(data => data.isUsed === false)})
            
             console.log("cart books details", this.props.AllCartData(this.state.cartData))
            
@@ -55,17 +55,52 @@ class AddInCart extends Component {
         })
        
     }
-    increaseQuantity = () => {
-        if (this.state.count < this.props.myBookDetail.booksAvailable) {
-            this.setState({ count: this.state.count + 1 })
-            console.log("count", this.state.count)
-        }
+    increaseQuantity = (Id) => {
+        
+        console.log("card", Id)
+        this.state.cartData.filter((item) => item.cartId === Id).map(async(values, index) => {
+
+         console.log("value.CartId=",values.cartId," cartId=",Id)
+         let data =0
+         data=data+1
+         await this.setState({
+            values: [
+             
+              [values.quantity=values.quantity+1],
+            ],
+            
+          });  
+          let BookId = values.bookId
+          let Quantity = values.quantity
+          let isHederRequire=true
+          console.log("values.bookId"+BookId+"values.quantity"+Quantity)
+          storeservice.addToCart(BookId,Quantity,isHederRequire).then((Response)=>{
+console.log("increase quan ",Response)
+          }).catch((err)=>{
+            console.log("ierr ",err)
+          })
+         
+     })
     }
-    decreaseQuantity = () => {
-        if (this.state.count > 0) {
-            this.setState({ count: this.state.count - 1 })
-            console.log("count", this.state.count)
-        }
+    decreaseQuantity = (Id) => {
+        
+            console.log("card", Id)
+            this.state.cartData.filter((item) => item.cartId === Id).map(async(values, index) => {
+    
+             console.log("value.CartId=",values.cartId," cartId=",Id)
+             let data =0
+             data=data+1
+             await this.setState({
+                values: [
+                 
+                  [
+                     ( values.quantity === 0)?0:(values.quantity=values.quantity-1)],
+                ],
+              });  
+           console.log("cardd",this.state.cartData)
+             
+         })
+        
     }
     openCustomerDetails =() =>{
         console.log("run")
@@ -98,9 +133,9 @@ class AddInCart extends Component {
                                                 <div className="authors">{values.author}</div>
                                                 <div className="prices">{values.price}</div>
                                                 <div className="quantityContainer">
-                                                    <div className="countButton"> <AddCircleOutlineOutlinedIcon fontSize="small" onClick={this.increaseQuantity} />
-                                                        <input className="inputQuantity" Value={this.state.count} disabled type="number" />
-                                                        <RemoveCircleOutlineIcon onClick={this.decreaseQuantity} />
+                                                    <div  className="countButton"> <AddCircleOutlineOutlinedIcon fontSize="small" onClick={()=>this.increaseQuantity(values.cartId)} />
+                                                        <input className="inputQuantity" Value={values.quantity} disabled type="number" />
+                                                        <RemoveCircleOutlineIcon onClick={()=>this.decreaseQuantity(values.cartId)} />
                                                     </div>
 
                                                     <div onClick={() => this.removeFromCart(values.cartId)} className="remove">Remove</div>

@@ -6,7 +6,7 @@ import AxiosServices from "../services/axiosServices";
  class storeServices {  
     
     addToCart(id,Quantity ,isHeaderRequire) {
-		return Axios.Post(config.url+"Cart?BookId="+id,Quantity,isHeaderRequire);  
+		return Axios.Post(config.url+"Cart?BookId="+id+"&Quantity="+Quantity,isHeaderRequire);  
     }
     addToWishLists(id,isHeaderRequire){
         return Axios.Post(config.url+"WishList?BookId="+id, id,isHeaderRequire);   

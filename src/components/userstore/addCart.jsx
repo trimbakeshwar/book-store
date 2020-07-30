@@ -61,35 +61,26 @@ class AddInCart extends Component {
         this.state.cartData.filter((item) => item.cartId === Id).map(async(values, index) => {
 
          console.log("value.CartId=",values.cartId," cartId=",Id)
-         let data =0
-         data=data+1
+        
          await this.setState({
             values: [
-             
+               
               [values.quantity=values.quantity+1],
+              
             ],
             
           });  
-          let BookId = values.bookId
-          let Quantity = values.quantity
-          let isHederRequire=true
-          console.log("values.bookId"+BookId+"values.quantity"+Quantity)
-          storeservice.addToCart(BookId,Quantity,isHederRequire).then((Response)=>{
-console.log("increase quan ",Response)
-          }).catch((err)=>{
-            console.log("ierr ",err)
-          })
-         
+          console.log("cardData", this.state.cartData)
+        
      })
     }
-    decreaseQuantity = (Id) => {
+    decreaseQuantity = async(Id) => {
         
             console.log("card", Id)
             this.state.cartData.filter((item) => item.cartId === Id).map(async(values, index) => {
     
              console.log("value.CartId=",values.cartId," cartId=",Id)
-             let data =0
-             data=data+1
+          
              await this.setState({
                 values: [
                  
@@ -97,8 +88,7 @@ console.log("increase quan ",Response)
                      ( values.quantity === 0)?0:(values.quantity=values.quantity-1)],
                 ],
               });  
-           console.log("cardd",this.state.cartData)
-             
+           
          })
         
     }

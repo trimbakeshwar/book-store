@@ -77,7 +77,7 @@ const storeservice = new storeServices();
            let Quantity=1
      console.log("add cart id",BookId)
      let isHeaderRequire=true
-        storeservice.addToCart(BookId,1,isHeaderRequire).then((Response)=>{
+        storeservice.addToCart(BookId,0,isHeaderRequire).then((Response)=>{
             console.log("add to cart succefull",Response)
         }).then((err)=>{
             console.log("add to cart succefull",err)

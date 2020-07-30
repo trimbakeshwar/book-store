@@ -76,3 +76,26 @@ margin-top: 25px;
 border-width: 0.1px;
 display: flex;
 }
+
+.EmptyCart{
+    height: 100%;
+    margin-top:50px ;
+    background-color:rgb(247, 249, 245);
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    display:flex;
+}
+.shopping{
+padding-top: 10%;
+    content: url('../images/EmptyCart.png');
+    width:50%
+}
+
+.continueShopping{
+padding-bottom: 20px;
+position: relative;
+bottom: 15px;
+font-size: 25px;
+    font-weight: 600;
+}

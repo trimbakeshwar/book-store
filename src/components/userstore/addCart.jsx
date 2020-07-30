@@ -17,7 +17,8 @@ import OrderDetails from "./orderDetails"
 import OrderSummary from "./orderSummary"
 import Headers from "./Header"
 import storeServices from "../../services/storeServices";
-
+import EmptyCarts from "../../images/EmptyCarts.png"
+import { Link } from 'react-router-dom';
 
 const storeservice = new storeServices();
 class AddInCart extends Component {
@@ -25,149 +26,157 @@ class AddInCart extends Component {
         super(props);
         this.state = {
             count: 0,
-            customerDetailHide:false,
-            cartData:[]
+            customerDetailHide: false,
+            cartData: []
         }
         this.getAllBookFromCart()
-      
+
     }
-     getAllBookFromCart(){
-        let isHeaderRequire=true
-        storeservice.getCartList(isHeaderRequire).then(async(Response)=>{
-            console.log("cart books",Response.data.data)
-            await this.setState({cartData:Response.data.data.filter((data) =>data.isDeleted === false).filter(data => data.isUsed === false)})
-           
+    getAllBookFromCart() {
+        let isHeaderRequire = true
+        storeservice.getCartList(isHeaderRequire).then(async (Response) => {
+            console.log("cart books", Response.data.data)
+            await this.setState({ cartData: Response.data.data.filter((data) => data.isDeleted === false).filter(data => data.isUsed === false) })
+
             console.log("cart books details", this.props.AllCartData(this.state.cartData))
-           
-        }).catch((err)=>{
-            console.log("err catch ",err)
+
+        }).catch((err) => {
+            console.log("err catch ", err)
         })
-       
+
     }
-    removeFromCart=(value)=>{
+    removeFromCart = (value) => {
         let CartId = value
-        let isHeaderRequire=true
-        storeservice.remove(CartId,isHeaderRequire).then((Response)=>{
-            console.log("remove cart books",Response)
+        let isHeaderRequire = true
+        storeservice.remove(CartId, isHeaderRequire).then((Response) => {
+            console.log("remove cart books", Response)
             this.getAllBookFromCart()
-        }).catch((err)=>{
-            console.log("err catch ",err)
+        }).catch((err) => {
+            console.log("err catch ", err)
         })
-       
+
     }
     increaseQuantity = (Id) => {
-        
-        console.log("card", Id)
-        this.state.cartData.filter((item) => item.cartId === Id).map(async(values, index) => {
 
-         console.log("value.CartId=",values.cartId," cartId=",Id)
-        
-         await this.setState({
-            values: [
-               
-              [values.quantity=values.quantity+1],
-              
-            ],
-            
-          });  
-          console.log("cardData", this.state.cartData)
-        
-     })
-    }
-    decreaseQuantity = async(Id) => {
-        
-            console.log("card", Id)
-            this.state.cartData.filter((item) => item.cartId === Id).map(async(values, index) => {
-    
-             console.log("value.CartId=",values.cartId," cartId=",Id)
-          
-             await this.setState({
+        console.log("card", Id)
+        this.state.cartData.filter((item) => item.cartId === Id).map(async (values, index) => {
+
+            console.log("value.CartId=", values.cartId, " cartId=", Id)
+
+            await this.setState({
                 values: [
-                 
-                  [
-                     ( values.quantity === 0)?0:(values.quantity=values.quantity-1)],
+
+                    [values.quantity = values.quantity + 1],
+
                 ],
-              });  
-           
-         })
-        
+
+            });
+            console.log("cardData", this.state.cartData)
+
+        })
     }
-    openCustomerDetails =() =>{
+    decreaseQuantity = async (Id) => {
+
+        console.log("card", Id)
+        this.state.cartData.filter((item) => item.cartId === Id).map(async (values, index) => {
+
+            console.log("value.CartId=", values.cartId, " cartId=", Id)
+
+            await this.setState({
+                values: [
+
+                    [
+                        (values.quantity === 0) ? 0 : (values.quantity = values.quantity - 1)],
+                ],
+            });
+
+        })
+
+    }
+    openCustomerDetails = () => {
         console.log("run")
-        this.setState({ customerDetailHide:true})
-        
-    } 
-  
+        this.setState({ customerDetailHide: true })
+
+    }
+
     render() {
 
         console.log("op", this.props.myBookDetail)
         return (
             <div>
                 <Headers />
-            <div className="boxForCart">
-                <div className="container">
-                    <div className="carttag"> My cart(2)</div>
-                    <div>
-                    {
-                                this.state.cartData.filter((item) => item.isDeleted === false).map((values, index) => {
-                                    return (
+                {(this.state.cartData.length === 0) ? (<div className="EmptyCart">
+                    <div className="shopping" />
+                        <div className="continueShopping">
+                            Click<Link to="/store"style={{textDecoration: "none"}}> Heare</Link> to Continue Shopping
+                            </div>
+                             </div>) : (
+                        <div>
+                            <div className="boxForCart">
+                                <div className="container">
+                                    <div className="carttag"> My cart(2)</div>
+                                    <div>
+                                        {
+                                            this.state.cartData.filter((item) => item.isDeleted === false).map((values, index) => {
+                                                return (
 
-                                        <div className="informationOfBook">
-                                            <div>
-                                                <img src={BookCover}
-                                                    width="60px"
-                                                    height="90px" />
-                                            </div>
-                                            <div>
-                                                <div className="title">{values.title}</div>
-                                                <div className="authors">{values.author}</div>
-                                                <div className="prices">{values.price}</div>
-                                                <div className="quantityContainer">
-                                                    <div  className="countButton"> <AddCircleOutlineOutlinedIcon fontSize="small" onClick={()=>this.increaseQuantity(values.cartId)} />
-                                                        <input className="inputQuantity" Value={values.quantity} disabled type="number" />
-                                                        <RemoveCircleOutlineIcon onClick={()=>this.decreaseQuantity(values.cartId)} />
-                                                    </div>
+                                                    <div className="informationOfBook">
+                                                        <div>
+                                                            <img src={BookCover}
+                                                                width="60px"
+                                                                height="90px" />
+                                                        </div>
+                                                        <div>
+                                                            <div className="title">{values.title}</div>
+                                                            <div className="authors">{values.author}</div>
+                                                            <div className="prices">{values.price}</div>
+                                                            <div className="quantityContainer">
+                                                                <div className="countButton"> <AddCircleOutlineOutlinedIcon fontSize="small" onClick={() => this.increaseQuantity(values.cartId)} />
+                                                                    <input className="inputQuantity" Value={values.quantity} disabled type="number" />
+                                                                    <RemoveCircleOutlineIcon onClick={() => this.decreaseQuantity(values.cartId)} />
+                                                                </div>
 
-                                                    <div onClick={() => this.removeFromCart(values.cartId)} className="remove">Remove</div>
+                                                                <div onClick={() => this.removeFromCart(values.cartId)} className="remove">Remove</div>
 
-                                                </div>
+                                                            </div>
 
-                                            </div>
+                                                        </div>
 
-                                        </div>)
+                                                    </div>)
 
-                                })
+                                            })
 
 
-                            }
-                       
-                    </div>
-                    <div className="placeOrder">
-                                    <Button variant="contained" color="primary" onClick={this.openCustomerDetails}>
-                                      PLACE ORDER
+                                        }
+
+                                    </div>
+                                    <div className="placeOrder">
+                                        <Button variant="contained" color="primary" onClick={this.openCustomerDetails}>
+                                            PLACE ORDER
                                     </Button>
+                                    </div>
                                 </div>
-                </div>
+                            </div>
+                            {(this.state.customerDetailHide) ? <OrderDetails /> : (<div className="hedlineContainers" style={{ marginBottom: "25px" }}> Customer Details </div>)}
+                            <div className="hedlineContainers"> Order Summery </div>)
+                        </div>)}
             </div>
-             {(this.state.customerDetailHide)?<OrderDetails/>:( <div className="hedlineContainers" style={{marginBottom:"25px"}}> Customer Details </div>)} 
-             <div className="hedlineContainers"> Order Summery </div>)
-         </div>
         )
     }
 }
-const mapStateToProps=(state)=>{
-    return{
-        mycartData:state.cartData,
-    
+const mapStateToProps = (state) => {
+    return {
+        mycartData: state.cartData,
+
     }
-    } 
-   
-    const mapDispatrchToProps =(dispatch)=>{
-      return{
-        AllCartData:(cartData)=>{(dispatch({type:'ALL_CART_DETAILS',payload:cartData}))},
-   
+}
+
+const mapDispatrchToProps = (dispatch) => {
+    return {
+        AllCartData: (cartData) => { (dispatch({ type: 'ALL_CART_DETAILS', payload: cartData })) },
+
     }
-    }
-    export default connect(mapStateToProps,mapDispatrchToProps)(AddInCart);
-    
+}
+export default connect(mapStateToProps, mapDispatrchToProps)(AddInCart);
+
 

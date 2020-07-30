@@ -16,6 +16,8 @@ import getAllBookList from "../adminDashbord/getAllBookList";
 import AddInCart from "./addCart"
 import adminService from "../../services/adminServices";
 import { connect } from 'react-redux'
+
+import { withRouter } from 'react-router';
 const service = new adminService();
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -53,7 +55,9 @@ const search=(e)=>{
     console.log("err",err)
   })
 }
-  
+const OpenCartPage=()=>{
+props.history.push("/addCart")
+}
   return (
   
     <div  >
@@ -76,7 +80,7 @@ const search=(e)=>{
             </div>
             <div className="shopingcart">
              <span className="cart">cart </span>
-            <ShoppingCartOutlinedIcon />
+            <ShoppingCartOutlinedIcon onClick={OpenCartPage} />
              </div>
            
           </Toolbar>
@@ -101,7 +105,7 @@ const mapStateToProps=(state)=>{
  
   }
   }
-  export default connect(mapStateToProps,mapDispatrchToProps)(Headers);
+  export default connect(mapStateToProps,mapDispatrchToProps)(withRouter(Headers));
   
 
 

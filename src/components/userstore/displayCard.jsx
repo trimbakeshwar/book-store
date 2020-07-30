@@ -77,7 +77,7 @@ const storeservice = new storeServices();
            let Quantity=1
      console.log("add cart id",BookId)
      let isHeaderRequire=true
-        storeservice.addToCart(BookId,0,isHeaderRequire).then((Response)=>{
+        storeservice.addToCart(BookId,1,isHeaderRequire).then((Response)=>{
             console.log("add to cart succefull",Response)
         }).then((err)=>{
             console.log("add to cart succefull",err)
@@ -121,12 +121,13 @@ const storeservice = new storeServices();
     this.setState({ bookDetail: this.props.mySearchData })
     }
     render() {
+        
         const { classes } = this.props;
         const { anchorEl } = this.state;
         const open = Boolean(anchorEl);
         const id = open ? 'no-transition-popper' : null;
       
-        
+            
         const bookCard = ((this.props.mysearchEnable)?(this.props.mySearchData):(this.state.bookDetail)).map((values, index) => {
             return (
                 
@@ -154,18 +155,20 @@ const storeservice = new storeServices();
                                 WISHLIST
                                    </button>
                         </div>) :
-                        (<div>
+                        (
+                        <div>
+                            
                             <div className="cardbuttonContainers">
                                 <div className="buttonsetting">
 
+                               
                                     <div style={{ position: "relative" }}>
-                                        <Button variant="contained" className={(this.state.AddBagButtonSetting === true && this.state.id === values.bookId) ? "ActiveButtons" : "Buttons"}
+                                        <Button variant="contained" className={((this.state.AddBagButtonSetting === true && this.state.id === values.bookId)) ? "ActiveButtons" : "Buttons"}
                                             disableElevation onClick={() => this.AddToBag(values)}>
                                             {(this.state.AddBagButtonSetting === true && this.state.id === values.bookId) ? "ADDED TO BAG" : " ADD TO BAG"}
 
                                         </Button>
-                                    </div>
-                                    <div className="wishlist">
+</div>                             <div className="wishlist">
                                         <button variant="contained" className={(this.state.AddwishlistSetting === true && this.state.id === values.bookId) ? "wishlistButton" : "Buttonss"}
                                             disableElevation onClick={() => this.AddToWishlist(values)}>
                                             WISHLIST
@@ -174,6 +177,9 @@ const storeservice = new storeServices();
                                 </div>
 
                             </div>
+                           
+                           
+                               
                         </div>)}
                 </Card>
             );
@@ -213,7 +219,8 @@ const mapStateToProps=(state)=>{
     return{
         myBookDetail:state.BookDetail,
         mySearchData:state.SearchData,
-        mysearchEnable:state.searchEnable
+        mysearchEnable:state.searchEnable,
+        mycartData: state.cartData,
     }
     } 
     const mapDispatrchToProps =(dispatch)=>{

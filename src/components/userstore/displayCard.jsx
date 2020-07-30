@@ -141,7 +141,7 @@ const storeservice = new storeServices();
                      {(values.booksAvailable === 0)?"OUT OFF STOCK":""}
                          </div>
                         <div className={(values.booksAvailable === 0)?"": "imag"}>
-                            <img src={BookCover}
+                            <img src={values.bookImage}
                                 width="100px"
                                 height="150px" />
                         </div>

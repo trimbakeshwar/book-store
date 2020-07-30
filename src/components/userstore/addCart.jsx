@@ -120,8 +120,8 @@ class AddInCart extends Component {
                                                 return (
 
                                                     <div className="informationOfBook">
-                                                        <div>
-                                                            <img src={BookCover}
+                                                        <div className="cartIMG">
+                                                            <img  className="cartIMGsize" src={BookCover}
                                                                 width="60px"
                                                                 height="90px" />
                                                         </div>
@@ -157,7 +157,7 @@ class AddInCart extends Component {
                                 </div>
                             </div>
                             {(this.state.customerDetailHide) ? <OrderDetails /> : (<div className="hedlineContainers" style={{ marginBottom: "25px" }}> Customer Details </div>)}
-                            <div className="hedlineContainers"> Order Summery </div>)
+                            <div className="hedlineContainers"> Order Summery </div>
                         </div>)}
             </div>
         )

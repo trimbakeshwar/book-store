@@ -73,7 +73,7 @@ props.history.push("/addCart")
               <div>
                 <IconButton><SearchIcon /></IconButton>
               </div>
-              <div  >
+              <div>
                 <TextField className="inputText" placeholder="Search" onChange={search}
                   InputProps={{ disableUnderline: true, }}  fullWidth>search</TextField>
               </div>

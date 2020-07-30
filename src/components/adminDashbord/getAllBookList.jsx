@@ -18,7 +18,25 @@ import adminService from "../../services/adminServices";
 import ImageOutlinedIcon from '@material-ui/icons/ImageOutlined';
 import { TextareaAutosize } from '@material-ui/core';
 import {connect} from 'react-redux'
+import { makeStyles, useTheme,withStyles } from '@material-ui/core/styles';
 const service = new adminService();
+const StyledTableCell = withStyles((theme) => ({
+  head: {
+    backgroundColor: theme.palette.text.secondary,
+    color: theme.palette.common.white,
+  },
+  body: {
+    fontSize: 16,
+  },
+}))(TableCell);
+
+const StyledTableRow = withStyles((theme) => ({
+  root: {
+    "&:nth-of-type(even)": {
+      backgroundColor: theme.palette.action.hover,
+    },
+  },
+}))(TableRow);
 
 
  class GetAllBook extends Component {
@@ -69,42 +87,46 @@ this.setState({open:true})
    .filter((item) => item.isDeleted === false)
    console.log("data",data)
      return ( 
-       <div>
+     
 
-       <div className="table">        
-       <TableContainer  className="table" component={Paper} >    
-       <Table id="tabledata" >
-       <TableHead >
-        <TableRow >
+       <div className="table" >        
+       <TableContainer  component={Paper} >    
+       <Table  >
+       <TableHead id="tableHead" >
+        <StyledTableRow id="tableRow" >
 
+        
+             <StyledTableCell align="right">sr_no</StyledTableCell>
+             <StyledTableCell align="left">bookImage</StyledTableCell>
+             <StyledTableCell align="left">Title</StyledTableCell>
+            <StyledTableCell align="left">Auther</StyledTableCell>
+            <StyledTableCell align="left">Price</StyledTableCell>
+            <StyledTableCell align="left">Quantity</StyledTableCell>
+             <StyledTableCell align="left">Edit</StyledTableCell>
+            <StyledTableCell align="left">Remove</StyledTableCell>
 
-             <TableCell align="right">sr no</TableCell>
-             <TableCell align="left">Title</TableCell>
-            <TableCell align="left">Auther</TableCell>
-            <TableCell align="left">Price</TableCell>
-            <TableCell align="left">Quantity</TableCell>
-             <TableCell align="left">Edit</TableCell>
-            <TableCell align="left">Remove</TableCell>
-
-           </TableRow>
+           </StyledTableRow>
          </TableHead>
          <TableBody>
+        
          {
+           
 
 ((this.props.myadminSearchEnable)?(this.props.myadminsearchData):(this.state.bookDetail)).filter((item) => item.isDeleted === false).map((book, index) => {
-              return <TableRow key={index}>
+              return <StyledTableRow id="tableRow" key={index}>
 
 
 
-               <TableCell  align="left">  {index + 1}</TableCell>
-               <TableCell align="left">{book.title}</TableCell>
-               <TableCell align="left">{book.author}</TableCell>
-               <TableCell align="left">{book.price}</TableCell>
-               <TableCell align="left">{book.booksAvailable}</TableCell>
-            <TableCell align="left"><Link to={{ pathname: '/adminDashbord/updateBook',  }}>
-               <IconButton><EditOutlinedIcon onClick={()=>this.EditData(book)}  />  </IconButton></Link > </TableCell>
-                <TableCell align="left"> <IconButton><DeleteOutlineOutlinedIcon onClick={()=>this.DeleteData(book.bookId)} /></IconButton> </TableCell>
-             </TableRow>
+               <StyledTableCell  align="center">  {index + 1}</StyledTableCell>
+               <StyledTableCell  align="left">  <img src={book.bookImage} width="80px" height="100px"/> </StyledTableCell>
+               <StyledTableCell align="left">{book.title}</StyledTableCell>
+               <StyledTableCell align="left">{book.author}</StyledTableCell>
+               <StyledTableCell align="left">{book.price}</StyledTableCell>
+               <StyledTableCell align="left">{book.booksAvailable}</StyledTableCell>
+            <StyledTableCell align="left"><Link to={{ pathname: '/adminDashbord/updateBook',  }}>
+               <IconButton><EditOutlinedIcon onClick={()=>this.EditData(book)}  />  </IconButton></Link > </StyledTableCell>
+                <StyledTableCell align="left"> <IconButton><DeleteOutlineOutlinedIcon onClick={()=>this.DeleteData(book.bookId)} /></IconButton> </StyledTableCell>
+             </StyledTableRow>
            })
           }
 
@@ -112,7 +134,7 @@ this.setState({open:true})
        </Table>
      </TableContainer>
     </div>
-    </div>
+   
      );    
 
   }

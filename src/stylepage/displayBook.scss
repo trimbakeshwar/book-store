@@ -11,7 +11,7 @@ $boxShadow:  0 1px 5px 0 rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0);
       flex-grow: initial;
       overflow-wrap: initial;
       padding-left:100px;; /* gutter size offset */
-      margin-top: 50px;
+  
       
   }
   .masonry-grid_column {
@@ -37,11 +37,11 @@ $boxShadow:  0 1px 5px 0 rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0);
   .display{
     // width:100%;
     display:flex;
-    margin-top:50px;
     margin-left: 100px;
     align-items:flex-start;
     flex-direction:row 
   }
+
   .author {
 padding-left: 15px;
 font-size: 10px;
@@ -61,7 +61,7 @@ color: grey;
    }
    .cardbuttonContainers{
    // padding-left: 15px;
-    padding-bottom: 15px;
+   
     position: relative;
     left:15px;
     width: 100%;
@@ -81,17 +81,26 @@ display: flex;
     padding-left: 15px;
     padding-bottom: 15px
 }
+
+@mixin buttonsstyle() {
+  font-size: 10px;
+  padding:7.7px;
+  padding-left: 20px;
+  padding-right: 20px;
+   background-color:white;
+   border-style: groove  ;
+   border-radius: 0 ;
+   box-shadow:$boxShadow;
+   border-color: rgb(253, 253, 253) ;
+   border-width:1px 2px 2px 2px;
+}
    .Buttonss{
-    font-size: 10px;
-   padding:7.7px;
-   padding-left: 20px;
-   padding-right: 20px;
-    background-color:white;
-    border-style: groove  ;
-    border-radius: 0 ;
-    box-shadow:$boxShadow;
-    border-color: rgb(253, 253, 253) ;
-    border-width:1px 2px 2px 2px;
+    @include buttonsstyle();
+   }
+   .wishlistButton{
+    @include buttonsstyle();
+    width: 200px;
+  
    }
    .imag{
        padding-top: 15px;
@@ -108,24 +117,11 @@ display: flex;
     color: white !important;
     display: inline-block !important;
    }
- .wishlistButton{
-  font-size: 10px;
-  padding:7.7px;
-  padding-left: 20px;
-  padding-right: 20px;
-  width: 100%;
-   background-color:white;
-   border-style: groove  ;
-   border-radius: 0 ;
-   width: 200px;
-   border-color: rgb(253, 253, 253) ;
-   border-width:1px 2px 2px 2px;
-   box-shadow:$boxShadow
- }
+ 
  .poppersetting{
   margin-top: 50px;
   position: relative;
-  left: 800px;
+ 
  }
  .popperButtonsetting{
   width: 180px;
@@ -133,6 +129,8 @@ display: flex;
   border-color: grey;
   border-width: thin;
   padding: 5px;
+  margin-top: 8%;
+    margin-left: 68.5%;
  }
  .poperitom{
   padding-left: 20px;
@@ -157,3 +155,118 @@ display: flex;
   box-shadow:$boxShadow;
 
  }
+ 
+ @media only screen and  (max-width: 414PX) {
+  .masonry-grid {
+     padding-left:0px;; /* gutter size offset */
+  }
+  .masonry-grid_column {
+     padding-left: 35px; /* gutter size */ 
+     width: 360px !important;
+  }
+  .display{
+     margin-left: 0;
+  }
+  .popperButtonsetting{
+    margin-left: 30%;
+   }
+   .bookimagecontainer{
+     width:100%;
+  }
+  .imag{
+     padding-right: 85px;
+}
+
+ @mixin buttonForResponsiv($widthforButton) {
+  width: $widthforButton !important;
+  height: 40px !important;
+ font-size: 15px !important;
+ }
+ .wishlistButton{
+  @include buttonForResponsiv( 95%);
+  }
+ .Buttons {
+  @include buttonForResponsiv( 155px);
+ }
+ .cardbuttonContainers{
+   width: 75%;
+  }
+  .Buttonss{
+    @include buttonForResponsiv( 155px);
+  }
+  .ActiveButtons{
+    @include buttonForResponsiv( 332px); 
+   }
+ }
+ 
+  @media only screen and  (max-width: 360PX) {
+
+  .masonry-grid_column {
+     padding-left: 30px; /* gutter size */ 
+    width: 290px !important;
+  }
+
+ @mixin buttonForResponsiv($widthforButton) {
+  width: $widthforButton !important;
+  height: 40px !important;
+ font-size: 13px !important;
+ }
+ .imag{
+  padding-right: 75px;
+}
+ .wishlistButton{
+  @include buttonForResponsiv( 95%);
+  }
+ .Buttons {
+  @include buttonForResponsiv( 120px);
+ }
+ .cardbuttonContainers{
+   width: 70%;
+  }
+  .Buttonss{
+    @include buttonForResponsiv( 120px);
+  }
+  .ActiveButtons{
+    @include buttonForResponsiv( 261px); 
+   }
+ }
+ @media only screen and  (max-width: 375PX) {
+
+  .masonry-grid_column {
+     padding-left: 40px; /* gutter size */ 
+    width: 290px !important;
+  }
+  .imag{
+    padding-right: 70px;
+}
+
+ @mixin buttonForResponsiv($widthforButton) {
+  width: $widthforButton !important;
+  height: 40px !important;
+ font-size: 13px !important;
+ }
+ .wishlistButton{
+  @include buttonForResponsiv( 95%);
+  }
+ .Buttons {
+  @include buttonForResponsiv( 120px);
+ }
+ .cardbuttonContainers{
+   width: 70%;
+  }
+  .Buttonss{
+    @include buttonForResponsiv( 120px);
+  }
+  .ActiveButtons{
+    @include buttonForResponsiv( 261px); 
+   }
+ }
+ @media only screen and  (max-width: 320PX) {
+
+    .masonry-grid_column {
+       padding-left: 15px; /* gutter size */ 
+    
+    }
+  
+   }
+   

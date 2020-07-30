@@ -123,9 +123,9 @@ class OrderDetails extends Component {
 
                     </div>
                     <div className="FieldForContactDetails">
-                        <TextField id="outlined-city" label="city/town" type="text" variant="outlined"
+                        <TextField className="TextStyle" id="outlined-city" label="city/town" type="text" variant="outlined"
                             defaultValue={this.state.city} onChange={this.cityHandler} size="small" />
-                        <TextField id="outlined-Landmark" label="Landmark" type="text" variant="outlined"
+                        <TextField className="TextStyle" id="outlined-Landmark" label="Landmark" type="text" variant="outlined"
                             onChange={this.LandmarkHandler} size="small" />
                     </div>
                     <div> </div>

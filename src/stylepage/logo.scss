@@ -16,3 +16,11 @@
     font-size: x-large;
     font-weight: bold;
 }
+@media only screen and  (max-width: 414PX) {
+.iconimage{
+padding: 0;
+}
+.name{
+    font-size: 0;
+}
+}

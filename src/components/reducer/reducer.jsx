@@ -8,8 +8,8 @@ const iState = {
     SearchData:[],
     searchEnable:false,
     adminsearchData:[],
-    adminSearchEnable:false
-   
+    adminSearchEnable:false,
+    orderID:""
 
 }
 
@@ -77,6 +77,13 @@ const reducer = (state=iState,action)=>{
             ...state,
             adminSearchEnable:action.payload,
             adminsearchData:action.info
+        }
+    }
+    if(action.type === 'ORDER_ID')
+    {
+        return {
+            ...state,
+            orderID:action.payload
         }
     }
     

@@ -62,7 +62,6 @@ class AddInCart extends Component {
         this.state.cartData.filter((item) => item.cartId === Id).map(async (values, index) => {
 
             console.log("value.CartId=", values.cartId, " cartId=", Id)
-
             await this.setState({
                 values: [
 

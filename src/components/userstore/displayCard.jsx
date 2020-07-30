@@ -46,6 +46,7 @@ const storeservice = new storeServices();
             },
             AnchorEl:null,
             searchEnable:false,
+           
         }
         this.getBooksList()
     }
@@ -117,6 +118,9 @@ const storeservice = new storeServices();
             console.log("err",err)
         })
     }
+    componentDidMount=()=>{
+        this.setState({CartDataForCheck:this.props.mycartData})
+    }
     searchbook(){
     this.setState({ bookDetail: this.props.mySearchData })
     }
@@ -126,18 +130,22 @@ const storeservice = new storeServices();
         const { anchorEl } = this.state;
         const open = Boolean(anchorEl);
         const id = open ? 'no-transition-popper' : null;
-      
+      console.log("data of cart",this.state.CartDataForCheck)
             
         const bookCard = ((this.props.mysearchEnable)?(this.props.mySearchData):(this.state.bookDetail)).map((values, index) => {
             return (
                 
                 <Card>
                     <div className="bookimagecontainer">
-                        <div className="imag">
+                     <div  className={(values.booksAvailable === 0)? "outoffstock":""}>
+                     {(values.booksAvailable === 0)?"OUT OFF STOCK":""}
+                         </div>
+                        <div className={(values.booksAvailable === 0)?"": "imag"}>
                             <img src={BookCover}
                                 width="100px"
                                 height="150px" />
                         </div>
+                       
                     </div>
                     <div className="titles">
                         {values.title}
@@ -148,9 +156,10 @@ const storeservice = new storeServices();
                     <div className="price">
                         Rs.  {values.price}
                     </div>
-                    {(this.state.AddwishlistSetting === true && this.state.id === values.bookId) ?
+                    
+                    {((this.state.AddwishlistSetting === true && this.state.id === values.bookId)||(values.booksAvailable === 0)) ?
                         (<div className="wishlist">
-                            <button variant="contained" className={(this.state.AddwishlistSetting === true && this.state.id === values.bookId) ? "wishlistButton" : "Buttonss"}
+                            <button variant="contained" className={((this.state.AddwishlistSetting === true && this.state.id === values.bookId)||(values.booksAvailable === 0)) ? "wishlistButton" : "Buttonss"}
                                 disableElevation >
                                 WISHLIST
                                    </button>
@@ -163,6 +172,7 @@ const storeservice = new storeServices();
 
                                
                                     <div style={{ position: "relative" }}>
+                                        
                                         <Button variant="contained" className={((this.state.AddBagButtonSetting === true && this.state.id === values.bookId)) ? "ActiveButtons" : "Buttons"}
                                             disableElevation onClick={() => this.AddToBag(values)}>
                                             {(this.state.AddBagButtonSetting === true && this.state.id === values.bookId) ? "ADDED TO BAG" : " ADD TO BAG"}

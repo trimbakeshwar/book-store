@@ -79,7 +79,6 @@ display: flex;
 
 .EmptyCart{
     height: 100%;
-    margin-top:50px ;
     background-color:rgb(247, 249, 245);
     flex-direction: column;
     align-items: center;
@@ -87,9 +86,9 @@ display: flex;
     display:flex;
 }
 .shopping{
-padding-top: 10%;
+margin-top: 50px;
     content: url('../images/EmptyCart.png');
-    width:50%
+    width:40%
 }
 
 .continueShopping{

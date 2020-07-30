@@ -51,7 +51,7 @@ export class Login extends Component {
                 
                     localStorage.setItem("Token", response.data.jsonToken);
                     localStorage.setItem("Name", response.data.data.firstName+" "+response.data.data.lastName);
-                   
+                    localStorage.setItem("User Role", response.data.data.userRole);
                     localStorage.setItem("Address", response.data.data.address);
                     localStorage.setItem("email", response.data.data.email);
                     localStorage.setItem("city", response.data.data.city);
@@ -62,13 +62,18 @@ export class Login extends Component {
                     console.log( "Adr",localStorage.getItem("Address"));
                     console.log( "c",localStorage.getItem("city"));
                     console.log( "pn",localStorage.getItem("phoneNumber"));
+                    console.log( "User Role",localStorage.getItem("User Role"));
                     this.setState({
                         snackbarOpen: true,
                         snackbarMessage: "login sucessful",
                         snackServicity: 'sucess'
                     })
-               
+                    if(localStorage.getItem("User Role") === "Admin"){
                         this.props.history.push('./adminDashbord');
+                    }
+                    else{
+                        this.props.history.push('./store');
+                    }
                     
                 }
             })

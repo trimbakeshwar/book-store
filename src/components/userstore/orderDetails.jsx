@@ -14,6 +14,7 @@ import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import OrderServices from "../../services/orderServices"
 import storeServices from '../../services/storeServices';
+import { withRouter } from 'react-router';
 const storeservice = new storeServices();
 const orderServices = new OrderServices();
 class OrderDetails extends Component {
@@ -62,7 +63,7 @@ class OrderDetails extends Component {
             .filter((item) => item.isDeleted === false).map(async (item) => {
 
                 let BookId = item.bookId
-                let Quantity = item.quantity
+                let Quantity = item.quantity-1
                 let isHederRequire = true
                 console.log("values.bookId" + BookId + "values.quantity" + Quantity)
                await storeservice.addToCart(BookId, Quantity, isHederRequire).then((Response) => {
@@ -79,7 +80,8 @@ class OrderDetails extends Component {
                 console.log("cartid ", CartId, " Address ", Address, " City ", City, " PinCode ", PinCode)
                 let isheaderRequired = true
                 orderServices.orderPlaced(CartId, Address, City, PinCode, isheaderRequired).then((Response) => {
-                    console.log("order placed", Response)
+                    console.log("order placed", this.props.SendOrderID(Response.data.data.orderId))
+                    this.props.history.push('./orderSummary');
                 }).catch((err) => {
                     console.log("order err", err)
                 })
@@ -151,9 +153,15 @@ class OrderDetails extends Component {
 const mapStateToProps = (state) => {
     return {
         mycartData: state.cartData,
+        myorderID: state.orderID
+    }
+}
+const mapDispatrchToProps = (dispatch) => {
+    return {
+        SendOrderID: (orderID) => { (dispatch({ type: 'ORDER_ID', payload: orderID })) },
 
     }
 }
 
-export default connect(mapStateToProps)(OrderDetails);
+export default connect(mapStateToProps,mapDispatrchToProps)(withRouter(OrderDetails));
 

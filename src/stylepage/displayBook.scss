@@ -1,6 +1,7 @@
 $bookContainerColor:rgb(243, 243, 243);
 $textweight: 600;
 $buttonColor:rgba(160, 48, 55, 0.925);
+$boxShadow:  0 1px 5px 0 rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0);
 .masonry-grid {
     width: 100%;
       display: -webkit-box; /* Not needed if autoprefixing */
@@ -24,10 +25,13 @@ $buttonColor:rgba(160, 48, 55, 0.925);
     margin: 25px 0 !important;
   }
   .bookimagecontainer{
-    height: 180px ;
-     width: 250px ;
-      margin-Right : 10px;
-      background-color: $bookContainerColor;
+    height: 180px;
+    width: 230px;
+    justify-content: space-around;
+    align-items: center;
+    position: relative;
+    display: flex;
+    background-color: #f3f3f3;
   }
   
   .display{
@@ -62,7 +66,7 @@ color: grey;
     left:15px;
     width: 100%;
    }
-   .Buttons{
+   .Buttons {
     font-size: 10px !important;
     border-radius: 0 !important;
     background-color:$buttonColor !important ;
@@ -85,14 +89,14 @@ display: flex;
     background-color:white;
     border-style: groove  ;
     border-radius: 0 ;
-    
+    box-shadow:$boxShadow;
     border-color: rgb(253, 253, 253) ;
     border-width:1px 2px 2px 2px;
    }
    .imag{
        padding-top: 15px;
        padding-bottom: 10px;
-       padding-left: 70px;
+       padding-right: 50px;
    }
    .ActiveButtons{
     
@@ -116,6 +120,7 @@ display: flex;
    width: 200px;
    border-color: rgb(253, 253, 253) ;
    border-width:1px 2px 2px 2px;
+   box-shadow:$boxShadow
  }
  .poppersetting{
   margin-top: 50px;
@@ -136,4 +141,19 @@ display: flex;
   padding-bottom: 5px;
   font-weight: normal;
   font-size: 16px;
+ }
+ .outoffstock{  
+     border-style: groove;
+  border-color: white;
+  border-width: thin;
+  justify-content: center;
+  position: absolute;
+  /* left: 50px; */
+  align-items: center;
+  display: flex;
+  background-color: white;
+  width: 65%;
+  height: 20%;
+  box-shadow:$boxShadow;
+
  }

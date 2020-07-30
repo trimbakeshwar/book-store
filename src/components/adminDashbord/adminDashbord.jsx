@@ -15,6 +15,8 @@ import AddCircleIcon from '@material-ui/icons/AddCircle';
  import MenuBookSharpIcon from '@material-ui/icons/MenuBookSharp';
  import GetAllBook from "./getAllBookList"
  import {connect} from 'react-redux'
+ import adminService from "../../services/adminServices";
+ const service = new adminService();
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
@@ -41,6 +43,7 @@ function AdminDashboard(props) {
   const theme = useTheme();
   const [searchtextField, setsearchtextField] = React.useState(false)
   const [openaddBook, setopenaddBook] = React.useState(false)
+  const [Search, setSearch] = React.useState('');
   const searchClick = () => {
     setsearchtextField(true)
   }
@@ -48,7 +51,17 @@ function AdminDashboard(props) {
   
     props.changeopenBook(!openaddBook)
   }
-  
+  const search=(e)=>{
+    console.log("search")
+     setSearch(e.target.value)
+     service.SearchBook(Search).then((Response)=>{
+      console.log("search",Response.data.data)
+      props.changeadminSearch(Response.data.data,true)
+     
+    }).catch((err)=>{
+      console.log("err",err)
+    })
+  }
   return (
   
     <div  >
@@ -66,7 +79,7 @@ function AdminDashboard(props) {
               </div>
               <div  >
                 <TextField className="inputText" placeholder="Search"
-                  InputProps={{ disableUnderline: true, }}  fullWidth>search</TextField>
+                  InputProps={{ disableUnderline: true, }} onChange={search} fullWidth>search</TextField>
               </div>
             </div>
             <div className="bookIcon">
@@ -87,14 +100,16 @@ function AdminDashboard(props) {
 const mapStateToProps=(state)=>{
   return{
     openBook:state.openBook,
-   
+   myadminSearchEnable:state.adminSearchEnable,
+   myadminsearchData:state.adminsearchData
   }
   } 
   const mapDispatrchToProps =(dispatch)=>{
     return{
   changeopenBook:(openBook)=>{(dispatch({type:'OPEN_ADD_BOOK_DILOGBOX',payload:openBook}))},
- 
-    }
+  changeadminSearch:(adminsearchData,adminSearchEnable)=>{(dispatch({type:'ADMIN_SEARCH',payload:adminSearchEnable,info:adminsearchData}))},
+
+   }
   }
   export default connect(mapStateToProps,mapDispatrchToProps)(AdminDashboard);
   

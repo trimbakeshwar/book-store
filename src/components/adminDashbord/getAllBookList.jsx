@@ -91,7 +91,7 @@ this.setState({open:true})
          <TableBody>
          {
 
-            this.state.bookDetail.filter((item) => item.isDeleted === false).map((book, index) => {
+((this.props.myadminSearchEnable)?(this.props.myadminsearchData):(this.state.bookDetail)).filter((item) => item.isDeleted === false).map((book, index) => {
               return <TableRow key={index}>
 
 
@@ -120,14 +120,17 @@ this.setState({open:true})
  const mapStateToProps=(state)=>{
   return{
     myopenupdateBook:state.openupdateBook,
-   
+    myadminSearchEnable:state.adminSearchEnable,
+       myadminsearchData:state.adminsearchData
   }
   } 
   const mapDispatrchToProps =(dispatch)=>{
     return{
   changeopenupdateBook:(openupdateBook)=>{(dispatch({type:'OPEN_UPDATE_BOOK_DILOGBOX',payload:openupdateBook}))},
-  sendDataForUpdateBook:(updateBookData)=>{(dispatch({type:'OPEN_UPDATE_BOOK_DATA',payload:updateBookData}))}
-    }
+  sendDataForUpdateBook:(updateBookData)=>{(dispatch({type:'OPEN_UPDATE_BOOK_DATA',payload:updateBookData}))},
+  changeadminSearch:(adminSearchEnable,adminsearchData)=>{(dispatch({type:'ADMIN_SEARCH',payload:adminSearchEnable,info:adminsearchData}))},
+  
+}
   }
   export default connect(mapStateToProps,mapDispatrchToProps)(withRouter(GetAllBook));
   

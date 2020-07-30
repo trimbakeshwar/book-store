@@ -8,6 +8,7 @@ import { withRouter } from 'react-router';
 import "../../stylepage/displayBook.scss"
 import adminService from "../../services/adminServices";
 import storeServices from "../../services/storeServices";
+
 import ImageOutlinedIcon from '@material-ui/icons/ImageOutlined';
 import { TextareaAutosize } from '@material-ui/core';
 import BookCover from "../../images/bookcover.jpg"
@@ -126,7 +127,7 @@ const storeservice = new storeServices();
         const id = open ? 'no-transition-popper' : null;
       
         
-        const bookCard = this.state.bookDetail.map((values, index) => {
+        const bookCard = ((this.props.mysearchEnable)?(this.props.mySearchData):(this.state.bookDetail)).map((values, index) => {
             return (
                 
                 <Card>

@@ -7,6 +7,10 @@ const iState = {
     cartData:[],
     SearchData:[],
     searchEnable:false,
+    adminsearchData:[],
+    adminSearchEnable:false
+   
+
 }
 
 const reducer = (state=iState,action)=>{
@@ -65,6 +69,14 @@ const reducer = (state=iState,action)=>{
             ...state,
             searchEnable:action.payload,
            
+        }
+    }
+    if(action.type === 'ADMIN_SEARCH')
+    {
+        return {
+            ...state,
+            adminSearchEnable:action.payload,
+            adminsearchData:action.info
         }
     }
     

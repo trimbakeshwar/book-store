@@ -57,3 +57,110 @@ padding-bottom: 20px;
     font-weight: bold;
 }
 
+@media only screen and  (max-width: 414PX) {
+    .textFields {
+      
+        padding-left: 18px;
+       
+        width: 90%;
+    } 
+    .dilogContainer{
+        width: 350px;
+    }
+    .imageContainer {
+       
+        width: 85%;
+    }
+    .textFields{
+        padding-right: 10px;
+    }
+
+.buttonContainer {
+   
+    width: 83%;
+}
+.dilogname {
+   
+    position: relative;
+    right: 50px;
+}
+
+}
+@media only screen and  (max-width: 375PX) {
+    .textFields {
+      
+        padding-left: 18px;
+       
+        width: 85%;
+    } 
+    .dilogContainer{
+        width: 300px;
+    }
+   
+    
+    .imageContainer {
+       
+        width: 100%;
+    }
+.buttonContainer {
+   
+    width: 78%;
+}
+.dilogname {
+   
+   
+    right: 40px;
+}
+}
+@media only screen and  (max-width: 360PX) {
+    .textFields {
+      
+        padding-left: 18px;
+       
+        width: 87%;
+    } 
+    .imageContainer {
+       
+        width: 100%;
+    }
+    .dilogContainer{
+        width: 290px;
+    }
+    
+
+.buttonContainer {
+   
+    width: 79%;
+}
+}
+@media only screen and  (max-width:320PX) {
+
+    
+    .dilogContainer{
+        width: 250px;
+    }
+    .textFields {
+      
+        padding-left: 18px;
+       
+        width: 87%;
+    } 
+    .imageContainer {
+       
+        width: 100%;
+    }
+  
+
+.buttonContainer {
+   
+    width: 75%;
+}
+.dilogicon{
+    padding-left: 1em;
+}
+.dilogname {
+   
+   
+    right: 15px;
+}
+}

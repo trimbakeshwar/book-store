@@ -10,6 +10,7 @@ import AddInCart from "./components/userstore/addCart"
 import AddInWishLIst from "./components/userstore/wishlist"
 import OrderSummary from "./components/userstore/orderSummary"
 import { Switch  } from "react-router-dom";
+import Profile from "./components/userstore/profile"
 import { CustomerRoute, AdminRoute, PublicRoute } from "./services/authgard";
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
     <Route exact path="/displayCard" component={DisplayBook}/> 
     <CustomerRoute exact path="/wishlist" component={AddInWishLIst}/> 
     <CustomerRoute exact path="/orderSummary" component={OrderSummary}/>
+    <Route exact path="/profile" component={Profile}/>
     </Switch>
    </Router>
   );

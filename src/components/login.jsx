@@ -57,13 +57,7 @@ export class Login extends Component {
                     localStorage.setItem("email", response.data.data.email);
                     localStorage.setItem("city", response.data.data.city);
                     localStorage.setItem("phoneNumber", response.data.data.phoneNumber);
-                    console.log("tokan",localStorage.getItem("Token"));
-                    console.log("fn", localStorage.getItem("Name"));
-                    console.log("email" ,localStorage.getItem("email"));
-                    console.log( "Adr",localStorage.getItem("Address"));
-                    console.log( "c",localStorage.getItem("city"));
-                    console.log( "pn",localStorage.getItem("phoneNumber"));
-                    console.log( "User Role",localStorage.getItem("User Role"));
+                   
                     this.setState({
                         snackbarOpen: true,
                         snackbarMessage: "login sucessful",

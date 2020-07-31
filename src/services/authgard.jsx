@@ -16,7 +16,7 @@ export const CustomerRoute = ({ component, ...rest }) => {
         ) : (
           <Redirect
             to={{
-              pathname: "/dashboard",
+              pathname: "/store",
               state: { from: props.location },
             }}
           />
@@ -57,7 +57,7 @@ export const PublicRoute = ({ component, ...rest }) => {
         ) : (
           <Redirect
             to={{
-              pathname: "/dashboard",
+              pathname: "/store",
               state: { from: props.location },
             }}
           />

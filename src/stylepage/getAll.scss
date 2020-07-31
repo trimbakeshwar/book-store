@@ -15,3 +15,24 @@ display: flex;;
 .pagination{
 margin-bottom: 10%;
 }
+@media only screen and  (max-width: 414PX) { 
+  .getAllcontainer{
+    width: 500px;
+    align-items: start;
+    flex-direction: column;
+    display: flex;;
+    } 
+    .table{
+      margin-top: 100px;
+      margin-left: 0;
+      margin-bottom: 30px;
+      margin-right: 0;
+      border-style: groove;
+      border-color: white;
+    
+    }
+    .pagination{
+      margin-bottom: 1%;
+      margin-left: 200px;
+      }
+}

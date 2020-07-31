@@ -151,9 +151,8 @@ class DisplayBook extends Component {
                             {(values.booksAvailable === 0) ? "OUT OFF STOCK" : ""}
                         </div>
                         <div className={(values.booksAvailable === 0) ? "" : "imag"}>
-                            <img src={values.bookImage}
-                                width="100px"
-                                height="150px" />
+                            <img className="img" src={values.bookImage}
+                                 />
                         </div>
 
                     </div>

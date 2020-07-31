@@ -7,6 +7,7 @@ import Alert from '@material-ui/lab/Alert';
 import Snackbar from '@material-ui/core/Snackbar';
 import patterns from "../configration/regex";
 import userservice from "../services/userservices";
+import auth from "../services/auth";
 const service = new userservice();
 export class Login extends Component {
     constructor(props) {
@@ -68,12 +69,22 @@ export class Login extends Component {
                         snackbarMessage: "login sucessful",
                         snackServicity: 'sucess'
                     })
-                    if(localStorage.getItem("User Role") === "Admin"){
-                        this.props.history.push('./adminDashbord');
-                    }
-                    else{
-                        this.props.history.push('./store');
-                    }
+                    if (response.data.data.userRole === "Admin") {
+                        auth.login();
+                        if (auth.isAuthenticated) {
+                          setTimeout(() => {
+                            this.props.history.push("/adminDashbord");
+                          }, 2000);
+                        }
+                      } else {
+                        auth.login();
+                        if (auth.isAuthenticated) {
+                          setTimeout(() => {
+                            this.props.history.push("/store");
+                          }, 2000);
+                        }
+                      }
+                  
                     
                 }
             })

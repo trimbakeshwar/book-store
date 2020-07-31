@@ -1,13 +1,12 @@
 
 .searchBar{
     position: relative;
-    right: 28em;
+    right: 30em;
     flex-direction: row;
     display: flex;
     width:40em;
 
-    height: 30px;
-    padding-bottom: 10px;
+  
     background-color:white;
     border-radius: 5px;
 }
@@ -43,7 +42,15 @@
 }
 @media only screen and  (max-width: 414PX) {
 .searchBar{
+    position: relative;
+    right: 30em;
+    flex-direction: row;
+    display: flex;
+    width:40em;
 
+  
+    background-color:white;
+    border-radius: 5px;
 } 
 .cart{
 }

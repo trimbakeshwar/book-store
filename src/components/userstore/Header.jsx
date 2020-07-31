@@ -64,8 +64,8 @@ props.history.push("/addCart")
       
       <div className="{classes.root}">
        
-        <AppBar position="fixed" style={{backgroundColor: "rgba(160, 48, 55, 0.925)"}} className={clsx(classes.appBar)} >
-          <Toolbar color="rgb(192, 14, 14)">
+        <AppBar position="fixed" style={{backgroundColor: "#A03037"}} className={clsx(classes.appBar)} >
+          <Toolbar style={{backgroundColor: "#A03037"}}>
              
               <div className="iconimage" />  
               <div className="name" >Bookstore</div>

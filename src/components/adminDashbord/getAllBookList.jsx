@@ -10,6 +10,7 @@ import IconButton from '@material-ui/core/IconButton';
  import Paper from '@material-ui/core/Paper';
 import { Link } from 'react-router-dom';
 import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
+import Pagination from "@material-ui/lab/Pagination";
 import DeleteOutlineOutlinedIcon from '@material-ui/icons/DeleteOutlineOutlined';
 import UpdateBooks from './updateBook';
 import { withRouter } from 'react-router';
@@ -45,7 +46,8 @@ const StyledTableRow = withStyles((theme) => ({
      super(props);
      this.state={
        bookDetail:[],
-    
+      page: 1,
+      itemsPerPage: 5,
        open:false  
          }
          this.getBooksList()
@@ -79,7 +81,9 @@ EditData=(updateBookData)=>{
   openDilog=()=>{
 this.setState({open:true})
   }
-
+  changePage = (event, value) => {
+    this.setState({ page: value });
+  };
 
 
    render() { 
@@ -88,7 +92,7 @@ this.setState({open:true})
    console.log("data",data)
      return ( 
      
-
+      <div className="getAllcontainer">
        <div className="table" >        
        <TableContainer  component={Paper} >    
        <Table  >
@@ -112,7 +116,12 @@ this.setState({open:true})
          {
            
 
-((this.props.myadminSearchEnable)?(this.props.myadminsearchData):(this.state.bookDetail)).filter((item) => item.isDeleted === false).map((book, index) => {
+((this.props.myadminSearchEnable)?(this.props.myadminsearchData):(this.state.bookDetail))
+.filter((item) => item.isDeleted === false).slice(
+  (this.state.page - 1) * this.state.itemsPerPage,
+  this.state.page * this.state.itemsPerPage
+)
+.map((book, index) => {
               return <StyledTableRow id="tableRow" key={index}>
 
 
@@ -131,10 +140,24 @@ this.setState({open:true})
           }
 
          </TableBody>
+        
        </Table>
      </TableContainer>
+    
     </div>
-   
+    <div className="pagination">
+ <Pagination
+                count={Math.ceil(
+               
+((this.props.myadminSearchEnable)?(this.props.myadminsearchData):(this.state.bookDetail)).length / this.state.itemsPerPage
+                )}
+                page={this.state.page}
+                onChange={(event, value) => this.changePage(event, value)}
+                defaultPage={1}
+                variant="outlined" shape="rounded" color="secondary"
+              />
+    </div>
+   </div>
      );    
 
   }

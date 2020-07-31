@@ -68,7 +68,7 @@ function AdminDashboard(props) {
         {  console.log("openbook",openaddBook)}
       <div className="{classes.root}">
        
-        <AppBar position="fixed" style={{backgroundColor: "rgba(160, 48, 55, 0.925)"}} className={clsx(classes.appBar)} >
+        <AppBar position="fixed" style={{backgroundColor: "rgba(160, 48, 55)"}} className={clsx(classes.appBar)} >
           <Toolbar color="rgb(192, 14, 14)">
              
               <div className="iconimage" />  

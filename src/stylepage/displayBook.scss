@@ -81,7 +81,12 @@ display: flex;
     padding-left: 15px;
     padding-bottom: 15px
 }
-
+.paginations{
+  justify-content: center;
+  display: flex;
+  margin-top: 20px;
+  margin-bottom: 50px;
+}
 @mixin buttonsstyle() {
   font-size: 10px;
   padding:7.7px;
@@ -119,7 +124,7 @@ display: flex;
    }
  
  .poppersetting{
-  margin-top: 50px;
+ 
   position: relative;
  
  }
@@ -174,7 +179,7 @@ display: flex;
      width:100%;
   }
   .imag{
-     padding-right: 85px;
+    padding-left: 50px;
 }
 
  @mixin buttonForResponsiv($widthforButton) {
@@ -212,7 +217,7 @@ display: flex;
  font-size: 13px !important;
  }
  .imag{
-  padding-right: 75px;
+  padding-left: 50px;
 }
  .wishlistButton{
   @include buttonForResponsiv( 95%);

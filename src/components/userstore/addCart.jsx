@@ -121,7 +121,7 @@ class AddInCart extends Component {
 
                                                     <div className="informationOfBook">
                                                         <div className="cartIMG">
-                                                            <img  className="cartIMGsize" src={BookCover}
+                                                            <img  className="cartIMGsize" src={values.bookImage}
                                                                 width="60px"
                                                                 height="90px" />
                                                         </div>

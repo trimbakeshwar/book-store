@@ -11,7 +11,7 @@ $boxShadow:  0 1px 5px 0 rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0);
       flex-grow: initial;
       overflow-wrap: initial;
       padding-left:100px;; /* gutter size offset */
-  margin-top: 80px;
+
       
   }
   .masonry-grid_column {
@@ -177,6 +177,9 @@ display: flex;
      margin-left: 0;
   }
   .popperButtonsetting{
+    
+    position: relative;
+    top:50px;
     margin-left: 30%;
    }
    .img{   

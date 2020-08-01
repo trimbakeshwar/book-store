@@ -81,7 +81,7 @@ class AddInWishLIst extends Component {
                 <Card>
                     <div className="bookimagecontainer">
                         <div className="imag">
-                            <img src={BookCover}
+                            <img className="img" src={values.bookImage}
                                 width="100px"
                                 height="150px" />
                         </div>

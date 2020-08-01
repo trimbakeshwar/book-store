@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Card from "@material-ui/core/Card";
-import "../../stylepage/profile.scss"
+
 import { Button } from '@material-ui/core';
 export default class Profile extends Component {
     constructor(props) {
@@ -30,21 +30,9 @@ export default class Profile extends Component {
                 <div >
 
                     <div className="profileDetail">
-                        <div className="profileButtonSetting">
-                            <div className="profileImage"></div>
-                            <div className="buttonpossition">
-                                <div className="spacing">
-                                    <Button variant="contained" color="primary" onClick={this.logout} >
-                                        logout
-                                     </Button>
-                                    </div>
-                                    <div>
-                                    <Button variant="contained" color="primary" onClick={this.WishlistItom}>
-                                        wishlist
-                                     </Button>
-                                </div>
-                            </div>
-                        </div>
+                    <div className="profileImage"></div>
+                        
+                        <div className="columnSetting">
                         <div className="lable">
                             <div> Name</div><br />
                             <div > Email</div><br />
@@ -59,7 +47,22 @@ export default class Profile extends Component {
                             <div > {localStorage.getItem("city")}</div><br />
                             <div> {localStorage.getItem("phoneNumber")}</div><br />
                         </div>
-
+                        </div>
+                        <div className="profileButtonSetting">
+                          
+                            <div className="buttonpossition">
+                                <div className="spacing">
+                                    <Button variant="contained" color="primary" onClick={this.logout} >
+                                        logout
+                                     </Button>
+                                    </div>
+                                    <div>
+                                    <Button variant="contained" color="primary" onClick={this.WishlistItom}>
+                                        wishlist
+                                     </Button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </Card>

@@ -1,16 +1,22 @@
 .profileDetail{
     display: flex;
     justify-content: end;
-    flex-direction: row;
+    flex-direction: column;
     
 }
+.columnSetting
+{
+    display: flex;
+    justify-content: end;
+    flex-direction: row;
+}
 .CardContainer{
-    width:50%;
+    width:350px;
     justify-content: start;
     align-items: flex-start;
     display: flex;
     margin-top: 10%;
-    margin-left: 20%;
+  
     padding: 30px;
     border-style: groove;
     border-color: white
@@ -35,7 +41,7 @@ color: gray
 }
 .profileImage{
    padding-right: 40px;
-   padding-left: 30px;
+   padding-left: 80px;
     content: url('../images/profileImg.jpg');
     height: 150px;
     width: 150px;
@@ -47,9 +53,54 @@ color: gray
 .buttonpossition{
     flex-direction: row;
     display: flex;
-    width: 210px;
-    margin-top: 40px;
+    width: 265px;
+    margin-top: 20px;
+    padding-left: 30px;
 }
 .spacing{
 width: 80%;
+}
+@media only screen and  (max-width: 414PX) {
+    .CardContainer{
+         width:353px;
+        // justify-content: start;
+        // align-items: flex-start;
+        // display: flex;
+       
+      
+        // padding: 30px;
+         border-style: none;
+        // border-color: white
+    }
+    
+}
+@media only screen and  (max-width: 375PX) {
+    .CardContainer{
+        padding-left: 15px;
+    }
+}
+@media only screen and  (max-width: 375PX) {
+    .CardContainer{
+        width:325px;
+        padding-left: 30px;
+    }
+}
+@media only screen and  (max-width: 320PX) {
+    .CardContainer{
+        width:290px;
+        padding-left: 1px;
+    }
+    
+.lable{
+   
+   
+    padding-left: 25px;
+    padding-right: 10px;
+
+
+}
+.buttonpossition{
+    
+    padding-left: 20px;
+}
 }

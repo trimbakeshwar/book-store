@@ -34,7 +34,11 @@
     display: flex;
     position: relative;
     right:12em;
+    
 } 
+.account{
+    padding-left: 30px;
+}
 .cart{
     position: relative;
     bottom: 2px;
@@ -62,6 +66,9 @@
 }
 .bookIcon{
 }
+.account{
+    padding-left: 10px;
+}
 }
 @media only screen and  (max-width: 360PX) {
     .searchBar{
@@ -85,7 +92,7 @@
         .cart{
         }
         .shopingcart{
-            right: 21em;
+            right: 22em;
         }
         .inputText{
             width:20px;
@@ -93,3 +100,18 @@
         .bookIcon{
         }
         }
+        @media only screen and  (max-width: 375PX) { 
+            .searchBar{
+            
+            } 
+            .cart{
+            }
+            .shopingcart{
+                right: 26em;
+            }
+            .inputText{
+                width:20px;
+            }
+            .bookIcon{
+            }
+            }

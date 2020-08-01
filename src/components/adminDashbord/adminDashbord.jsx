@@ -16,6 +16,11 @@ import AddCircleIcon from '@material-ui/icons/AddCircle';
  import GetAllBook from "./getAllBookList"
  import {connect} from 'react-redux'
  import adminService from "../../services/adminServices";
+ import {AdminSearch,openAddDilogbox} from "../Actions/Actions"
+import Popper from '@material-ui/core/Popper';
+import Profile from '../userstore/profile'
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import { withRouter } from 'react-router';
  const service = new adminService();
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -43,25 +48,33 @@ function AdminDashboard(props) {
   const theme = useTheme();
   const [searchtextField, setsearchtextField] = React.useState(false)
   const [openaddBook, setopenaddBook] = React.useState(false)
+  const [anchorEl, setAnchorEl] = React.useState(null);
   const [Search, setSearch] = React.useState('');
   const searchClick = () => {
     setsearchtextField(true)
   }
   const addBook =()=>{
   
-    props.changeopenBook(!openaddBook)
+    props.openAddDilogbox(!openaddBook)
   }
   const search=(e)=>{
     console.log("search")
      setSearch(e.target.value)
      service.SearchBook(Search).then((Response)=>{
       console.log("search",Response.data.data)
-      props.changeadminSearch(Response.data.data,true)
+      props.AdminSearch(Response.data.data,true)
      
     }).catch((err)=>{
       console.log("err",err)
     })
   }
+  
+const handleClick = (event) => {
+  setAnchorEl(anchorEl ? null : event.currentTarget);
+};
+
+const open = Boolean(anchorEl);
+const id = open ? 'simple-popper' : undefined;
   return (
   
     <div  >
@@ -85,12 +98,19 @@ function AdminDashboard(props) {
             <div className="bookIcon">
              <AddCircleIcon onClick={addBook}/>
              < MenuBookSharpIcon />
+             <div className="account">
+             <AccountCircleIcon  onClick={handleClick} />
+             </div>
              <AddBooks  />
              </div>
            
           </Toolbar>
         </AppBar>
       </div>
+      
+  <Popper  id={id} open={open} anchorEl={anchorEl} >
+        <Profile />
+      </Popper>
      <GetAllBook />
     
     </div>
@@ -111,5 +131,5 @@ const mapStateToProps=(state)=>{
 
    }
   }
-  export default connect(mapStateToProps,mapDispatrchToProps)(AdminDashboard);
+  export default connect(mapStateToProps,{openAddDilogbox:openAddDilogbox,AdminSearch:AdminSearch})(withRouter(AdminDashboard));
   

@@ -82,29 +82,17 @@ export class Login extends Component {
                     
                 }
             })
-                .catch((err) => {
-                    console.log(err);
-                    if (err === 401) {
-                        this.setState({
+                .catch(async(error) => {
+                    console.log(error);
+                  
+                        await this.setState({
                             snackbarOpen: true,
                             snackbarMessage: "invalid email or password",
                             snackServicity: "error"
                         })
-                    }
-                    if (err === 400) {
-                        this.setState({
-                            snackbarOpen: true,
-                            snackbarMessage: "Email and password requir",
-                            snackServicity: "error"
-                        })
-                    }
-                    if (err === 404) {
-                        this.setState({
-                            snackbarOpen: true,
-                            snackbarMessage: "not found",
-                            snackServicity: "error"
-                        })
-                    }
+                 
+                   
+                 
                 });
             }
         

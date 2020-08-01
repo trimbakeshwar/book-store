@@ -1,4 +1,5 @@
 import IconButton from '@material-ui/core/IconButton';
+import {CartDetails} from "../Actions/Actions"
 import React, { Component } from 'react';
 import Card from '@material-ui/core/Card';
 import Masonry from 'react-masonry-css';
@@ -19,7 +20,6 @@ import Headers from "./Header"
 import storeServices from "../../services/storeServices";
 import EmptyCarts from "../../images/EmptyCarts.png"
 import { Link } from 'react-router-dom';
-
 const storeservice = new storeServices();
 class AddInCart extends Component {
     constructor(props) {
@@ -38,7 +38,7 @@ class AddInCart extends Component {
             console.log("cart books", Response.data.data)
             await this.setState({ cartData: Response.data.data.filter((data) => data.isDeleted === false).filter(data => data.isUsed === false) })
 
-            console.log("cart books details", this.props.AllCartData(this.state.cartData))
+            console.log("cart books details", this.props.CartDetails(this.state.cartData))
 
         }).catch((err) => {
             console.log("err catch ", err)
@@ -172,10 +172,13 @@ const mapStateToProps = (state) => {
 
 const mapDispatrchToProps = (dispatch) => {
     return {
-        AllCartData: (cartData) => { (dispatch({ type: 'ALL_CART_DETAILS', payload: cartData })) },
+        CartDetails: CartDetails
 
     }
 }
-export default connect(mapStateToProps, mapDispatrchToProps)(AddInCart);
+export default connect(mapStateToProps,  {
+    CartDetails: CartDetails
+
+})(AddInCart);
 
 

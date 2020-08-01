@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import Card from "@material-ui/core/Card";
-
+import "../../stylepage/profile.scss"
 import { Button } from '@material-ui/core';
-export default class Profile extends Component {
+import { withRouter } from 'react-router';
+ class Profile extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -25,49 +26,51 @@ export default class Profile extends Component {
     render() {
         return (
 
-            <Card boxShadow={3}  className="CardContainer">
+            <Card  className="CardContainer">
                
-                <div >
+               <div >
 
-                    <div className="profileDetail">
-                    <div className="profileImage"></div>
-                        
-                        <div className="columnSetting">
-                        <div className="lable">
-                            <div> Name</div><br />
-                            <div > Email</div><br />
-                            <div > Address</div><br />
-                            <div > City</div><br />
-                            <div > Phone_Number</div><br />
-                        </div>
-                        <div className="info">
-                            <div > {localStorage.getItem("Name")}</div><br />
-                            <div >{localStorage.getItem("email")}</div><br />
-                            <div > {localStorage.getItem("Address")}</div><br />
-                            <div > {localStorage.getItem("city")}</div><br />
-                            <div> {localStorage.getItem("phoneNumber")}</div><br />
-                        </div>
-                        </div>
-                        <div className="profileButtonSetting">
-                          
-                            <div className="buttonpossition">
-                                <div className="spacing">
-                                    <Button variant="contained" color="primary" onClick={this.logout} >
-                                        logout
-                                     </Button>
-                                    </div>
-                                    <div>
-                                    <Button variant="contained" color="primary" onClick={this.WishlistItom}>
-                                        wishlist
-                                     </Button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </Card>
-
+                   <div className="profileDetail">
+                   <div className="profileImage"></div>
+                       
+                       <div className="columnSetting">
+                       <div className="lable">
+                           <div> Name</div><br />
+                           <div > Email</div><br />
+                           <div > Address</div><br />
+                           <div > City</div><br />
+                           <div > Phone_Number</div><br />
+                       </div>
+                       <div className="info">
+                           <div > {localStorage.getItem("Name")}</div><br />
+                           <div >{localStorage.getItem("email")}</div><br />
+                           <div > {localStorage.getItem("Address")}</div><br />
+                           <div > {localStorage.getItem("city")}</div><br />
+                           <div> {localStorage.getItem("phoneNumber")}</div><br />
+                       </div>
+                       </div>
+                       <div className="profileButtonSetting">
+                         
+                           <div className="buttonpossition">
+                               <div className="spacing">
+                                   <Button variant="contained" color="primary" onClick={this.logout} >
+                                       logout
+                                    </Button>
+                                   </div>
+                                   <div>
+                                       {(localStorage.getItem("User Role") === "Customer")?
+                                   (<Button variant="contained" color="primary" onClick={this.WishlistItom}>
+                                       wishlist
+                                    </Button>):(undefined)
+                                     }
+                               </div>
+                           </div>
+                       </div>
+                   </div>
+               </div>
+           </Card>        
         )
     }
 }
 
+export default  withRouter(Profile)

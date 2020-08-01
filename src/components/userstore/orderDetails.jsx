@@ -15,6 +15,7 @@ import FormLabel from '@material-ui/core/FormLabel';
 import OrderServices from "../../services/orderServices"
 import storeServices from '../../services/storeServices';
 import { withRouter } from 'react-router';
+import {ORDERID} from '../Actions/Actions'
 const storeservice = new storeServices();
 const orderServices = new OrderServices();
 class OrderDetails extends Component {
@@ -58,10 +59,10 @@ class OrderDetails extends Component {
         this.setState({ Landmard: e.target.value })
     }
     placeOrder = () => {
-
+    
         this.props.mycartData.filter((item) => item.isUsed === false)
             .filter((item) => item.isDeleted === false).map(async (item) => {
-
+                console.log(" this.props.mycartData", this.props.mycartData)
                 let BookId = item.bookId
                 let Quantity = item.quantity-1
                 let isHederRequire = true
@@ -80,7 +81,7 @@ class OrderDetails extends Component {
                 console.log("cartid ", CartId, " Address ", Address, " City ", City, " PinCode ", PinCode)
                 let isheaderRequired = true
                 orderServices.orderPlaced(CartId, Address, City, PinCode, isheaderRequired).then((Response) => {
-                    console.log("order placed", this.props.SendOrderID(Response.data.data.orderId))
+                    console.log("order placed", this.props.ORDERID(Response.data.data.orderId))
                     this.props.history.push('./orderSummary');
                 }).catch((err) => {
                     console.log("order err", err)
@@ -156,12 +157,7 @@ const mapStateToProps = (state) => {
         myorderID: state.orderID
     }
 }
-const mapDispatrchToProps = (dispatch) => {
-    return {
-        SendOrderID: (orderID) => { (dispatch({ type: 'ORDER_ID', payload: orderID })) },
 
-    }
-}
 
-export default connect(mapStateToProps,mapDispatrchToProps)(withRouter(OrderDetails));
+export default connect(mapStateToProps,{ORDERID: ORDERID})(withRouter(OrderDetails));
 

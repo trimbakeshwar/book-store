@@ -6,6 +6,7 @@ import Masonry from 'react-masonry-css';
 import Button from '@material-ui/core/Button';
 import { withRouter } from 'react-router';
 import "../../stylepage/displayBook.scss"
+import{BookDetails} from "../Actions/Actions"
 import adminService from "../../services/adminServices";
 import storeServices from "../../services/storeServices";
 import Pagination from "@material-ui/lab/Pagination";
@@ -89,7 +90,8 @@ class DisplayBook extends Component {
         }).then((err) => {
             console.log("add to cart succefull", err)
         })
-        this.props.changemyBookDetail(values)
+      
+        this.props.BookDetails(values)
     }
     AddToWishlist = (values) => {
 
@@ -136,7 +138,7 @@ class DisplayBook extends Component {
         const { anchorEl } = this.state;
         const open = Boolean(anchorEl);
         const id = open ? 'no-transition-popper' : null;
-        console.log("data of cart", this.state.CartDataForCheck)
+        console.log("data of cart", this.props.mySearchData)
 
         const bookCard = ((this.props.mysearchEnable) ? (this.props.mySearchData) : (this.state.bookDetail))
         .slice(
@@ -254,11 +256,8 @@ const mapStateToProps = (state) => {
         mycartData: state.cartData,
     }
 }
-const mapDispatrchToProps = (dispatch) => {
-    return {
-        changemyBookDetail: (BookDetail) => { (dispatch({ type: 'BOOK_DETAIL', payload: BookDetail })) },
 
-    }
-}
 
-export default connect(mapStateToProps, mapDispatrchToProps)(withStyles(styles)(DisplayBook));
+export default connect(mapStateToProps, {
+    BookDetails:BookDetails
+})(withStyles(styles)(DisplayBook));

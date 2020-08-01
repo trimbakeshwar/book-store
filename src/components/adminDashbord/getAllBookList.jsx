@@ -19,6 +19,7 @@ import adminService from "../../services/adminServices";
 import ImageOutlinedIcon from '@material-ui/icons/ImageOutlined';
 import { TextareaAutosize } from '@material-ui/core';
 import {connect} from 'react-redux'
+import {openUpdateDilogbox, openUpdateBookData} from "../Actions/Actions"
 import { makeStyles, useTheme,withStyles } from '@material-ui/core/styles';
 const service = new adminService();
 const StyledTableCell = withStyles((theme) => ({
@@ -65,8 +66,8 @@ const StyledTableRow = withStyles((theme) => ({
 
 EditData=(updateBookData)=>{
   console.log("book",updateBookData);
-  this.props.changeopenupdateBook(true)
-  this.props.sendDataForUpdateBook(updateBookData)
+  this.props.openUpdateDilogbox(true)
+  this.props.openUpdateBookData(updateBookData)
   this.props.history.push('/adminDashbord/updateBook');
 }
   DeleteData=(id)=>{
@@ -169,15 +170,9 @@ this.setState({open:true})
        myadminsearchData:state.adminsearchData
   }
   } 
-  const mapDispatrchToProps =(dispatch)=>{
-    return{
-  changeopenupdateBook:(openupdateBook)=>{(dispatch({type:'OPEN_UPDATE_BOOK_DILOGBOX',payload:openupdateBook}))},
-  sendDataForUpdateBook:(updateBookData)=>{(dispatch({type:'OPEN_UPDATE_BOOK_DATA',payload:updateBookData}))},
-  changeadminSearch:(adminSearchEnable,adminsearchData)=>{(dispatch({type:'ADMIN_SEARCH',payload:adminSearchEnable,info:adminsearchData}))},
-  
-}
-  }
-  export default connect(mapStateToProps,mapDispatrchToProps)(withRouter(GetAllBook));
+
+  export default connect(mapStateToProps,{openUpdateDilogbox:openUpdateDilogbox
+    ,openUpdateBookData: openUpdateBookData})(withRouter(GetAllBook));
   
 
 

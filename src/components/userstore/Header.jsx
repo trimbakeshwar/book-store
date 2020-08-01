@@ -23,6 +23,8 @@ import { withRouter } from 'react-router';
 import "../../stylepage/profile.scss"
 import Card from '@material-ui/core/Card';
 import Button from '@material-ui/core/Button';
+import {SeartchBookss, SearchEnable} from "../Actions/Actions"
+import Profile from  "../userstore/profile"
 const service = new adminService();
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -56,8 +58,8 @@ const search=(e)=>{
    setSearch(e.target.value)
   service.SearchBook(Search).then((Response)=>{
     console.log("search",Response.data.data)
-    props.searchedData(Response.data.data)
-    props.searchedEnable(true)
+    props.SeartchBookss(Response.data.data)
+    props.SearchEnable(true)
   }).catch((err)=>{
     console.log("err",err)
   })
@@ -69,19 +71,6 @@ const handleClick = (event) => {
   setAnchorEl(anchorEl ? null : event.currentTarget);
 };
 
-const logout = () => {
-  localStorage.removeItem("Token");
-  localStorage.removeItem("Name");
-  localStorage.removeItem("email");
-  localStorage.removeItem("User Role");
-  localStorage.removeItem("Address");
-  localStorage.removeItem("city");
-  localStorage.removeItem("phoneNumber");
-  this.props.history.push("/");
-}
-const WishlistItom = () => {
-  props.history.push("/wishlist");
-}
 const open = Boolean(anchorEl);
 const id = open ? 'simple-popper' : undefined;
   return (
@@ -118,48 +107,7 @@ const id = open ? 'simple-popper' : undefined;
       </div>
   
       <Popper  id={id} open={open} anchorEl={anchorEl} >
-              
-            <Card  className="CardContainer">
-               
-               <div >
-
-                   <div className="profileDetail">
-                   <div className="profileImage"></div>
-                       
-                       <div className="columnSetting">
-                       <div className="lable">
-                           <div> Name</div><br />
-                           <div > Email</div><br />
-                           <div > Address</div><br />
-                           <div > City</div><br />
-                           <div > Phone_Number</div><br />
-                       </div>
-                       <div className="info">
-                           <div > {localStorage.getItem("Name")}</div><br />
-                           <div >{localStorage.getItem("email")}</div><br />
-                           <div > {localStorage.getItem("Address")}</div><br />
-                           <div > {localStorage.getItem("city")}</div><br />
-                           <div> {localStorage.getItem("phoneNumber")}</div><br />
-                       </div>
-                       </div>
-                       <div className="profileButtonSetting">
-                         
-                           <div className="buttonpossition">
-                               <div className="spacing">
-                                   <Button variant="contained" color="primary" onClick={logout} >
-                                       logout
-                                    </Button>
-                                   </div>
-                                   <div>
-                                   <Button variant="contained" color="primary" onClick={WishlistItom}>
-                                       wishlist
-                                    </Button>
-                               </div>
-                           </div>
-                       </div>
-                   </div>
-               </div>
-           </Card>        
+        <Profile />
       </Popper>
     </div>
   );
@@ -173,12 +121,12 @@ const mapStateToProps=(state)=>{
  
   const mapDispatrchToProps =(dispatch)=>{
     return{
-      searchedData:(SearchData,)=>{(dispatch({type:'SEARCH_BOOKS',payload:SearchData, }))},
-      searchedEnable:(searchEnable,)=>{(dispatch({type:'SEARCH_ENABLE',payload:searchEnable, }))}
- 
+      SeartchBookss:SeartchBookss,
+      SearchEnable:SearchEnable
   }
   }
-  export default connect(mapStateToProps,mapDispatrchToProps)(withRouter(Headers));
+  export default connect(mapStateToProps,{  SeartchBookss:SeartchBookss,
+    SearchEnable:SearchEnable})(withRouter(Headers));
   
 
 

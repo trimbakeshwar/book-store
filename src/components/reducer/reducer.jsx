@@ -1,3 +1,12 @@
+import {CART_ID_FOR_PURCHES,
+    BOOK_DETAIL,SEARCH_BOOKS ,
+    SEARCH_ENABLE,
+    ORDER_ID,
+    OPEN_ADD_BOOK_DILOGBOX,
+    OPEN_UPDATE_BOOK_DILOGBOX,
+    OPEN_UPDATE_BOOK_DATA,
+    ADMIN_SEARCH} from "../Actions/Actions"
+
 const iState = {
     
     openBook:false,
@@ -14,7 +23,7 @@ const iState = {
 }
 
 const reducer = (state=iState,action)=>{
-    if(action.type === 'OPEN_ADD_BOOK_DILOGBOX')
+    if(action.type === OPEN_ADD_BOOK_DILOGBOX)
     {
         return {
             ...state,
@@ -22,7 +31,7 @@ const reducer = (state=iState,action)=>{
             
         }
     }
-    if(action.type === 'OPEN_UPDATE_BOOK_DILOGBOX')
+    if(action.type === OPEN_UPDATE_BOOK_DILOGBOX)
     {
         return {
             ...state,
@@ -30,7 +39,7 @@ const reducer = (state=iState,action)=>{
             
         }
     }
-    if(action.type === 'OPEN_UPDATE_BOOK_DATA')
+    if(action.type === OPEN_UPDATE_BOOK_DATA)
     {
         return {
             ...state,
@@ -38,7 +47,8 @@ const reducer = (state=iState,action)=>{
             
         }
     }
-    if(action.type === 'BOOK_DETAIL')
+    
+    if(action.type === BOOK_DETAIL)
     {
         return {
             ...state,
@@ -46,7 +56,7 @@ const reducer = (state=iState,action)=>{
             
         }
     }
-    if(action.type === 'ALL_CART_DETAILS')
+    if(action.type === CART_ID_FOR_PURCHES)
     {
         return {
             ...state,
@@ -55,7 +65,7 @@ const reducer = (state=iState,action)=>{
         }
     }
     
-    if(action.type === 'SEARCH_BOOKS')
+    if(action.type === SEARCH_BOOKS)
     {
         return {
             ...state,
@@ -63,7 +73,7 @@ const reducer = (state=iState,action)=>{
            
         }
     }
-    if(action.type === 'SEARCH_ENABLE')
+    if(action.type === SEARCH_ENABLE)
     {
         return {
             ...state,
@@ -71,15 +81,15 @@ const reducer = (state=iState,action)=>{
            
         }
     }
-    if(action.type === 'ADMIN_SEARCH')
+    if(action.type === ADMIN_SEARCH)
     {
         return {
             ...state,
-            adminSearchEnable:action.payload,
-            adminsearchData:action.info
+            adminSearchEnable:action.info,
+            adminsearchData:action.payload
         }
     }
-    if(action.type === 'ORDER_ID')
+    if(action.type === ORDER_ID)
     {
         return {
             ...state,

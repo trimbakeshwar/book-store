@@ -18,12 +18,14 @@ import AxiosServices from "../services/axiosServices";
       return Axios.Get(config.url+"Cart",isHeaderRequire); 
  
     }
+
     removeFromWishlist(WishListId,isHeaderRequire ){
       
       return Axios.Delete(config.url+"WishList/"+WishListId ,isHeaderRequire); 
     } 
     getWishListList(isHeaderRequire){
       return Axios.Get(config.url+"WishList/",isHeaderRequire ); 
+
     }
     AddWishListToCart(id,isHeaderRequire){
       return Axios.Post(config.url+"Cart/WishListToCart/"+id,id,isHeaderRequire);  

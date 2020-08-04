@@ -27,7 +27,6 @@ const styles = theme => ({
     },
 });
 const service = new adminService();
-
 const storeservice = new storeServices();
 class DisplayBook extends Component {
 

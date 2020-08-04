@@ -15,6 +15,7 @@ import AxiosServices from "../services/axiosServices";
  
     }
     updateBooksDetail(data,id){
+
       return Axios.Put(config.url+"Book/"+id,data, {headers: {Authorization: "Bearer "+localStorage.getItem("Token") }}); 
  
     }
@@ -25,6 +26,7 @@ import AxiosServices from "../services/axiosServices";
     SearchBook(Search){
       return Axios.Get(config.url+"Book/"+Search, {headers: {Authorization: "Bearer "+localStorage.getItem("Token") }}); 
       
+
     }
 }
 export default adminService;

@@ -30,6 +30,7 @@ function App() {
     <Route exact path="/profile" component={Profile}/>
     </Switch>
    </Router>
+
   );
 }
 export default App;

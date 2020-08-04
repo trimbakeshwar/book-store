@@ -16,4 +16,7 @@ export default class AxiosServices{
         return axios.put(url,data,tokan)
     }
 
+    Put(url, token){
+        return axios.put(url,token)
+    }
 }

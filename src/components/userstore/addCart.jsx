@@ -21,6 +21,7 @@ import storeServices from "../../services/storeServices";
 import EmptyCarts from "../../images/EmptyCarts.png"
 import { Link } from 'react-router-dom';
 const storeservice = new storeServices();
+
 class AddInCart extends Component {
     constructor(props) {
         super(props);
@@ -33,13 +34,13 @@ class AddInCart extends Component {
 
     }
     getAllBookFromCart() {
+
         let isHeaderRequire = true
         storeservice.getCartList(isHeaderRequire).then(async (Response) => {
             console.log("cart books", Response.data.data)
             await this.setState({ cartData: Response.data.data.filter((data) => data.isDeleted === false).filter(data => data.isUsed === false) })
 
             console.log("cart books details", this.props.CartDetails(this.state.cartData))
-
         }).catch((err) => {
             console.log("err catch ", err)
         })
@@ -51,6 +52,7 @@ class AddInCart extends Component {
         storeservice.remove(CartId, isHeaderRequire).then((Response) => {
             console.log("remove cart books", Response)
             this.getAllBookFromCart()
+
         }).catch((err) => {
             console.log("err catch ", err)
         })
@@ -104,6 +106,7 @@ class AddInCart extends Component {
         return (
             <div>
                 <Headers />
+
                 {(this.state.cartData.length === 0) ? (<div className="EmptyCart">
                     <div className="shopping" />
                     <div className="continueShopping">
@@ -159,6 +162,7 @@ class AddInCart extends Component {
                             {(this.state.customerDetailHide) ? <OrderDetails /> : (<div className="hedlineContainers" style={{ marginBottom: "25px" }}> Customer Details </div>)}
                             <div className="hedlineContainers"> Order Summery </div>
                         </div>)}
+
             </div>
         )
     }

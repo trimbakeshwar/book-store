@@ -66,8 +66,10 @@ const StyledTableRow = withStyles((theme) => ({
 
 EditData=(updateBookData)=>{
   console.log("book",updateBookData);
+
   this.props.openUpdateDilogbox(true)
   this.props.openUpdateBookData(updateBookData)
+
   this.props.history.push('/adminDashbord/updateBook');
 }
   DeleteData=(id)=>{
@@ -89,7 +91,7 @@ this.setState({open:true})
 
    render() { 
    let data=this.state.bookDetail
-   .filter((item) => item.isDeleted === false)
+   .filter((item) => item.isDeleted === true)
    console.log("data",data)
      return ( 
      
@@ -115,6 +117,7 @@ this.setState({open:true})
          <TableBody>
         
          {
+
            
 
 ((this.props.myadminSearchEnable)?(this.props.myadminsearchData):(this.state.bookDetail))
@@ -137,6 +140,7 @@ this.setState({open:true})
                <IconButton><EditOutlinedIcon onClick={()=>this.EditData(book)}  />  </IconButton></Link > </StyledTableCell>
                 <StyledTableCell align="left"> <IconButton><DeleteOutlineOutlinedIcon onClick={()=>this.DeleteData(book.bookId)} /></IconButton> </StyledTableCell>
              </StyledTableRow>
+
            })
           }
 

@@ -18,7 +18,7 @@ const goToStore = () => {
               src={CheckoutMessage}
               className="summaryimage"
               alt="summary img"
-            />
+            />z
           </div>
           <br />
           <div className="Comfirmation">
@@ -26,10 +26,12 @@ const goToStore = () => {
              the order id is #{props.myorderID} save order id for 
              further communication.. 
           </div>
+
          
           <div style={{position: "relative",
     bottom: "70px"}}>
             <Card className="table">
+
               <div className="flexSetting">
                 <div className="Column">
                   <div className="header"> Email Id</div><br/>
@@ -50,8 +52,9 @@ const goToStore = () => {
               </div>
             </Card>
           </div>
-         
+
           <div style={{position: "relative",bottom: "60px"}}>
+
             <Button
               className="button-Login"
               variant="contained"
@@ -63,6 +66,7 @@ const goToStore = () => {
           </div>
         </div>
         <br />
+
         
         <div>
         

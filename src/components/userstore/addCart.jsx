@@ -1,4 +1,5 @@
 import IconButton from '@material-ui/core/IconButton';
+import { CartDetails } from "../Actions/Actions"
 import React, { Component } from 'react';
 import Card from '@material-ui/core/Card';
 import Masonry from 'react-masonry-css';
@@ -17,8 +18,8 @@ import OrderDetails from "./orderDetails"
 import OrderSummary from "./orderSummary"
 import Headers from "./Header"
 import storeServices from "../../services/storeServices";
-
-const service = new adminService();
+import EmptyCarts from "../../images/EmptyCarts.png"
+import { Link } from 'react-router-dom';
 const storeservice = new storeServices();
 
 class AddInCart extends Component {
@@ -30,11 +31,16 @@ class AddInCart extends Component {
             cartData: []
         }
         this.getAllBookFromCart()
+
     }
     getAllBookFromCart() {
-        storeservice.getCartList().then((Response) => {
+
+        let isHeaderRequire = true
+        storeservice.getCartList(isHeaderRequire).then(async (Response) => {
             console.log("cart books", Response.data.data)
-            this.setState({ cartData: Response.data.data })
+            await this.setState({ cartData: Response.data.data.filter((data) => data.isDeleted === false).filter(data => data.isUsed === false) })
+
+            console.log("cart books details", this.props.CartDetails(this.state.cartData))
         }).catch((err) => {
             console.log("err catch ", err)
         })
@@ -42,87 +48,136 @@ class AddInCart extends Component {
     }
     removeFromCart = (value) => {
         let CartId = value
-        storeservice.remove(CartId).then((Response) => {
+        let isHeaderRequire = true
+        storeservice.remove(CartId, isHeaderRequire).then((Response) => {
             console.log("remove cart books", Response)
+            this.getAllBookFromCart()
 
         }).catch((err) => {
             console.log("err catch ", err)
         })
-        this.getAllBookFromCart()
+
     }
-    increaseQuantity = () => {
-        if (this.state.count < this.props.myBookDetail.booksAvailable) {
-            this.setState({ count: this.state.count + 1 })
-            console.log("count", this.state.count)
-        }
+    increaseQuantity = (Id) => {
+
+        console.log("card", Id)
+        this.state.cartData.filter((item) => item.cartId === Id).map(async (values, index) => {
+
+            console.log("value.CartId=", values.cartId, " cartId=", Id)
+            await this.setState({
+                values: [
+
+                    [values.quantity = values.quantity + 1],
+
+                ],
+
+            });
+            console.log("cardData", this.state.cartData)
+
+        })
     }
-    decreaseQuantity = () => {
-        if (this.state.count > 0) {
-            this.setState({ count: this.state.count - 1 })
-            console.log("count", this.state.count)
-        }
+    decreaseQuantity = async (Id) => {
+
+        console.log("card", Id)
+        this.state.cartData.filter((item) => item.cartId === Id).map(async (values, index) => {
+
+            console.log("value.CartId=", values.cartId, " cartId=", Id)
+
+            await this.setState({
+                values: [
+
+                    [
+                        (values.quantity === 0) ? 0 : (values.quantity = values.quantity - 1)],
+                ],
+            });
+
+        })
+
     }
     openCustomerDetails = () => {
         console.log("run")
         this.setState({ customerDetailHide: true })
+
     }
+
     render() {
 
         console.log("op", this.props.myBookDetail)
         return (
             <div>
                 <Headers />
-                <div className="boxForCart">
-                    <div className="container">
-                        <div className="carttag"> My cart(2)</div>
+
+                {(this.state.cartData.length === 0) ? (<div className="EmptyCart">
+                    <div className="shopping" />
+                    <div className="continueShopping">
+                        Click<Link to="/store" style={{ textDecoration: "none" }}> Heare</Link> to Continue Shopping
+                            </div>
+                </div>) : (
                         <div>
-                            {
-                                this.state.cartData.filter((item) => item.isDeleted === false).map((values, index) => {
-                                    return (
+                            <div className="boxForCart">
+                                <div className="container">
+                                    <div className="carttag"> My cart(2)</div>
+                                    <div>
+                                        {
+                                            this.state.cartData.filter((item) => item.isDeleted === false).map((values, index) => {
+                                                return (
 
-                                        <div className="informationOfBook">
-                                            <div>
-                                                <img src={BookCover}
-                                                    width="60px"
-                                                    height="90px" />
-                                            </div>
-                                            <div>
-                                                <div className="title">{values.title}</div>
-                                                <div className="authors">{values.author}</div>
-                                                <div className="prices">{values.price}</div>
-                                                <div className="quantityContainer">
-                                                    <div className="countButton"> <AddCircleOutlineOutlinedIcon fontSize="small" onClick={this.increaseQuantity} />
-                                                        <input className="inputQuantity" Value={this.state.count} disabled type="number" />
-                                                        <RemoveCircleOutlineIcon onClick={this.decreaseQuantity} />
-                                                    </div>
+                                                    <div className="informationOfBook">
+                                                        <div className="cartIMG">
+                                                            <img className="cartIMGsize" src={values.bookImage}
+                                                                width="60px"
+                                                                height="90px" />
+                                                        </div>
+                                                        <div>
+                                                            <div className="title">{values.title}</div>
+                                                            <div className="authors">{values.author}</div>
+                                                            <div className="prices">{values.price}</div>
+                                                            <div className="quantityContainer">
+                                                                <div className="countButton"> <AddCircleOutlineOutlinedIcon style={{ cursor: "pointer" }} fontSize="small" onClick={() => this.increaseQuantity(values.cartId)} />
+                                                                    <input className="inputQuantity" Value={values.quantity} disabled type="number" />
+                                                                    <RemoveCircleOutlineIcon style={{ cursor: "pointer" }} onClick={() => this.decreaseQuantity(values.cartId)} />
+                                                                </div>
 
-                                                    <div onClick={() => this.removeFromCart(values.cartId)} className="remove">Remove</div>
+                                                                <div style={{ cursor: "pointer" }} onClick={() => this.removeFromCart(values.cartId)} className="remove">Remove</div>
 
-                                                </div>
+                                                            </div>
 
-                                            </div>
+                                                        </div>
 
-                                        </div>)
+                                                    </div>)
 
-                                })
+                                            })
 
 
-                            }
+                                        }
 
-                        </div>
-                        <div className="placeOrder">
-                            <Button variant="contained" color="primary" onClick={this.openCustomerDetails}>
-                                PLACE ORDER
+                                    </div>
+                                    <div className="placeOrder">
+                                        <Button variant="contained" color="primary" onClick={this.openCustomerDetails}>
+                                            PLACE ORDER
                                     </Button>
-                        </div>
-                    </div>
-                </div>
-                {(this.state.customerDetailHide) ? <OrderDetails /> : (<div className="hedlineContainers"> Customer Details </div>)}
-                <OrderSummary />
+                                    </div>
+                                </div>
+                            </div>
+                            {(this.state.customerDetailHide) ? <OrderDetails /> : (<div className="hedlineContainers" style={{ marginBottom: "25px" }}> Customer Details </div>)}
+                            <div className="hedlineContainers"> Order Summery </div>
+                        </div>)}
+
             </div>
         )
     }
 }
+const mapStateToProps = (state) => {
+    return {
+        mycartData: state.cartData,
+
+    }
+}
 
 
-export default AddInCart;
+export default connect(mapStateToProps, {
+    CartDetails: CartDetails
+
+})(AddInCart);
+
+

@@ -1,13 +1,12 @@
 
 .searchBar{
     position: relative;
-    right: 28em;
+    right: 30em;
     flex-direction: row;
     display: flex;
     width:40em;
-
-    height: 30px;
-    padding-bottom: 10px;
+    height: 40px;
+  
     background-color:white;
     border-radius: 5px;
 }
@@ -17,7 +16,8 @@
    height: 20px;
    border-style: none;
    position: relative;
-   top:8px;
+   top:5px;
+   background-color:white;
 }
 .bookIcon{
    
@@ -34,9 +34,66 @@
     display: flex;
     position: relative;
     right:12em;
+    
 } 
+.account{
+    padding-left: 30px;
+}
 .cart{
     position: relative;
     bottom: 2px;
     padding-right: 5px;
 }
+@media only screen and  (max-width: 414PX) {
+.searchBar{
+    position: relative;
+    right: 31em;
+    min-width: 12em;
+} 
+.cart{
+}
+.shopingcart{
+    right: 29em;
+}
+.inputText{
+    width:8em;
+    position: relative;
+    top: 4px;
+}
+.bookIcon{
+}
+.account{
+    padding-left: 10px;
+}
+}
+
+   @media only screen and  (max-width: 375PX) { 
+        .searchBar{
+            min-width: 10em;
+        } 
+        .cart{
+        }
+        .shopingcart{
+            right: 30em;
+        }
+       
+        .bookIcon{
+        }
+        }
+        @media only screen and  (max-width: 320PX) { 
+            .searchBar{
+                min-width: 7.5em;
+            } 
+            .cart{
+            }
+            .shopingcart{
+                right: 30em;
+            }
+            .inputText{
+                width:8em;
+                position: relative;
+                top: 4px;
+            }
+            .bookIcon{
+            }
+            }

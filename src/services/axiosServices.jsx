@@ -1,16 +1,19 @@
 import axios from 'axios'
 export default class AxiosServices{
    
-    Post(url, data , token){
-        return axios.post(url,data,token)
+    Post(url, data , isHeaderRequire){
+        return axios.post(url,data, {headers: {Authorization: "Bearer "+localStorage.getItem("Token") }})
     
 }
-    Get( url , token){
-        return axios.get(url,token)
+    Get( url , isHeaderRequire){
+        return axios.get(url,isHeaderRequire?{headers: {Authorization: "Bearer "+localStorage.getItem("Token") }}:undefined)
     }
 
-    Delete(url, token){
-        return axios.delete(url,token)
+    Delete(url, isHeaderRequire){
+        return axios.delete(url,isHeaderRequire?{headers: {Authorization: "Bearer "+localStorage.getItem("Token") }}:undefined)
+    }
+    Put(url,data,tokan){
+        return axios.put(url,data,tokan)
     }
 
     Put(url, token){

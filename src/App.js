@@ -8,22 +8,29 @@ import Store from "./components/userstore/store"
 import DisplayBook from "./components/userstore/displayCard"
 import AddInCart from "./components/userstore/addCart"
 import AddInWishLIst from "./components/userstore/wishlist"
+import OrderSummary from "./components/userstore/orderSummary"
+import { Switch  } from "react-router-dom";
+import Profile from "./components/userstore/profile"
+import { CustomerRoute, AdminRoute, PublicRoute } from "./services/authgard";
 function App() {
   return (
-    <div >
-      <Router>
-      <Route exact path="/" component={Login}/>
-    <Route exact path="/registration" component={Registration}/> 
-    <Route exact path="/adminDashbord" component={AdminDashboard}/> 
-    <Route exact  path="/adminDashbord/updateBook" component={UpdateBooks}/>
+    <Router>
+      <Switch>
+      <PublicRoute exact path="/registration" component={Registration}/> 
+      <PublicRoute exact path="/" component={Login}/>
+   
+    <AdminRoute  path="/adminDashbord/updateBook" component={UpdateBooks}/>
+    <AdminRoute exact path="/adminDashbord" component={AdminDashboard}/> 
+   
     <Route exact path="/store" component={Store}/> 
-    <Route exact path="/AddCart" component={AddInCart}/>
+    <CustomerRoute exact path="/addCart" component={AddInCart}/>
     <Route exact path="/displayCard" component={DisplayBook}/> 
-    <Route exact path="/wishlist" component={AddInWishLIst}/> 
-    
+    <CustomerRoute exact path="/wishlist" component={AddInWishLIst}/> 
+    <CustomerRoute exact path="/orderSummary" component={OrderSummary}/>
+    <Route exact path="/profile" component={Profile}/>
+    </Switch>
+   </Router>
 
-    </Router>
-    </div>
   );
 }
 export default App;

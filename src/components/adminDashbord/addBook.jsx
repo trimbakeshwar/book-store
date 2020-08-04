@@ -6,6 +6,7 @@ import { TextField, Button } from '@material-ui/core';
 import ImageIcon from '@material-ui/icons/Image';
 import adminService from "../../services/adminServices";
 import ImageOutlinedIcon from '@material-ui/icons/ImageOutlined';
+import {openAddDilogbox} from "../Actions/Actions"
 import {connect} from 'react-redux'
 const service = new adminService();
 class AddBooks extends Component {
@@ -24,20 +25,35 @@ class AddBooks extends Component {
 
     }
     handleTitleChange = (e) => {
+        if (e.target.value.trim() !== "") {
+            console.log("addbook")
         this.setState({ Title: e.target.value })
+        }
     }
     handleDescriptionChange = (e) => {
+        if (e.target.value.trim() !== "") {
+            console.log("addbook")
         this.setState({ Description: e.target.value })
+        }
     }
     handleAutherChange = (e) => {
+        if (e.target.value.trim() !== "") {
+            console.log("addbook")
         this.setState({ Auther: e.target.value })
+        }
     }
    
     handleQuantityChange = (e) => {
+        if (e.target.value.trim() !== "") {
+            console.log("addbook")
         this.setState({ Quantity: e.target.value })
+        }
     }
     handleprizeChange = (e) => {
+        if (e.target.value.trim() !== "") {
+            console.log("addbook")
         this.setState({ prize: e.target.value })
+        }
     }
     
 
@@ -49,6 +65,7 @@ class AddBooks extends Component {
     // }
     ImageHandler = (e) => {
         e.preventDefault();
+        
         this.setState({
             image: e.target.files[0],
             imageUrl: URL.createObjectURL(e.target.files[0])
@@ -71,14 +88,14 @@ class AddBooks extends Component {
         console.log("req Data", requestData)
         service.AddBooksDetail(requestData).then((Response) => {
             console.log("Response", Response);
-            this.props.changeopenBook(!this.props.myopenBook)
+            this.props.openAddDilogbox(!this.props.myopenBook)
         }).catch((err) => {
             console.log(err);
         })
     }
    
     CloseBook=()=>{
-        this.props.changeopenBook(!this.props.myopenBook)
+        this.props.openAddDilogbox(!this.props.myopenBook)
     }
     render() {
         return (
@@ -177,11 +194,6 @@ const mapStateToProps=(state)=>{
      
     }
     } 
-    const mapDispatrchToProps =(dispatch)=>{
-      return{
-    changeopenBook:(openBook)=>{(dispatch({type:'OPEN_ADD_BOOK_DILOGBOX',payload:openBook}))},
-   
-      }
-    }
-    export default connect(mapStateToProps,mapDispatrchToProps)(AddBooks);
+    
+    export default connect(mapStateToProps,{openAddDilogbox:openAddDilogbox})(AddBooks);
     

@@ -37,7 +37,8 @@ class AddInWishLIst extends Component {
         this.getAllBookFromWishList()
     }
     getAllBookFromWishList(){
-        storeservice.getWishListList().then((Response)=>{
+        let isHeaderRequire=true
+        storeservice.getWishListList(isHeaderRequire).then((Response)=>{
             console.log("cart books",Response.data.data)
             this.setState({wishListData:Response.data.data})
         }).catch((err)=>{
@@ -46,28 +47,41 @@ class AddInWishLIst extends Component {
        
     }
     RemoveFromWishlist=(value)=>{
-        let WishListId  = value.bookId
+        let WishListId  = value
+        let isHeaderRequire=true
         console.log("WishListId ",WishListId)
-        storeservice.removeFromWishlist(WishListId).then((Response)=>{
+        storeservice.removeFromWishlist(WishListId,isHeaderRequire).then((Response)=>{
             console.log("remove cart books",Response)
+            this.getAllBookFromWishList()
+        }).catch((err)=>{
+            console.log("err catch ",err)
+        })
+      
+    }
+    wishListToCart=(value)=>{
+        let WishListId   = value
+        let isHeaderRequire=true
+        console.log("WishList to cart ",WishListId)
+        storeservice.AddWishListToCart(WishListId,isHeaderRequire).then((Response)=>{
+            console.log("add wish to cart books",Response)
+            this.getAllBookFromWishList()
           
         }).catch((err)=>{
             console.log("err catch ",err)
         })
-        this.getAllBookFromWishList()
-    }
-   
+     
+   }
    
    
     render() {
       
        
-        const bookCard = this.state.wishListData.map((values, index) => {
+        const bookCard = this.state.wishListData.filter((item) => item.isDeleted === false ).filter((item) => item.isMoved === false ).map((values, index) => {
             return (
                 <Card>
                     <div className="bookimagecontainer">
                         <div className="imag">
-                            <img src={BookCover}
+                            <img className="img" src={values.bookImage}
                                 width="100px"
                                 height="150px" />
                         </div>
@@ -88,14 +102,14 @@ class AddInWishLIst extends Component {
 
                                     <div style={{ position: "relative" }}>
                                         <Button variant="contained" className= "Buttons"
-                                            disableElevation onClick={() => this.wishListToCart(values)}>
+                                            disableElevation onClick={() => this.wishListToCart(values.wishListId)}>
                                           ADD TO BAG
 
                                         </Button>
                                     </div>
                                     <div className="wishlist">
                                         <button variant="contained" className= "Buttonss"
-                                            disableElevation onClick={() => this.RemoveFromWishlist(values)}>
+                                            disableElevation onClick={() => this.RemoveFromWishlist(values.wishListId)}>
                                             REMOVE
                                    </button>
                                     </div>

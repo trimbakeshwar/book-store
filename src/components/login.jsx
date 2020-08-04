@@ -7,6 +7,7 @@ import Alert from '@material-ui/lab/Alert';
 import Snackbar from '@material-ui/core/Snackbar';
 import patterns from "../configration/regex";
 import userservice from "../services/userservices";
+import auth from "../services/auth";
 const service = new userservice();
 export class Login extends Component {
     constructor(props) {
@@ -51,50 +52,47 @@ export class Login extends Component {
                 
                     localStorage.setItem("Token", response.data.jsonToken);
                     localStorage.setItem("Name", response.data.data.firstName+" "+response.data.data.lastName);
-                   
+                    localStorage.setItem("User Role", response.data.data.userRole);
                     localStorage.setItem("Address", response.data.data.address);
                     localStorage.setItem("email", response.data.data.email);
                     localStorage.setItem("city", response.data.data.city);
                     localStorage.setItem("phoneNumber", response.data.data.phoneNumber);
-                    console.log("tokan",localStorage.getItem("Token"));
-                    console.log("fn", localStorage.getItem("Name"));
-                    console.log("email" ,localStorage.getItem("email"));
-                    console.log( "Adr",localStorage.getItem("Address"));
-                    console.log( "c",localStorage.getItem("city"));
-                    console.log( "pn",localStorage.getItem("phoneNumber"));
+                   
                     this.setState({
                         snackbarOpen: true,
                         snackbarMessage: "login sucessful",
                         snackServicity: 'sucess'
                     })
-               
-                        this.props.history.push('./adminDashbord');
+                    if (response.data.data.userRole === "Admin") {
+                        auth.login();
+                        if (auth.isAuthenticated) {
+                          setTimeout(() => {
+                            this.props.history.push("/adminDashbord");
+                          }, 2000);
+                        }
+                      } else {
+                        auth.login();
+                        if (auth.isAuthenticated) {
+                          setTimeout(() => {
+                            this.props.history.push("/store");
+                          }, 2000);
+                        }
+                      }
+                  
                     
                 }
             })
-                .catch((err) => {
-                    console.log(err);
-                    if (err === 401) {
-                        this.setState({
+                .catch(async(error) => {
+                    console.log(error);
+                  
+                        await this.setState({
                             snackbarOpen: true,
                             snackbarMessage: "invalid email or password",
                             snackServicity: "error"
                         })
-                    }
-                    if (err === 400) {
-                        this.setState({
-                            snackbarOpen: true,
-                            snackbarMessage: "Email and password requir",
-                            snackServicity: "error"
-                        })
-                    }
-                    if (err === 404) {
-                        this.setState({
-                            snackbarOpen: true,
-                            snackbarMessage: "not found",
-                            snackServicity: "error"
-                        })
-                    }
+                 
+                   
+                 
                 });
             }
         

@@ -3,9 +3,9 @@ import "../../stylepage/orderSummary.scss";
 import Card from "@material-ui/core/Card";
 import CheckoutMessage from "../../images/orderSummaryimg.jpg";
 import { Button } from "@material-ui/core";
+import { connect } from 'react-redux'
 
-
-export default function OrderSummary(props) {
+ function OrderSummary(props) {
 const goToStore = () => {
   props.history.push("/");
 };
@@ -23,14 +23,15 @@ const goToStore = () => {
           <br />
           <div className="Comfirmation">
             Hurray!!!your order is confirmed 
-             the order id is #123456 save order id for 
+             the order id is #{props.myorderID} save order id for 
              further communication.. 
           </div>
-          <br />
-          <br />
+
          
-          <div>
-            <Card className="tables">
+          <div style={{position: "relative",
+    bottom: "70px"}}>
+            <Card className="table">
+
               <div className="flexSetting">
                 <div className="Column">
                   <div className="header"> Email Id</div><br/>
@@ -51,21 +52,21 @@ const goToStore = () => {
               </div>
             </Card>
           </div>
-          <br />
-         
-          <div>
+
+          <div style={{position: "relative",bottom: "60px"}}>
+
             <Button
               className="button-Login"
               variant="contained"
               color="primary"
-              onClick={()=>props.history.push("/")}
+              onClick={()=>props.history.push("/store")}
             >
               CONTINUE SHOPPING
             </Button>
           </div>
         </div>
         <br />
-       
+
         
         <div>
         
@@ -73,3 +74,12 @@ const goToStore = () => {
       </div>
     );
 }
+const mapStateToProps = (state) => {
+  return {
+    
+      myorderID: state.orderID
+  }
+}
+
+
+export default connect(mapStateToProps)(OrderSummary);

@@ -15,7 +15,7 @@ import FormLabel from '@material-ui/core/FormLabel';
 import OrderServices from "../../services/orderServices"
 import storeServices from '../../services/storeServices';
 import { withRouter } from 'react-router';
-import {ORDERID} from '../Actions/Actions'
+import { ORDERID } from '../Actions/Actions'
 const storeservice = new storeServices();
 const orderServices = new OrderServices();
 class OrderDetails extends Component {
@@ -37,37 +37,55 @@ class OrderDetails extends Component {
         console.log(e.target.value)
     }
     NameHandler = (e) => {
-        this.setState({ name: e.target.value })
+        if (e.target.value.trim() !== "") {
+            this.setState({ name: e.target.value })
+        }
 
     }
-    phoneHandlerr = (e) => {
-        this.setState({ phoneNumber: e.target.value })
+    phoneHandler = (e) => {
+        if (e.target.value.trim() !== "") {
+            this.setState({ phoneNumber: e.target.value })
+        }
     }
     pinHandler = (e) => {
-        this.setState({ pincode: e.target.value })
+        if (e.target.value.trim() !== "") {
+            console.log("pin")
+            this.setState({ pincode: e.target.value })
+        }
     }
-    LocationHandlerr = (e) => {
-        this.setState({ Locality: e.target.value })
+    LocationHandler = (e) => {
+        if (e.target.value.trim() !== "") {
+            console.log("locat")
+            this.setState({ Locality: e.target.value })
+        }
     }
-    AddressHandlerr = (e) => {
-        this.setState({ Address: e.target.value })
+    AddressHandler = (e) => {
+        if (e.target.value.trim() !== "") {
+            this.setState({ Address: e.target.value })
+        }
     }
-    cityHandlerr = (e) => {
-        this.setState({ city: e.target.value })
+    cityHandler = (e) => {
+        if (e.target.value.trim() !== "") {
+            this.setState({ city: e.target.value })
+        }
     }
-    LandmarkHandlerr = (e) => {
-        this.setState({ Landmard: e.target.value })
+    LandmarkHandler = (e) => {
+
+        if (e.target.value.trim() !== "") {
+            console.log("land")
+            this.setState({ Landmard: e.target.value })
+        }
     }
     placeOrder = () => {
-    
+
         this.props.mycartData.filter((item) => item.isUsed === false)
             .filter((item) => item.isDeleted === false).map(async (item) => {
                 console.log(" this.props.mycartData", this.props.mycartData)
                 let BookId = item.bookId
-                let Quantity = item.quantity-1
+                let Quantity = item.quantity - 1
                 let isHederRequire = true
                 console.log("values.bookId" + BookId + "values.quantity" + Quantity)
-               await storeservice.addToCart(BookId, Quantity, isHederRequire).then((Response) => {
+                await storeservice.addToCart(BookId, Quantity, isHederRequire).then((Response) => {
                     console.log("increase quan ", Response)
 
                 }).catch((err) => {
@@ -81,6 +99,7 @@ class OrderDetails extends Component {
                 console.log("cartid ", CartId, " Address ", Address, " City ", City, " PinCode ", PinCode)
                 let isheaderRequired = true
                 orderServices.orderPlaced(CartId, Address, City, PinCode, isheaderRequired).then((Response) => {
+                    console.log("order placed", Response)
                     console.log("order placed", this.props.ORDERID(Response.data.data.orderId))
                     this.props.history.push('./orderSummary');
                 }).catch((err) => {
@@ -159,5 +178,5 @@ const mapStateToProps = (state) => {
 }
 
 
-export default connect(mapStateToProps,{ORDERID: ORDERID})(withRouter(OrderDetails));
+export default connect(mapStateToProps, { ORDERID: ORDERID })(withRouter(OrderDetails));
 

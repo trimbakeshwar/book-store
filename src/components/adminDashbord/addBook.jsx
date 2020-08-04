@@ -25,20 +25,35 @@ class AddBooks extends Component {
 
     }
     handleTitleChange = (e) => {
+        if (e.target.value.trim() !== "") {
+            console.log("addbook")
         this.setState({ Title: e.target.value })
+        }
     }
     handleDescriptionChange = (e) => {
+        if (e.target.value.trim() !== "") {
+            console.log("addbook")
         this.setState({ Description: e.target.value })
+        }
     }
     handleAutherChange = (e) => {
+        if (e.target.value.trim() !== "") {
+            console.log("addbook")
         this.setState({ Auther: e.target.value })
+        }
     }
    
     handleQuantityChange = (e) => {
+        if (e.target.value.trim() !== "") {
+            console.log("addbook")
         this.setState({ Quantity: e.target.value })
+        }
     }
     handleprizeChange = (e) => {
+        if (e.target.value.trim() !== "") {
+            console.log("addbook")
         this.setState({ prize: e.target.value })
+        }
     }
     
 
@@ -50,6 +65,7 @@ class AddBooks extends Component {
     // }
     ImageHandler = (e) => {
         e.preventDefault();
+        
         this.setState({
             image: e.target.files[0],
             imageUrl: URL.createObjectURL(e.target.files[0])

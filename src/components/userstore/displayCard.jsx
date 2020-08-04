@@ -6,7 +6,7 @@ import Masonry from 'react-masonry-css';
 import Button from '@material-ui/core/Button';
 import { withRouter } from 'react-router';
 import "../../stylepage/displayBook.scss"
-import{BookDetails} from "../Actions/Actions"
+import { BookDetails } from "../Actions/Actions"
 import adminService from "../../services/adminServices";
 import storeServices from "../../services/storeServices";
 import Pagination from "@material-ui/lab/Pagination";
@@ -47,9 +47,10 @@ class DisplayBook extends Component {
             },
             AnchorEl: null,
             searchEnable: false,
-            
- page: 1,
- itemsPerPage: 5,
+
+
+            page: 1,
+            itemsPerPage: 8,
 
         }
         this.getBooksList()
@@ -70,7 +71,7 @@ class DisplayBook extends Component {
     }
     changePage = (event, value) => {
         this.setState({ page: value });
-      };
+    };
     handleClick = event => {
         const { currentTarget } = event;
         this.setState(state => ({
@@ -79,19 +80,36 @@ class DisplayBook extends Component {
     };
 
 
-    AddToBag = (values) => {
+    AddToBag = (values, key) => {
         this.setState({ AddBagButtonSetting: true, id: values.bookId, AddwishlistSetting: false })
         let BookId = values.bookId
         let Quantity = 1
         console.log("add cart id", BookId)
         let isHeaderRequire = true
+        this.state.bookDetail.filter((item) => item.bookId === BookId).map(async (values, index) => {
+
+            console.log("value.CartId=", values.cartId, " cartId=", BookId)
+            await this.setState({
+                values: [
+
+                    [values.Key = key],
+
+                ],
+
+            });
+            console.log("addd boook iddd", this.state.bookDetail)
+
+        })
+
         storeservice.addToCart(BookId, 1, isHeaderRequire).then((Response) => {
             console.log("add to cart succefull", Response)
+            //  this.state.tempBooksArry.push({ BookId,Key:key })
         }).then((err) => {
             console.log("add to cart succefull", err)
         })
-      
+        console.log("temparray", this.state.tempBooksArry)
         this.props.BookDetails(values)
+
     }
     AddToWishlist = (values) => {
 
@@ -129,82 +147,78 @@ class DisplayBook extends Component {
     componentDidMount = () => {
         this.setState({ CartDataForCheck: this.props.mycartData })
     }
-    searchbook() {
-        this.setState({ bookDetail: this.props.mySearchData })
-    }
+    // searchbook() {
+    //     this.setState({ bookDetail: this.props.mySearchData })
+    // }
     render() {
-
         const { classes } = this.props;
         const { anchorEl } = this.state;
         const open = Boolean(anchorEl);
         const id = open ? 'no-transition-popper' : null;
         console.log("data of cart", this.props.mySearchData)
-
         const bookCard = ((this.props.mysearchEnable) ? (this.props.mySearchData) : (this.state.bookDetail))
-        .slice(
-            (this.state.page - 1) * this.state.itemsPerPage,
-            this.state.page * this.state.itemsPerPage
-          ).map((values, index) => {
-            return (
+            .slice(
+                (this.state.page - 1) * this.state.itemsPerPage,
+                this.state.page * this.state.itemsPerPage
+            ).map((values, index) => {
+                return (
+                    <Card>
+                        <div className="bookimagecontainer">
+                            <div className={(values.booksAvailable === 0) ? "outoffstock" : ""}>
+                                {(values.booksAvailable === 0) ? "OUT OFF STOCK" : ""}
+                            </div>
+                            <div className={(values.booksAvailable === 0) ? "" : "imag"}>
+                                <img className="img" src={values.bookImage}
+                                />
+                            </div>
 
-                <Card>
-                    <div className="bookimagecontainer">
-                        <div className={(values.booksAvailable === 0) ? "outoffstock" : ""}>
-                            {(values.booksAvailable === 0) ? "OUT OFF STOCK" : ""}
                         </div>
-                        <div className={(values.booksAvailable === 0) ? "" : "imag"}>
-                            <img className="img" src={values.bookImage}
-                                 />
+                        <div className="titles">
+                            {values.title}
+                        </div>
+                        <div className="author">
+                            {values.author}
+                        </div>
+                        <div className="price">
+                            Rs.  {values.price}
                         </div>
 
-                    </div>
-                    <div className="titles">
-                        {values.title}
-                    </div>
-                    <div className="author">
-                        {values.author}
-                    </div>
-                    <div className="price">
-                        Rs.  {values.price}
-                    </div>
+                        {((this.state.AddwishlistSetting === true && this.state.id === values.bookId) || (values.booksAvailable === 0)) ?
+                            (<div className="wishlist">
 
-                    {((this.state.AddwishlistSetting === true && this.state.id === values.bookId) || (values.booksAvailable === 0)) ?
-                        (<div className="wishlist">
-                            <button variant="contained" className={((this.state.AddwishlistSetting === true && this.state.id === values.bookId) || (values.booksAvailable === 0)) ? "wishlistButton" : "Buttonss"}
-                                disableElevation >
-                                WISHLIST
+                                <button variant="contained" className={((this.state.AddwishlistSetting === true && this.state.id === values.bookId) || (values.booksAvailable === 0)) ? "wishlistButton" : "Buttonss"}
+                                    disableElevation >
+                                    WISHLIST
                                    </button>
-                        </div>) :
-                        (
-                            <div>
-
-                                <div className="cardbuttonContainers">
-                                    <div className="buttonsetting">
-
-
-                                        <div style={{ position: "relative" }}>
-
-                                            <Button variant="contained" className={((this.state.AddBagButtonSetting === true && this.state.id === values.bookId)) ? "ActiveButtons" : "Buttons"}
-                                                disableElevation onClick={() => this.AddToBag(values)}>
-                                                {(this.state.AddBagButtonSetting === true && this.state.id === values.bookId) ? "ADDED TO BAG" : " ADD TO BAG"}
-
-                                            </Button>
-                                        </div>                             <div className="wishlist">
-                                            <button variant="contained" className={(this.state.AddwishlistSetting === true && this.state.id === values.bookId) ? "wishlistButton" : "Buttonss"}
-                                                disableElevation onClick={() => this.AddToWishlist(values)}>
-                                                WISHLIST
-                                   </button>
+                            </div>) :
+                            (
+                                <div>
+                                    <div className="cardbuttonContainers">
+                                        <div className="buttonsetting">
+                                            <div style={{ position: "relative" }}>
+                                                <Button variant="contained"
+                                                    className={((this.state.AddBagButtonSetting === true && this.state.id === values.bookId) || (values.Key === true))
+                                                        ? "ActiveButtons" : "Buttons"}
+                                                    disableElevation onClick={() => this.AddToBag(values, true)}>
+                                                    {((this.state.AddBagButtonSetting === true && this.state.id === values.bookId) || (values.Key === true)) ? "ADDED TO BAG" : " ADD TO BAG"}
+                                                </Button>
+                                            </div>
+                                            <div className="wishlist">
+                                                <button style={{ cursor: "pointer" }} variant="contained" className={(this.state.AddwishlistSetting === true && this.state.id === values.bookId) ? "wishlistButton" : "Buttonss"}
+                                                    disableElevation onClick={() => this.AddToWishlist(values)}>
+                                                    WISHLIST
+                                               </button>
+                                            </div>
                                         </div>
+
                                     </div>
 
-                                </div>
 
 
-
-                            </div>)}
-                </Card>
-            );
-        })
+                                </div>)}
+                    </Card>
+                );
+            })
         return (
             <div>
                 <div className="poppersetting" >
@@ -259,5 +273,5 @@ const mapStateToProps = (state) => {
 
 
 export default connect(mapStateToProps, {
-    BookDetails:BookDetails
+    BookDetails: BookDetails
 })(withStyles(styles)(DisplayBook));

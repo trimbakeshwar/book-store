@@ -26,10 +26,9 @@ const goToStore = () => {
              the order id is #{props.myorderID} save order id for 
              further communication.. 
           </div>
-          <br />
-          <br />
-          <br />
-          <div>
+         
+          <div style={{position: "relative",
+    bottom: "70px"}}>
             <Card className="table">
               <div className="flexSetting">
                 <div className="Column">
@@ -51,22 +50,20 @@ const goToStore = () => {
               </div>
             </Card>
           </div>
-          <br />
-          <br />
-          <div>
+         
+          <div style={{position: "relative",bottom: "60px"}}>
             <Button
               className="button-Login"
               variant="contained"
               color="primary"
-              onClick={()=>props.history.push("/")}
+              onClick={()=>props.history.push("/store")}
             >
               CONTINUE SHOPPING
             </Button>
           </div>
         </div>
         <br />
-        <br />
-        <br />
+        
         <div>
         
         </div>

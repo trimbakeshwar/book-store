@@ -25,20 +25,35 @@ class UpdateBooks extends Component {
 
     }
     handleTitleChange = (e) => {
+        if (e.target.value.trim() !== "") {
+            console.log("updatebook")
         this.setState({ Title: e.target.value })
+        }
     }
     handleDescriptionChange = (e) => {
+        if (e.target.value.trim() !== "") {
+            console.log("updatebook")
         this.setState({ Description: e.target.value })
+        }
     }
     handleAutherChange = (e) => {
+        if (e.target.value.trim() !== "") {
+            console.log("updatebook")
         this.setState({ Author: e.target.value })
+        }
     }
    
     handleQuantityChange = (e) => {
+        if (e.target.value.trim() !== "") {
+            console.log("updatebook")
         this.setState({ booksAvailable: e.target.value })
+        }
     }
     handleprizeChange = (e) => {
+        if (e.target.value.trim() !== "") {
+            console.log("updatebook")
         this.setState({ price: e.target.value })
+        }
     }
     
 
@@ -119,7 +134,7 @@ class UpdateBooks extends Component {
                 <div className="dilogContainer">
                     <div className="dilogHederContainer">
                         <div className="dilogicon" />
-                        <div className="dilogname" >AddBooks</div>
+                        <div className="dilogname" >EditBooks</div>
                     </div>
                     <div className="imageContainer">
                         {(this.state.imageUrl !== null && this.state.imageUrl !== undefined) ?

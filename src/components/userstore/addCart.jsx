@@ -1,5 +1,5 @@
 import IconButton from '@material-ui/core/IconButton';
-import {CartDetails} from "../Actions/Actions"
+import { CartDetails } from "../Actions/Actions"
 import React, { Component } from 'react';
 import Card from '@material-ui/core/Card';
 import Masonry from 'react-masonry-css';
@@ -106,10 +106,10 @@ class AddInCart extends Component {
                 <Headers />
                 {(this.state.cartData.length === 0) ? (<div className="EmptyCart">
                     <div className="shopping" />
-                        <div className="continueShopping">
-                            Click<Link to="/store"style={{textDecoration: "none"}}> Heare</Link> to Continue Shopping
+                    <div className="continueShopping">
+                        Click<Link to="/store" style={{ textDecoration: "none" }}> Heare</Link> to Continue Shopping
                             </div>
-                             </div>) : (
+                </div>) : (
                         <div>
                             <div className="boxForCart">
                                 <div className="container">
@@ -121,7 +121,7 @@ class AddInCart extends Component {
 
                                                     <div className="informationOfBook">
                                                         <div className="cartIMG">
-                                                            <img  className="cartIMGsize" src={values.bookImage}
+                                                            <img className="cartIMGsize" src={values.bookImage}
                                                                 width="60px"
                                                                 height="90px" />
                                                         </div>
@@ -130,12 +130,12 @@ class AddInCart extends Component {
                                                             <div className="authors">{values.author}</div>
                                                             <div className="prices">{values.price}</div>
                                                             <div className="quantityContainer">
-                                                                <div className="countButton"> <AddCircleOutlineOutlinedIcon fontSize="small" onClick={() => this.increaseQuantity(values.cartId)} />
+                                                                <div className="countButton"> <AddCircleOutlineOutlinedIcon style={{ cursor: "pointer" }} fontSize="small" onClick={() => this.increaseQuantity(values.cartId)} />
                                                                     <input className="inputQuantity" Value={values.quantity} disabled type="number" />
-                                                                    <RemoveCircleOutlineIcon onClick={() => this.decreaseQuantity(values.cartId)} />
+                                                                    <RemoveCircleOutlineIcon style={{ cursor: "pointer" }} onClick={() => this.decreaseQuantity(values.cartId)} />
                                                                 </div>
 
-                                                                <div onClick={() => this.removeFromCart(values.cartId)} className="remove">Remove</div>
+                                                                <div style={{ cursor: "pointer" }} onClick={() => this.removeFromCart(values.cartId)} className="remove">Remove</div>
 
                                                             </div>
 
@@ -170,13 +170,8 @@ const mapStateToProps = (state) => {
     }
 }
 
-const mapDispatrchToProps = (dispatch) => {
-    return {
-        CartDetails: CartDetails
 
-    }
-}
-export default connect(mapStateToProps,  {
+export default connect(mapStateToProps, {
     CartDetails: CartDetails
 
 })(AddInCart);

@@ -7,7 +7,7 @@
 .columnSetting
 {
     display: flex;
-    justify-content: end;
+    justify-content:flex-end;
     flex-direction: row;
 }
 .CardContainer{
@@ -85,14 +85,13 @@ width: 80%;
         padding-left: 30px;
     }
 }
-@media only screen and  (max-width: 320PX) {
+@media only screen and  (max-width: 320PX ) {
     .CardContainer{
         width:290px;
         padding-left: 1px;
     }
     
 .lable{
-   
    
     padding-left: 25px;
     padding-right: 10px;

@@ -59,6 +59,8 @@ function AdminDashboard(props) {
   }
   const search=(e)=>{
     console.log("search")
+    if (e.target.value.trim() !== "") {
+      console.log("search")
      setSearch(e.target.value)
      service.SearchBook(Search).then((Response)=>{
       console.log("search",Response.data.data)
@@ -67,6 +69,7 @@ function AdminDashboard(props) {
     }).catch((err)=>{
       console.log("err",err)
     })
+  }
   }
   
 const handleClick = (event) => {

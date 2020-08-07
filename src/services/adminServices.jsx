@@ -23,6 +23,7 @@ import AxiosServices from "../services/axiosServices";
  
     }
     SearchBook(Search){
+      console.log("service ",Search)
       return Axios.Get(config.url+"Book/"+Search, {headers: {Authorization: "Bearer "+localStorage.getItem("Token") }}); 
       
     }

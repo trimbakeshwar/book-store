@@ -149,7 +149,7 @@ export class Registration extends Component {
                             <span className="labletext">Create your book store account</span>
                         </div>
                         <div className="TextInputField">
-                            <TextField id="outlined-firstName"
+                            <TextField id="firstName"
                                 label="First Name" type="text"
                                 variant="outlined" size="small"
                                 onChange={this.firstNameHandler}
@@ -157,7 +157,7 @@ export class Registration extends Component {
                                 helperText={this.state.firstNameError}
                             >first Name</TextField><br />
                             <TextField className="rightTextField"
-                             id="outlined-lastName"
+                             id="lastName"
                                 label="last Name" type="text"
                                 variant="outlined" size="small"
                                 onChange={this.lastNameHandler}
@@ -165,7 +165,7 @@ export class Registration extends Component {
                                 helperText={this.state.lastNameError}>last Name</TextField>
                         </div>
                         <div className="Field">
-                          <TextField id="outlined-email"
+                          <TextField id="email"
                                 label="Email" type="Email"
                                 variant="outlined" size="small"
                                 onChange={this.emailHandler}
@@ -173,7 +173,7 @@ export class Registration extends Component {
                                 helperText={this.state.EmailError} fullWidth>Email</TextField><br />
                         </div>
                         <div className="TextInputField">
-                            <TextField id="outlined-password" label="password" variant="outlined"
+                            <TextField id="password" label="password" variant="outlined"
                                 onChange={this.passwordHandler}
                                 error={((this.state.passwordError) || (this.state.MissmatchError))}
                                 helperText={((this.state.passwordError) || (this.state.MissmatchError))}
@@ -196,7 +196,7 @@ export class Registration extends Component {
                             <span className="lable"> use 8 or more charecter with a mix of letters, symbols & numbers </span>
                         </div>
                         <div className="TextInputField">
-                            <TextField id="outlined-firstName"
+                            <TextField id="phoneNumber"
                                 label="phone number" type="number"
                                 variant="outlined" size="small"
                                 onChange={this.phoneNumberHandler}
@@ -204,7 +204,7 @@ export class Registration extends Component {
                                 helperText={this.state.phoneNumberError}
                             >phone number</TextField><br />
                             <TextField className="rightTextField"
-                                id="outlined-city"
+                                id="city"
                                 label="city" type="text"
                                 variant="outlined" size="small"
                                 onChange={this.cityHandler}
@@ -212,7 +212,7 @@ export class Registration extends Component {
                                 helperText={this.state.cityError}>city</TextField>
                         </div>
                         <div className="Field">
-                            <TextField id="outlined-Address"
+                            <TextField id="address"
                                 label="Address" type="text"
                                 variant="outlined" size="small" 
                                 onChange={this.AddressHandler}

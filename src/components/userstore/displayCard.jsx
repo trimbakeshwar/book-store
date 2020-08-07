@@ -98,6 +98,8 @@ class DisplayBook extends Component {
 
             });
             console.log("addd boook iddd", this.state.bookDetail)
+            console.log("addd boook iddd",  this.props.mycartData.lenght)
+           ;
 
         })
 
@@ -165,7 +167,7 @@ class DisplayBook extends Component {
                     <Card>
                         <div className="bookimagecontainer">
                             <div className={(values.booksAvailable === 0) ? "outoffstock" : ""}>
-                                {(values.booksAvailable === 0) ? "OUT OFF STOCK" : ""}
+                                {(values.booksAvailable === 0) ? "OUT OF STOCK" : ""}
                             </div>
                             <div className={(values.booksAvailable === 0) ? "" : "imag"}>
                                 <img className="img" src={values.bookImage}

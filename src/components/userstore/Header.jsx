@@ -18,6 +18,10 @@ import adminService from "../../services/adminServices";
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import { connect } from 'react-redux'
 import Popper from '@material-ui/core/Popper';
+import { Observable,from,BehaviorSubject} from 'rxjs';
+
+import {SearchBook}from "../../services/adminServices";
+import Badge from '@material-ui/core/Badge';
 import Paper from '@material-ui/core/Paper';
 import { withRouter } from 'react-router';
 import "../../stylepage/profile.scss"
@@ -25,6 +29,7 @@ import Card from '@material-ui/core/Card';
 import Button from '@material-ui/core/Button';
 import { SeartchBookss, SearchEnable } from "../Actions/Actions"
 import Profile from "../userstore/profile"
+import SearchBookName from "../obsrvable/observable" 
 const service = new adminService();
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -47,24 +52,50 @@ const useStyles = makeStyles((theme) => ({
 
 
 }));
+ 
 function Headers(props) {
   const classes = useStyles();
   const theme = useTheme();
   const [Search, setSearch] = useState('');
   const [popperopen, setpopperopen] = useState(false)
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const search = (e) => {
-    console.log("search")
-    if (e.target.value.trim() !== "") {
-      setSearch(e.target.value)
-      service.SearchBook(Search).then((Response) => {
-        console.log("search", Response.data.data)
-        props.SeartchBookss(Response.data.data)
-        props.SearchEnable(true)
-      }).catch((err) => {
-        console.log("err", err)
-      })
-    }
+   const SearchSubscriber = new BehaviorSubject(0)
+  const searchObj = SearchSubscriber.asObservable();
+   
+ 
+  const search = async(e) => {
+    setSearch(e.target.value)
+  //  await SearchBookName(e.target.value)
+  SearchSubscriber.next( 
+  await service.SearchBook(Search).then((Response) => {
+          console.log("search", Response.data.data)
+          props.SeartchBookss(Response.data.data)
+          props.SearchEnable(true)
+        }).catch((err) => {
+          console.log("err", err)
+        })
+
+  )
+    console.log("search on header")
+        // service.SearchBook(Search).then((Response) => {
+        //       console.log("search", Response.data.data)
+        //       props.SeartchBookss(Response.data.data)
+        //       props.SearchEnable(true)
+        //     }).catch((err) => {
+        //       console.log("err", err)
+        //     })
+  
+ 
+    // if (e.target.value.trim() !== "") {
+    //   setSearch(e.target.value)
+    //   service.SearchBook(Search).then((Response) => {
+    //     console.log("search", Response.data.data)
+    //     props.SeartchBookss(Response.data.data)
+    //     props.SearchEnable(true)
+    //   }).catch((err) => {
+    //     console.log("err", err)
+    //   })
+    // }
   }
   const OpenCartPage = () => {
     props.history.push("/addCart")
@@ -98,7 +129,11 @@ function Headers(props) {
             </div>
             <div className="shopingcart">
               <span className="cart">cart </span>
-              <ShoppingCartOutlinedIcon style={{ cursor: "pointer" }} onClick={OpenCartPage} />
+            
+             <Badge badgeContent={props.mycartData.length} color="secondary">
+               <ShoppingCartOutlinedIcon style={{ cursor: "pointer" }} onClick={OpenCartPage} />
+               </Badge>
+               
               <div className="account">
                 <AccountCircleIcon style={{ cursor: "pointer" }} onClick={handleClick} />
               </div>
@@ -117,7 +152,8 @@ function Headers(props) {
 const mapStateToProps = (state) => {
   return {
     mySearchData: state.SearchData,
-    mysearchEnable: state.searchEnable
+    mysearchEnable: state.searchEnable,
+    mycartData:state.cartData
   }
 }
 

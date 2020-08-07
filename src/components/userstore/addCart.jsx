@@ -20,6 +20,8 @@ import Headers from "./Header"
 import storeServices from "../../services/storeServices";
 import EmptyCarts from "../../images/EmptyCarts.png"
 import { Link } from 'react-router-dom';
+import Loader from 'react-loader-spinner'
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
 const storeservice = new storeServices();
 class AddInCart extends Component {
     constructor(props) {
@@ -104,10 +106,12 @@ class AddInCart extends Component {
         return (
             <div>
                 <Headers />
+               
                 {(this.state.cartData.length === 0) ? (<div className="EmptyCart">
+                    
                     <div className="shopping" />
                     <div className="continueShopping">
-                        Click<Link to="/store" style={{ textDecoration: "none" }}> Heare</Link> to Continue Shopping
+                        Click<Link to="/store" style={{ textDecoration: "none" }}> Here</Link> to Continue Shopping
                             </div>
                 </div>) : (
                         <div>
